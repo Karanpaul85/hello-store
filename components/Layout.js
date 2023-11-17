@@ -1,12 +1,7 @@
 import Head from "next/head";
 import Header from "./header/Header";
-import { useEffect, useState } from "react";
 import BottomBar from "./bottomBar/BottomBar";
 const Layout = (props) => {
-  const [currentUrl, setCurrentUrl] = useState("");
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, [setCurrentUrl]);
   return (
     <>
       <Head>
@@ -26,12 +21,10 @@ const Layout = (props) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-        <meta name="twitter:url" content={currentUrl} />
-        <meta property="og:url" content={currentUrl} />
       </Head>
       <Header />
       <main>{props.children}</main>
-      <BottomBar />
+      {/* <BottomBar /> */}
     </>
   );
 };
