@@ -9,6 +9,7 @@ const Layout = (props) => {
   return (
     <>
       <Head>
+        <title>Latest Breaking News App</title>
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta property="og:type" content="website" />

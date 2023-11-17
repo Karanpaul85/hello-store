@@ -9,7 +9,8 @@ import Link from "next/link";
 import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
 
-const HomePage = ({ data }) => {
+const HomePage = ({data, errorData}) => {
+  console.log(errorData, "errorData");
   const { textConst } = allConst;
   const customStyle = {
     newsSection: {
@@ -52,30 +53,15 @@ const HomePage = ({ data }) => {
       fontSize: "12px",
     },
   };
+  if (errorData) {
+    return "Test";
+  }
   return (
     <Layout>
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News"
         )}
-        {/* <title>{data?.[0].title}</title>
-        <meta name="description" content={data?.[0].title} />
-        <link rel="icon" type="image/png" href={data?.[0].image_url} />
-        <link rel="apple-touch-icon" href={data?.[0].image_url} />
-        <meta property="og:image" content={data?.[0].image_url} />
-        <meta
-          name="twitter:image"
-          property="og:image"
-          content={data?.[0].image_url}
-        />
-        <meta property="og:title" content={data?.[0].title} />
-        <meta property="og:description" content={data?.[0].title} />
-        <meta name="twitter:title" content={data?.[0].title} />
-        <meta name="twitter:description" content={data?.[0].title} />
-        <meta property="og:title" content={data?.[0].title} />
-        <meta name="twitter:title" content={data?.[0].title} />
-        <meta property="og:description" content={data?.[0].title} />
-        <meta name="twitter:description" content={data?.[0].title} /> */}
       </Head>
       {/* <div style={{ height: 200 }}>Slider</div> */}
       <div className={styles.mainHeading}>
@@ -91,18 +77,6 @@ const HomePage = ({ data }) => {
                 style={customStyle.newsCard}
               >
                 <div className="tumbNail" style={customStyle.tumbNail}>
-                  {/* <div
-                    style={{
-                      background: `url(${item.image_url}) no-repeat`,
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      backgroundPosition: "center",
-                      filter: "blur(2px)",
-                    }}
-                  ></div> */}
                   {index > 1 ? (
                     <Image
                       src={item.image_url}
@@ -144,7 +118,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     try {
       const serverData = await store.dispatch(fetchData());
       return {
-        props: { data: serverData?.payload },
+        props: {
+          data: serverData?.payload,
+          errorData: serverData?.error?.message,
+        },
       };
     } catch (error) {
       console.error("API Error:", error);
