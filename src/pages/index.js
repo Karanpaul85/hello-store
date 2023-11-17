@@ -55,10 +55,10 @@ const HomePage = ({ data }) => {
   return (
     <Layout>
       <Head>
-        {/* {ogMetaTags(
+        {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News"
-        )} */}
-        <title>{data?.[0].title}</title>
+        )}
+        {/* <title>{data?.[0].title}</title>
         <meta name="description" content={data?.[0].title} />
         <link rel="icon" type="image/png" href={data?.[0].image_url} />
         <link rel="apple-touch-icon" href={data?.[0].image_url} />
@@ -75,7 +75,7 @@ const HomePage = ({ data }) => {
         <meta property="og:title" content={data?.[0].title} />
         <meta name="twitter:title" content={data?.[0].title} />
         <meta property="og:description" content={data?.[0].title} />
-        <meta name="twitter:description" content={data?.[0].title} />
+        <meta name="twitter:description" content={data?.[0].title} /> */}
       </Head>
       {/* <div style={{ height: 200 }}>Slider</div> */}
       <div className={styles.mainHeading}>
