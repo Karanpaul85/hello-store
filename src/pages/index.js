@@ -8,9 +8,10 @@ import { allConst } from "@/constant/common_constants";
 import Link from "next/link";
 import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
+import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 
 const HomePage = ({ data, errorData }) => {
-  console.log(errorData, "errorData");
+  //console.log(errorData, "errorData");
   const { textConst } = allConst;
   const customStyle = {
     newsSection: {
@@ -56,7 +57,15 @@ const HomePage = ({ data, errorData }) => {
   if (errorData) {
     return (
       <Layout>
-        <Head>{errorData ? <title>errorData</title> : ogMetaTags(errorData)}</Head>
+        <Head>
+          {errorData
+            ? ogErrorMetaTags(errorData)
+            : ogMetaTags(
+              data && data.length
+                  ? data?.[0]
+                  : "Welcome to world breaking News"
+              )}
+        </Head>
         <div className={styles.mainHeading}>
           <h1>{textConst.API_ERROR}</h1>
         </div>
@@ -127,7 +136,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
       const serverData = await store.dispatch(fetchData());
-      console.log(serverData);
       return {
         props: {
           data: serverData?.payload,

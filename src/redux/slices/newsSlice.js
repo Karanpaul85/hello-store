@@ -36,6 +36,7 @@ const newSlice = createSlice({
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
+        state.newsData = null;
         state.error = action.error.message;
       });
   },
