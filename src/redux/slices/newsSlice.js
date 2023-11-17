@@ -24,7 +24,6 @@ const newSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Add extra reducers for handling the async action
     builder
       .addCase(fetchData.pending, (state) => {
         state.loading = true;
@@ -40,6 +39,5 @@ const newSlice = createSlice({
       });
   },
 });
-
 export const { setNewsData } = newSlice.actions;
 export default newSlice.reducer;
