@@ -6,6 +6,8 @@ import { wrapper } from "../utils/withRedux";
 import styles from "../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
 import Link from "next/link";
+import Head from "next/head";
+import { ogMetaTags } from "../../components/commonOgMetatags";
 
 const HomePage = ({ data }) => {
   const { textConst } = allConst;
@@ -34,7 +36,7 @@ const HomePage = ({ data }) => {
       left: 0,
       width: "100%",
       height: "100%",
-      objectFit: "contain",
+      objectFit: "cover",
       backgroundSize: "cover",
     },
     newsContent: {
@@ -52,7 +54,30 @@ const HomePage = ({ data }) => {
   };
   return (
     <Layout>
-      <div style={{ height: 200 }}>Slider</div>
+      <Head>
+        {/* {ogMetaTags(
+          data && data.length ? data?.[0] : "Welcome to world breaking News"
+        )} */}
+        <title>{data?.[0].title}</title>
+        <meta name="description" content={data?.[0].title} />
+        <link rel="icon" type="image/png" href={data?.[0].image_url} />
+        <link rel="apple-touch-icon" href={data?.[0].image_url} />
+        <meta property="og:image" content={data?.[0].image_url} />
+        <meta
+          name="twitter:image"
+          property="og:image"
+          content={data?.[0].image_url}
+        />
+        <meta property="og:title" content={data?.[0].title} />
+        <meta property="og:description" content={data?.[0].title} />
+        <meta name="twitter:title" content={data?.[0].title} />
+        <meta name="twitter:description" content={data?.[0].title} />
+        <meta property="og:title" content={data?.[0].title} />
+        <meta name="twitter:title" content={data?.[0].title} />
+        <meta property="og:description" content={data?.[0].title} />
+        <meta name="twitter:description" content={data?.[0].title} />
+      </Head>
+      {/* <div style={{ height: 200 }}>Slider</div> */}
       <div className={styles.mainHeading}>
         <h1>{textConst.LATEST_NEWS}</h1>
       </div>
@@ -66,7 +91,7 @@ const HomePage = ({ data }) => {
                 style={customStyle.newsCard}
               >
                 <div className="tumbNail" style={customStyle.tumbNail}>
-                  <div
+                  {/* <div
                     style={{
                       background: `url(${item.image_url}) no-repeat`,
                       position: "absolute",
@@ -77,12 +102,12 @@ const HomePage = ({ data }) => {
                       backgroundPosition: "center",
                       filter: "blur(2px)",
                     }}
-                  ></div>
-                  {index > 2 ? (
+                  ></div> */}
+                  {index > 1 ? (
                     <Image
                       src={item.image_url}
-                      width={600}
-                      height={600}
+                      width={300}
+                      height={300}
                       alt=""
                       style={customStyle.img}
                       loading="lazy"
@@ -92,13 +117,12 @@ const HomePage = ({ data }) => {
                   ) : (
                     <Image
                       src={item.image_url}
-                      width={600}
-                      height={600}
+                      width={300}
+                      height={300}
                       alt=""
                       style={customStyle.img}
                       blurDataURL={item.image_url}
-                      placeholder="blur"
-                      priority
+                      priority={true}
                     />
                   )}
                 </div>
@@ -120,7 +144,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     try {
       const serverData = await store.dispatch(fetchData());
       return {
-        props: { data: serverData.payload },
+        props: { data: serverData?.payload },
       };
     } catch (error) {
       console.error("API Error:", error);

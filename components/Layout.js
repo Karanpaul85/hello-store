@@ -12,7 +12,7 @@ const Layout = (props) => {
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Websitefreelancing news app" />
+        <meta property="og:site_name" content="Breaking News" />
         <meta name="twitter:card" content="summary" />
         <meta property="og:image:width" content="1500" />
         <meta property="og:image:height" content="786" />
