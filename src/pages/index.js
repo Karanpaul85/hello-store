@@ -5,20 +5,20 @@ import { setNewsData, fetchData } from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
 import api from "../utils/api";
 
-const HomePage = ({ serverData }) => {
-  const dispatch = useDispatch();
-  const myData = useSelector((state) => state.newSlice.newsData);
-  const loading = useSelector((state) => state.newSlice.loading);
-  const error = useSelector((state) => state.newSlice.error);
-  useEffect(() => {
-    // Dispatch the fetchData async thunk
-    dispatch(fetchData());
-  }, [dispatch]);
+const HomePage = ({ data }) => {
+  // const dispatch = useDispatch();
+  // const myData = useSelector((state) => state.newSlice.newsData);
+  // const loading = useSelector((state) => state.newSlice.loading);
+  // const error = useSelector((state) => state.newSlice.error);
+  // useEffect(() => {
+  //   // Dispatch the fetchData async thunk
+  //   dispatch(fetchData());
+  // }, [dispatch]);
 
   return (
     <div>
-      {myData &&
-        myData.map((item) => {
+      {data &&
+        data.map((item) => {
           return <p key={item.title}>{item.title}</p>;
         })}
     </div>
@@ -28,7 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
       // Manually dispatch the fetchData async thunk on the server side
-      await store.dispatch(fetchData());
+      const serverData = await store.dispatch(fetchData());
+      return {
+        props: { data: serverData.payload },
+      };
     } catch (error) {
       console.error("API Error:", error);
     }
