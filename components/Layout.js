@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Header from "./header/Header";
-import BottomBar from "./bottomBar/BottomBar";
 const Layout = (props) => {
   return (
     <>
@@ -24,7 +23,6 @@ const Layout = (props) => {
       </Head>
       <Header />
       <main>{props.children}</main>
-      {/* <BottomBar /> */}
     </>
   );
 };
