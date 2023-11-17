@@ -3,7 +3,6 @@ export const ogErrorMetaTags = (errorData) => {
     <>
       <title>{errorData}</title>
       <meta name="description" content={errorData} />
-      <link rel="icon" type="image/png" href={errorData} />
       <meta property="og:title" content={errorData} />
       <meta property="og:description" content={errorData} />
       <meta name="twitter:title" content={errorData} />
