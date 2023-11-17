@@ -24,9 +24,8 @@ const HomePage = ({ data }) => {
     },
     tumbNail: {
       position: "relative",
-      width: "100px",
-      height: "100px",
-      paddingTop: "32.75%",
+      width: "100%",
+      paddingTop: "50%",
     },
     img: {
       borderRadius: "8px",
@@ -67,6 +66,18 @@ const HomePage = ({ data }) => {
                 style={customStyle.newsCard}
               >
                 <div className="tumbNail" style={customStyle.tumbNail}>
+                  <div
+                    style={{
+                      background: `url(${item.image_url}) no-repeat`,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      backgroundPosition: "center",
+                      filter: "blur(2px)",
+                    }}
+                  ></div>
                   {index > 2 ? (
                     <Image
                       src={item.image_url}
