@@ -19,7 +19,7 @@ const HomePage = ({ data }) => {
     <div>
       {data &&
         data.map((item) => {
-          return <p key={item.title}>{item.title}</p>;
+          return <p key={item.title}>{item.title} + 1</p>;
         })}
     </div>
   );
