@@ -56,7 +56,7 @@ const HomePage = ({ data, errorData }) => {
   if (errorData) {
     return (
       <Layout>
-        <Head>{ogMetaTags(errorData)}</Head>
+        <Head>{errorData ? <title>errorData</title> : ogMetaTags(errorData)}</Head>
         <div className={styles.mainHeading}>
           <h1>{textConst.API_ERROR}</h1>
         </div>
@@ -127,6 +127,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
       const serverData = await store.dispatch(fetchData());
+      console.log(serverData);
       return {
         props: {
           data: serverData?.payload,
