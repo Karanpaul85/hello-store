@@ -1,4 +1,5 @@
 // pages/index.js
+import Image from "next/image";
 import Layout from "../../components/Layout";
 import { fetchData } from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
@@ -8,7 +9,12 @@ const HomePage = ({ data }) => {
     <Layout>
       {data &&
         data.map((item) => {
-          return <p key={item.title}>{item.title}</p>;
+          return (
+            <p key={item.title}>
+              <Image src={item.image_url} alt={item.title} width={600} height={600}/>
+              {item.title}
+            </p>
+          );
         })}
     </Layout>
   );
