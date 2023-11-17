@@ -9,7 +9,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
 
-const HomePage = ({data, errorData}) => {
+const HomePage = ({ data, errorData }) => {
   console.log(errorData, "errorData");
   const { textConst } = allConst;
   const customStyle = {
@@ -54,7 +54,17 @@ const HomePage = ({data, errorData}) => {
     },
   };
   if (errorData) {
-    return "Test";
+    return (
+      <Layout>
+        <Head>{ogMetaTags(errorData)}</Head>
+        <div className={styles.mainHeading}>
+          <h1>{textConst.API_ERROR}</h1>
+        </div>
+        <div className="newsSection" style={customStyle.newsSection}>
+          <p>{errorData}</p>
+        </div>
+      </Layout>
+    );
   }
   return (
     <Layout>
