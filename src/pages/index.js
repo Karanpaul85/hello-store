@@ -66,7 +66,7 @@ const HomePage = ({ data }) => {
           data.length > 0 &&
           data.map((item, index) => {
             return (
-              <Link
+              <div
                 href={`/hindi/${item.article_id}`}
                 key={item.article_id}
                 style={customStyle.newsCard}
@@ -115,7 +115,7 @@ const HomePage = ({ data }) => {
                     Published at : {item.pubDate}
                   </p>
                 </div>
-              </Link>
+              </div>
             );
           })}
       </div>
@@ -125,12 +125,13 @@ const HomePage = ({ data }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
-      const serverData = await store.dispatch(fetchData());
-      return {
-        props: {
-          data: serverData.payload,
-        },
-      };
+      await store.dispatch(fetchData());
+      // const serverData = await store.dispatch(fetchData());
+      // return {
+      //   props: {
+      //     data: serverData.payload,
+      //   },
+      // };
     } catch (error) {
       console.error("API Error:", error);
     }
