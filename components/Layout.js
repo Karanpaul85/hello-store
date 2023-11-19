@@ -29,7 +29,9 @@ const Layout = (props) => {
         <meta property="og:url" content={currentUrl} />
       </Head>
       <Header />
-      <main>{props.children}</main>
+      <main>
+        <div className="container">{props.children}</div>
+      </main>
     </>
   );
 };

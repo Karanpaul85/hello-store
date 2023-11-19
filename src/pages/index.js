@@ -11,7 +11,6 @@ import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 
 const HomePage = ({ data, errorData }) => {
-  //console.log(errorData, "errorData");
   const { textConst } = allConst;
   const customStyle = {
     newsSection: {
@@ -61,7 +60,7 @@ const HomePage = ({ data, errorData }) => {
           {errorData
             ? ogErrorMetaTags(errorData)
             : ogMetaTags(
-              data && data.length
+                data && data.length
                   ? data?.[0]
                   : "Welcome to world breaking News"
               )}
@@ -136,10 +135,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
       const serverData = await store.dispatch(fetchData());
+      const data = serverData.payload ? serverData.payload : null;
+      const errorData = serverData.error ? serverData?.error?.message : null;
       return {
         props: {
-          data: serverData?.payload,
-          errorData: serverData?.error?.message,
+          data,
+          errorData,
         },
       };
     } catch (error) {
