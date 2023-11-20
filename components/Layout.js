@@ -9,6 +9,7 @@ const Layout = (props) => {
   return (
     <>
       <Head>
+        <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta property="og:type" content="website" />

@@ -1,25 +1,11 @@
-const withPWA = require("next-pwa");
+/** @type {import ( 'next' ).NextConfig} */
+
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
 
 module.exports = withPWA({
-  reactStrictMode: true,
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
-  pwa: {
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-    disable: process.env.NODE_ENV === "development",
-  },
-});
-// Add the generateSW configuration separately
-module.exports = {
-  ...module.exports,
-  pwa: {
-    generateInDevMode: true,
-    // Add other generateSW options here
-  },
+  // next.js config
   images: {
     remotePatterns: [
       {
@@ -28,4 +14,4 @@ module.exports = {
       },
     ],
   },
-};
+})
