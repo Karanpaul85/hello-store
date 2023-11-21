@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header id="header" className={styles.header}>
       <div className="container">
-        <Link href="/">
+        <Link href="/?asa=asas">
           <Image
             src="/assets/images/logo.jpg"
             width={80}
