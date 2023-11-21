@@ -16,7 +16,7 @@ function MyApp({ Component, ...rest }) {
   return (
     <>
       <style jsx global>{`
-        html {
+        *, html {
           font-family: ${poppins.style.fontFamily};
         }
       `}</style>

@@ -10,7 +10,7 @@ import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 
-const HomePage = ({ data, errorData }) => {
+const HomePage = ({ data, errorData, category }) => {
   const { textConst } = allConst;
   const customStyle = {
     newsSection: {
@@ -90,7 +90,7 @@ const HomePage = ({ data, errorData }) => {
           data.map((item, index) => {
             return (
               <Link
-                href={`/hindi/${item.article_id}`}
+                href={`/hi/${category}/${item.article_id}`}
                 key={item.article_id}
                 style={customStyle.newsCard}
               >
@@ -134,13 +134,15 @@ const HomePage = ({ data, errorData }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
-      const serverData = await store.dispatch(fetchData());
+      const options = { lang: "hi", category: "world" };
+      const serverData = await store.dispatch(fetchData(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
         props: {
           data,
           errorData,
+          category: options.category,
         },
       };
     } catch (error) {

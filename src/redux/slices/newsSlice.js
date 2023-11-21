@@ -4,12 +4,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 // Async thunk for fetching data
-export const fetchData = createAsyncThunk("newSlice/fetchData", async () => {
-  const response = await api.get(
-    "/1/news?apikey=pub_30553943e4fa640b3256ae5087619b2dede08&language=hi&image=1&category=world"
-  );
-  return response.data.results;
-});
+export const fetchData = createAsyncThunk(
+  "newSlice/fetchData",
+  async (options) => {
+    const response = await api.get(
+      `/1/news?apikey=pub_30553943e4fa640b3256ae5087619b2dede08&language=${options.lang}&image=1&category=${options.category}`
+    );
+    return response.data.results;
+  }
+);
 
 const newSlice = createSlice({
   name: "newSlice",
