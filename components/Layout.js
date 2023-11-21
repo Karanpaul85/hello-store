@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
-import ShareBTN from "./share/Share";
 const Layout = (props) => {
   const [currentUrl, setCurrentUrl] = useState("");
   useEffect(() => {
@@ -34,7 +33,6 @@ const Layout = (props) => {
       <main>
         <div className="container">{props.children}</div>
       </main>
-      <ShareBTN/>
     </>
   );
 };

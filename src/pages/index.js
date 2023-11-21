@@ -1,16 +1,58 @@
 // pages/index.js
+import Image from "next/image";
 import Layout from "../../components/Layout";
 import { fetchData } from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
 import styles from "../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
+import Link from "next/link";
 import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
-import SingleNews from "../../components/singleNews/SingleNews";
 
-const HomePage = ({ data, errorData, category, lang }) => {
+const HomePage = ({ data, errorData, category }) => {
   const { textConst } = allConst;
+  const customStyle = {
+    newsSection: {
+      padding: "0 16px",
+      overflow: "auto",
+    },
+    newsCard: {
+      background: "#fff",
+      borderRadius: "8px",
+      margin: "24px 0",
+      boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+      display: "flex",
+      flexWrap: "wrap",
+    },
+    tumbNail: {
+      position: "relative",
+      width: "100%",
+      paddingTop: "50%",
+    },
+    img: {
+      borderRadius: "8px",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      backgroundSize: "cover",
+    },
+    newsContent: {
+      padding: "8px",
+      with: "100%",
+    },
+    h3Hdeading: {
+      fontSize: "14px",
+      fontWeight: "500",
+    },
+    published: {
+      marginTop: "10px",
+      fontSize: "12px",
+    },
+  };
   if (errorData) {
     return (
       <Layout>
@@ -26,7 +68,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
         <div className={styles.mainHeading}>
           <h1>{textConst.API_ERROR}</h1>
         </div>
-        <div className={styles.newsSection}>
+        <div className="newsSection" style={customStyle.newsSection}>
           <p>{errorData}</p>
         </div>
       </Layout>
@@ -47,13 +89,42 @@ const HomePage = ({ data, errorData, category, lang }) => {
         {data &&
           data.map((item, index) => {
             return (
-              <SingleNews
+              <Link
+                href={`/hi/${category}/${item.article_id}`}
                 key={item.article_id}
-                newsdata={item}
-                index={index}
-                lang={lang}
-                category={category}
-              />
+                style={customStyle.newsCard}
+              >
+                <div className="tumbNail" style={customStyle.tumbNail}>
+                  {index > 1 ? (
+                    <Image
+                      src={item.image_url}
+                      width={300}
+                      height={300}
+                      alt=""
+                      style={customStyle.img}
+                      loading="lazy"
+                      blurDataURL={item.image_url}
+                      placeholder="blur"
+                    />
+                  ) : (
+                    <Image
+                      src={item.image_url}
+                      width={300}
+                      height={300}
+                      alt=""
+                      style={customStyle.img}
+                      blurDataURL={item.image_url}
+                      priority={true}
+                    />
+                  )}
+                </div>
+                <div className="newsContent" style={customStyle.newsContent}>
+                  <h2 style={customStyle.h3Hdeading}>{item.title}</h2>
+                  <p style={customStyle.published}>
+                    Published at : {item.pubDate}
+                  </p>
+                </div>
+              </Link>
             );
           })}
       </div>
@@ -72,7 +143,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
           data,
           errorData,
           category: options.category,
-          lang: options.lang,
         },
       };
     } catch (error) {
