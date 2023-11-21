@@ -5,6 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../../../components/commonErrorMetatags";
+import styles from "./singleNews.module.css";
 
 const News = ({ data, errorData }) => {
   if (errorData) {
@@ -30,25 +31,21 @@ const News = ({ data, errorData }) => {
   }
   return (
     <Layout>
-      <Head>
-        {ogMetaTags(
-          data ? data : "Welcome to world breaking News"
-        )}
-      </Head>
+      <Head>{ogMetaTags(data ? data : "Welcome to world breaking News")}</Head>
       <div>
-        <div className="tumbNail">
+        <div className={styles.tumbNail}>
           <Image
             src={data.image_url}
-            width={300}
-            height={300}
+            width={640}
+            height={480}
             alt=""
             blurDataURL={data.image_url}
             priority={true}
           />
         </div>
-        <div className="newsContent">
-          <h2>{data.title}</h2>
-          <p>Published at : {data.pubDate}</p>
+        <div className={styles.newsContent}>
+          <h1>{data.title}</h1>
+          <p className={styles.publish}>Published at : {data.pubDate}</p>
           <p>{data.description}</p>
         </div>
       </div>
