@@ -1,10 +1,13 @@
 .mainHeading {
-    padding: 16px;
-    line-height: 1;
-  }
-  .mainHeading  h1 {
-    font-size: 20px;
-    color: #222;
-    font-weight: 500;
-  }
-  
+  padding: 16px;
+  line-height: 1;
+}
+.mainHeading h1 {
+  font-size: 20px;
+  color: #222;
+  font-weight: 500;
+}
+.newsSection {
+  padding: 0 16px;
+  overflow: auto;
+}
