@@ -1,4 +1,3 @@
-import { Share } from "@mui/icons-material";
 import styles from "./share.module.css";
 import { useEffect, useState } from "react";
 const ShareBTN = () => {
@@ -18,7 +17,7 @@ const ShareBTN = () => {
       className={styles.shareBtn}
       onClick={isRealDevice ? realDevice : desktopShare}
     >
-      <Share />
+      share
     </button>
   );
 };
