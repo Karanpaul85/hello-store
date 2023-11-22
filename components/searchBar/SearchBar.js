@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { showSearchSec } from "@/redux/slices/searchSlice";
+
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
@@ -20,8 +24,12 @@ const SearchBar = () => {
         placeholder="Enter any keyword"
         ref={textInput}
       />
-      <button>Search</button>
-      <button onClick={() => dispatch(showSearchSec(false))}>close</button>
+      <button>
+        <FontAwesomeIcon icon={faMagnifyingGlass} beat/>
+      </button>
+      <button onClick={() => dispatch(showSearchSec(false))}>
+        <FontAwesomeIcon icon={faXmark} />
+      </button>
     </div>
   );
 };

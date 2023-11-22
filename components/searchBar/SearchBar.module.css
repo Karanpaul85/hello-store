@@ -22,3 +22,6 @@
   border: 1px solid #ccc;
   text-transform: capitalize;
 }
+.searcBarSection button svg{
+    width: 24px;
+}
