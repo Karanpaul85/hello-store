@@ -1,0 +1,24 @@
+.searcBarSection {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.searcBarSection input {
+  width: 70%;
+  border: 0;
+  padding: 8px;
+  height: 100%;
+}
+.searcBarSection button {
+  width: 15%;
+  height: 100%;
+  border: 1px solid #ccc;
+  text-transform: capitalize;
+}

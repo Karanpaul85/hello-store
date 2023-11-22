@@ -1,7 +1,6 @@
 // slices/mySlice.js
 import api from "@/utils/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
 
 // Async thunk for fetching data
 export const fetchData = createAsyncThunk(
