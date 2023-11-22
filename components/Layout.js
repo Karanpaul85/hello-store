@@ -20,8 +20,6 @@ const Layout = (props) => {
         <meta property="og:image:height" content="786" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
-        <meta property="og:image" content="/favicon.ico" />
-        <meta name="twitter:image" content="/favicon.ico" />
         <meta name="theme-color" content="#07007a" />
         <meta
           name="keywords"
@@ -34,7 +32,7 @@ const Layout = (props) => {
       <main>
         <div className="container">{props.children}</div>
       </main>
-      <ShareBTN/>
+      <ShareBTN />
     </>
   );
 };

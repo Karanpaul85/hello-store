@@ -1,18 +1,18 @@
 export const socialSharing = [
   {
-    name: "Facebook",
+    name: "facebook",
     url: "https://www.facebook.com/sharer/sharer.php?u=",
   },
   {
-    name: "Twitter",
+    name: "twitter",
     url: "https://twitter.com/intent/tweet?text=",
   },
   {
-    name: "Linkedin",
+    name: "linkedin",
     url: "https://www.linkedin.com/share?url=",
   },
   {
-    name: "Whatsapp",
-    url: "whatsapp://send?text=",
+    name: "whatsapp",
+    url: "web.whatsapp://send?text=",
   },
 ];

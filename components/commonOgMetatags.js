@@ -6,6 +6,7 @@ export const ogMetaTags = (otherdata) => {
         <link rel="icon" type="image/png" href={otherdata.image_url} />
         <link rel="apple-touch-icon" href={otherdata.image_url} />
         <meta property="og:image" content={otherdata.image_url} />
+        <meta name="twitter:image" content={otherdata.image_url} />
         <meta
           name="twitter:image"
           property="og:image"

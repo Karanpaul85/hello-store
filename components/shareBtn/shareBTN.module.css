@@ -1,3 +1,8 @@
+.icons {
+  background: url(/assets/images/icons.jpg) no-repeat;
+  background-size: 100%;
+  background-position: -3px -167px;
+}
 .shareBtn {
   position: fixed;
   bottom: 30px;
@@ -16,4 +21,39 @@
   position: fixed;
   bottom: 90px;
   right: 20px;
+}
+.socialLinkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.socialLinkList li {
+  margin-bottom: 10px;
+}
+.socialLinkList li a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.facebook {
+  background-position: 1px -11px;
+  background-color: #2d4af6;
+}
+.twitter {
+  background-position: 1px -49px;
+}
+.linkedin {
+  background-position: 3px -73px;
+  background-size: 86%;
+}
+.whatsapp {
+  background-position: 0px -127px;
 }

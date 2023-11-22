@@ -29,11 +29,9 @@ const ShareBTN = () => {
   return (
     <div className={styles.socialShare}>
       <button
-        className={styles.shareBtn}
+        className={`${styles.shareBtn} ${styles.icons}`}
         onClick={isRealDevice ? realDevice : desktopShare}
-      >
-        Share
-      </button>
+      ></button>
       {showSocialLinks && <SocialLinks />}
     </div>
   );
