@@ -1,24 +1,41 @@
+import SocialLinks from "../socialLinks/SocialLinks";
 import styles from "./shareBTN.module.css";
 import { useEffect, useState } from "react";
 const ShareBTN = () => {
   const [isRealDevice, setIsRealDevice] = useState(false);
+  const [showSocialLinks, setShowSocialLinks] = useState(false);
   useEffect(() => {
     navigator.share && setIsRealDevice(true);
   }, []);
 
   const desktopShare = () => {
-    console.log("desktop");
+    showSocialLinks ? setShowSocialLinks(false) : setShowSocialLinks(true);
   };
   const realDevice = () => {
-    alert("realDevice");
+    const title = document.title;
+    const text = "Check this out!";
+    const url = window.location.href;
+    if (navigator.share !== undefined) {
+      navigator
+        .share({
+          title,
+          text,
+          url,
+        })
+        .then(() => console.log("Shared!"))
+        .catch((err) => console.error(err));
+    }
   };
   return (
-    <button
-      className={styles.shareBtn}
-      onClick={isRealDevice ? realDevice : desktopShare}
-    >
-      Share
-    </button>
+    <div className={styles.socialShare}>
+      <button
+        className={styles.shareBtn}
+        onClick={isRealDevice ? realDevice : desktopShare}
+      >
+        Share
+      </button>
+      {showSocialLinks && <SocialLinks />}
+    </div>
   );
 };
 export default ShareBTN;
