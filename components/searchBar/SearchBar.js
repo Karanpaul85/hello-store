@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./SearchBar.module.css";
+
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { showSearchSec } from "@/redux/slices/searchSlice";
 
-import FontAwesomeIcon from "../FontAwesomeIcon";
-import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
-
 const SearchBar = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const textInput = useRef(null);
@@ -14,6 +16,15 @@ const SearchBar = () => {
   useEffect(() => {
     textInput.current?.focus();
   }, []);
+
+  const handleChnage = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searchNews = () => {
+    router.push(`/search?q=${search}`);
+    dispatch(showSearchSec(false))
+  };
   return (
     <div className={styles.searcBarSection}>
       <input
@@ -23,12 +34,10 @@ const SearchBar = () => {
         value={search}
         placeholder="Enter any keyword"
         ref={textInput}
+        onChange={handleChnage}
       />
-      <button>
-        <FontAwesomeIcon icon={faMagnifyingGlass} beat/>
-      </button>
-      <button onClick={() => dispatch(showSearchSec(false))}>
-        <FontAwesomeIcon icon={faXmark} />
+      <button onClick={searchNews}>
+        <FontAwesomeIcon icon={faArrowRight} />
       </button>
     </div>
   );

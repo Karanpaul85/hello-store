@@ -3,3 +3,11 @@
   align-items: center;
   padding: 8px;
 }
+.topRight button {
+  width: 44px;
+  background: none;
+  border: 0;
+}
+.topRight button svg{
+  width: 18px;
+}

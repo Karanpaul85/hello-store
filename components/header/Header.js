@@ -1,9 +1,11 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
-import SearchBar from "../searchBar/SearchBar";
 import { useSelector } from "react-redux";
+
+const SearchBar = dynamic(() => import("../searchBar/SearchBar"))
 
 const Header = () => {
   const { showSearch } = useSelector((state) => state.searchSlice);
