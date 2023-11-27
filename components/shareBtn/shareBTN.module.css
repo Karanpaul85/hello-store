@@ -17,6 +17,9 @@
   justify-content: center;
   cursor: pointer;
 }
+.shareBtn svg {
+  width: 18px;
+}
 .socialShare {
   position: fixed;
   bottom: 90px;

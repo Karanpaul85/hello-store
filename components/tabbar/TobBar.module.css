@@ -1,0 +1,25 @@
+.tabBar {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  display: flex;
+  padding: 0 16px;
+}
+.tabBar li {
+  margin: 0;
+  vertical-align: top;
+  padding: 10px 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tabBar li a {
+  width: 100%;
+  padding: 10px !important;
+  text-transform: capitalize;
+  border: none;
+  background: none;
+}
+.active a {
+  border-bottom: 2px solid #222 !important;
+}

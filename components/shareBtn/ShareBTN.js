@@ -1,3 +1,5 @@
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import SocialLinks from "../socialLinks/SocialLinks";
 import styles from "./shareBTN.module.css";
 import { useEffect, useState } from "react";
@@ -29,9 +31,9 @@ const ShareBTN = () => {
   return (
     <div className={styles.socialShare}>
       <button
-        className={`${styles.shareBtn} ${styles.icons}`}
+        className={`${styles.shareBtn}`}
         onClick={isRealDevice ? realDevice : desktopShare}
-      ></button>
+      ><FontAwesomeIcon icon={faShareAlt} /></button>
       {showSocialLinks && <SocialLinks />}
     </div>
   );

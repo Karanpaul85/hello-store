@@ -8,6 +8,7 @@ import Head from "next/head";
 import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
+import Tabbar from "../../components/tabbar/TabBar";
 
 const HomePage = ({ data, errorData, category, lang }) => {
   const { textConst } = allConst;
@@ -40,6 +41,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
         )}
       </Head>
       {/* <div style={{ height: 200 }}>Slider</div> */}
+      <Tabbar lang="hi" />
       <div className={styles.mainHeading}>
         <h1>{textConst.LATEST_NEWS}</h1>
       </div>
@@ -61,7 +63,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
   );
 };
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
+  (store) => async (ctx) => {
     try {
       const options = { lang: "hi", category: "world" };
       const serverData = await store.dispatch(fetchData(options));

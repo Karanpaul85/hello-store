@@ -14,7 +14,7 @@ const Header = () => {
       <div className="container">
         <div className={styles.topHeader}>
           <div className={styles.logo}>
-            <Link href="/?asa=asas">
+            <Link href="/">
               <Image
                 src="/assets/images/logo.jpg"
                 width={80}

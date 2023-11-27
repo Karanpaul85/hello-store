@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { socialSharing } from "../../src/utils/socialShare";
 import styles from "../shareBtn/shareBTN.module.css";
+import FontAwesomeIcon from "../FontAwesomeIcon";
 const SocialLinks = () => {
   const url =
     window !== undefined
@@ -12,9 +13,15 @@ const SocialLinks = () => {
         {socialSharing &&
           socialSharing.length &&
           socialSharing.map((socialLink) => {
+            console.log(socialLink, "socialLink");
             return (
               <li key={socialLink.name}>
-                <Link href={`${socialLink.url}${url}`} className={`${styles.icons} ${styles[socialLink.name]}`}/>
+                <Link
+                  href={`${socialLink.url}${url}`}
+                  className={`${styles.icons} ${styles[socialLink.name]}`}
+                >
+                  {/* <FontAwesomeIcon icon={socialLink.icon} /> */}
+                </Link>
               </li>
             );
           })}
