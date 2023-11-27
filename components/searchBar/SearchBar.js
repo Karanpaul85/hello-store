@@ -6,12 +6,17 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { showSearchSec } from "@/redux/slices/searchSlice";
+import { allConst } from "@/constant/common_constants";
 
 const SearchBar = () => {
   const router = useRouter();
+  const { lang } = router.query;
+  console.log(lang, "lang");
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [searchError, setSearchError] = useState(false);
   const textInput = useRef(null);
+  const { textConst } = allConst;
 
   useEffect(() => {
     textInput.current?.focus();
@@ -19,11 +24,19 @@ const SearchBar = () => {
 
   const handleChnage = (e) => {
     setSearch(e.target.value);
+    if (e.target.value.length >= 3) {
+      setSearchError(false);
+    }
   };
 
   const searchNews = () => {
-    router.push(`/search?q=${search}`);
-    dispatch(showSearchSec(false))
+    if (search.length >= 3) {
+      router.push(`/search?q=${search}&lang=${lang ? lang : "hi"}`);
+      dispatch(showSearchSec(false));
+    } else {
+      console.log("please enter proper query");
+      setSearchError(true);
+    }
   };
   return (
     <div className={styles.searcBarSection}>
@@ -32,9 +45,14 @@ const SearchBar = () => {
         name="search"
         id="search"
         value={search}
-        placeholder="Enter any keyword"
+        placeholder={
+          !searchError
+            ? "Enter any keyword"
+            : textConst.SEARCH_ERROR_PLACEHOLDER
+        }
         ref={textInput}
         onChange={handleChnage}
+        className={searchError && styles.error}
       />
       <button onClick={searchNews}>
         <FontAwesomeIcon icon={faArrowRight} />

@@ -2,13 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./singleNews.module.css";
 
-const SingleNews = ({ newsdata, index, lang, category }) => {
+const SingleNews = ({
+  newsdata,
+  index,
+  lang,
+  category,
+  isSearch,
+  queryString,
+}) => {
   return (
     <Link
-      href={`/${lang}/${category}/${newsdata.article_id}`}
+      href={`/${lang}/${category}/${newsdata.article_id}${
+        isSearch && `?from=${queryString}`
+      }`}
       className={styles.newsCard}
     >
-      <div className={styles.tumbNail}>
+      {newsdata.image_url && <div className={styles.tumbNail}>
         {index > 1 ? (
           <Image
             src={newsdata.image_url}
@@ -29,7 +38,7 @@ const SingleNews = ({ newsdata, index, lang, category }) => {
             priority={true}
           />
         )}
-      </div>
+      </div>}
       <div className={styles.newsContent}>
         <h2 className={styles.h2Hdeading}>{newsdata.title}</h2>
         <p className={styles.published}>Published at : {newsdata.pubDate}</p>

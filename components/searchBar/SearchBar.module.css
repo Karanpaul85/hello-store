@@ -28,3 +28,14 @@
 .searcBarSection button svg {
   width: 18px;
 }
+.error {
+  border: 1px solid red !important;
+}
+.error::placeholder {
+  color: red;
+  opacity: 1;
+}
+
+.error::-ms-input-placeholder {
+  color: red;
+}

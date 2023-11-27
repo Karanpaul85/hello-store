@@ -6,8 +6,12 @@ import Image from "next/image";
 import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../../../components/commonErrorMetatags";
 import styles from "./singleNews.module.css";
+import headingStyle from "../../../styles/Home.module.css";
+import { fetchSearchData } from "@/redux/slices/searchSlice";
+import { allConst } from "@/constant/common_constants";
 
 const News = ({ data, errorData }) => {
+  const { textConst } = allConst;
   if (errorData) {
     return (
       <Layout>
@@ -20,10 +24,10 @@ const News = ({ data, errorData }) => {
                   : "Welcome to world breaking News"
               )}
         </Head>
-        <div className={styles.mainHeading}>
+        <div className={headingStyle.mainHeading}>
           <h1>{textConst.API_ERROR}</h1>
         </div>
-        <div className="newsSection" style={customStyle.newsSection}>
+        <div className="newsSection" style={headingStyle.newsSection}>
           <p>{errorData}</p>
         </div>
       </Layout>
@@ -33,7 +37,7 @@ const News = ({ data, errorData }) => {
     <Layout>
       <Head>{ogMetaTags(data ? data : "Welcome to world breaking News")}</Head>
       <div>
-        <div className={styles.tumbNail}>
+        {data.image_url && <div className={styles.tumbNail}>
           <Image
             src={data.image_url}
             width={640}
@@ -42,7 +46,7 @@ const News = ({ data, errorData }) => {
             blurDataURL={data.image_url}
             priority={true}
           />
-        </div>
+        </div>}
         <div className={styles.newsContent}>
           <h1>{data.title}</h1>
           <p className={styles.publish}>Published at : {data.pubDate}</p>
@@ -56,7 +60,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: ctx.query.lang, category: ctx.query.type };
-      const serverData = await store.dispatch(fetchData(options));
+      const serverData = await store.dispatch(
+        ctx.query.from
+          ? fetchSearchData({ lang: ctx.query.lang, q: ctx.query.from })
+          : fetchData(options)
+      );
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       const singleNews =
