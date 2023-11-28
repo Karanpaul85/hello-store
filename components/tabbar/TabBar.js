@@ -5,12 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 const Tabbar = ({ lang }) => {
   const router = useRouter();
-  const [hash, sethash] = useState("world");
-  useEffect(() => {
-    if (router.asPath.split("#")[1]) {
-      sethash(router.asPath.split("#")[1]);
-    }
-  }, [router.asPath]);
+  const { type } = router.query;
 
   if (lang === "hi") {
     return (
@@ -21,7 +16,7 @@ const Tabbar = ({ lang }) => {
             return (
               <li
                 key={listItem.category}
-                className={`${hash === listItem.category && styles.active}`}
+                className={`${type === listItem.category && styles.active}`}
               >
                 <Link href={`/hi/${listItem.category}`}>
                   {listItem.translation}

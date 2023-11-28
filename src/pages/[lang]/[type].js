@@ -8,10 +8,12 @@ import { ogErrorMetaTags } from "../../../components/commonErrorMetatags";
 import { ogMetaTags } from "../../../components/commonOgMetatags";
 import headingStyle from "../../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
+import SingleNews from "../../../components/singleNews/SingleNews";
 
-const Types = ({ data, errorData }) => {
+const Types = ({ data, errorData, category }) => {
+  console.log(data, "data");
   const router = useRouter();
-  const {textConst} = allConst;
+  const { textConst } = allConst;
   const { lang, type } = router.query;
   if (errorData) {
     return (
@@ -36,8 +38,30 @@ const Types = ({ data, errorData }) => {
   }
   return (
     <Layout>
+      <Head>
+        {ogMetaTags(
+          data && data.length ? data?.[0] : "Welcome to world breaking News"
+        )}
+      </Head>
       <Tabbar lang={lang} />
-      {type}, {lang}
+      <div className={headingStyle.mainHeading}>
+        <h1>{textConst.LATEST_NEWS}</h1>
+      </div>
+      <div className={headingStyle.newsSection}>
+        {data && data.length > 0
+          ? data.map((item, index) => {
+              return (
+                <SingleNews
+                  key={item.article_id}
+                  newsdata={item}
+                  index={index}
+                  lang={lang}
+                  category={category}
+                />
+              );
+            })
+          : "We can not find any results for this query"}
+      </div>
     </Layout>
   );
 };

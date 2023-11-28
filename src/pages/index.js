@@ -40,7 +40,6 @@ const HomePage = ({ data, errorData, category, lang }) => {
           data && data.length ? data?.[0] : "Welcome to world breaking News"
         )}
       </Head>
-      {/* <div style={{ height: 200 }}>Slider</div> */}
       <Tabbar lang="hi" />
       <div className={styles.mainHeading}>
         <h1>{textConst.LATEST_NEWS}</h1>

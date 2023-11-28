@@ -5,6 +5,11 @@
   width: 100%;
   display: flex;
   padding: 0 16px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.tabBar::-webkit-scrollbar {
+  display: none;
 }
 .tabBar li {
   margin: 0;

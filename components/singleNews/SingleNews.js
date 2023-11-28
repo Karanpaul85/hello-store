@@ -10,35 +10,36 @@ const SingleNews = ({
   isSearch,
   queryString,
 }) => {
+  const searchParm = isSearch ? `?from=${queryString}` : "";
   return (
     <Link
-      href={`/${lang}/${category}/${newsdata.article_id}${
-        isSearch && `?from=${queryString}`
-      }`}
+      href={`/${lang}/${category}/${newsdata.article_id}${searchParm}`}
       className={styles.newsCard}
     >
-      {newsdata.image_url && <div className={styles.tumbNail}>
-        {index > 1 ? (
-          <Image
-            src={newsdata.image_url}
-            width={300}
-            height={300}
-            alt=""
-            loading="lazy"
-            blurDataURL={newsdata.image_url}
-            placeholder="blur"
-          />
-        ) : (
-          <Image
-            src={newsdata.image_url}
-            width={300}
-            height={300}
-            alt=""
-            blurDataURL={newsdata.image_url}
-            priority={true}
-          />
-        )}
-      </div>}
+      {newsdata.image_url && (
+        <div className={styles.tumbNail}>
+          {index > 1 ? (
+            <Image
+              src={newsdata.image_url}
+              width={300}
+              height={300}
+              alt=""
+              loading="lazy"
+              blurDataURL={newsdata.image_url}
+              placeholder="blur"
+            />
+          ) : (
+            <Image
+              src={newsdata.image_url}
+              width={300}
+              height={300}
+              alt=""
+              blurDataURL={newsdata.image_url}
+              priority={true}
+            />
+          )}
+        </div>
+      )}
       <div className={styles.newsContent}>
         <h2 className={styles.h2Hdeading}>{newsdata.title}</h2>
         <p className={styles.published}>Published at : {newsdata.pubDate}</p>
