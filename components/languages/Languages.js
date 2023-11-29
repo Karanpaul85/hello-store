@@ -1,7 +1,13 @@
 import styles from "./Languages.module.css";
 import { languages } from "../../src/constant/common_constants";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { showLangSec } from "@/redux/slices/searchSlice";
 const Languages = () => {
+  const dispatch = useDispatch();
+  const hideLangBar = () => {
+    dispatch(showLangSec(false))
+  };
   return (
     <div className={styles.langBarSection}>
       <ul>
@@ -10,7 +16,9 @@ const Languages = () => {
           languages.map((item) => {
             return (
               <li key={item.desc}>
-                <Link href={item.url}>{item.desc}</Link>
+                <Link href={item.url} onClick={hideLangBar}>
+                  {item.desc}
+                </Link>
               </li>
             );
           })}
