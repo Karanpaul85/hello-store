@@ -12,9 +12,11 @@ const TopRight = () => {
   const dispatch = useDispatch();
   const toggleSearchBar = () => {
     showSearch ? dispatch(showSearchSec(false)) : dispatch(showSearchSec(true));
+    dispatch(showLangSec(false));
   };
   const showLanguages = () => {
     showlang ? dispatch(showLangSec(false)) : dispatch(showLangSec(true));
+    dispatch(showSearchSec(false));
   };
   return (
     <div className={styles.topRight}>
