@@ -3,6 +3,7 @@ import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import SocialLinks from "../socialLinks/SocialLinks";
 import styles from "./shareBTN.module.css";
 import { useEffect, useState } from "react";
+import Button from "../Button";
 const ShareBTN = () => {
   const [isRealDevice, setIsRealDevice] = useState(false);
   const [showSocialLinks, setShowSocialLinks] = useState(false);
@@ -30,10 +31,14 @@ const ShareBTN = () => {
   };
   return (
     <div className={styles.socialShare}>
-      <button
-        className={`${styles.shareBtn}`}
+      <Button
         onClick={isRealDevice ? realDevice : desktopShare}
-      ><FontAwesomeIcon icon={faShareAlt} /></button>
+        classes={styles.shareBtn}
+        title="Social Share"
+        ariaLabel="Social Share"
+      >
+        <FontAwesomeIcon icon={faShareAlt} />
+      </Button>
       {showSocialLinks && <SocialLinks />}
     </div>
   );

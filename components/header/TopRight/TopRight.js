@@ -3,6 +3,7 @@ import styles from "./TopRight.module.css";
 import { showSearchSec } from "@/redux/slices/searchSlice";
 import FontAwesomeIcon from "../../FontAwesomeIcon";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../Button";
 const TopRight = () => {
   const { showSearch } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
@@ -11,9 +12,14 @@ const TopRight = () => {
   };
   return (
     <div className={styles.topRight}>
-      <button onClick={toggleSearchBar}>
+      <Button
+        onClick={toggleSearchBar}
+        type="button"
+        title="Search"
+        ariaLabel="Search"
+      >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </button>
+      </Button>
     </div>
   );
 };
