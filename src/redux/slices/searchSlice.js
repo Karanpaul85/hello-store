@@ -18,10 +18,14 @@ const searchSlice = createSlice({
     showSearch: false,
     loading: false,
     error: null,
+    showlang: false,
   },
   reducers: {
     showSearchSec: (state, action) => {
       state.showSearch = action.payload;
+    },
+    showLangSec: (state, action) => {
+      state.showlang = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -42,5 +46,5 @@ const searchSlice = createSlice({
       });
   },
 });
-export const { showSearchSec } = searchSlice.actions;
+export const { showSearchSec, showLangSec } = searchSlice.actions;
 export default searchSlice.reducer;

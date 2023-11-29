@@ -41,3 +41,4 @@ export const tagList = {
     "other",
   ],
 };
+export const languages = [{ url: "/", desc: "हिंदी" }, { url: "/en/world", desc: "English" }];

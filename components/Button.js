@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Button = ({ type, title, ariaLabel, onClick, children, classes }) => {
+const Button = ({ type, title, ariaLabel, onClick, children, classes, id }) => {
   return (
     <button
       type={type}
@@ -8,6 +8,7 @@ const Button = ({ type, title, ariaLabel, onClick, children, classes }) => {
       aria-label={ariaLabel}
       onClick={onClick}
       className={classes}
+      id={id}
     >
       {children}
     </button>

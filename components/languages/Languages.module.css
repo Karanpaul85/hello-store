@@ -1,0 +1,26 @@
+.langBarSection {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.langBarSection ul {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+}
+.langBarSection ul li {
+  flex: 1 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #ccc;
+}

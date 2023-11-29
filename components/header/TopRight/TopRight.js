@@ -1,14 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./TopRight.module.css";
-import { showSearchSec } from "@/redux/slices/searchSlice";
+import { showSearchSec, showLangSec } from "@/redux/slices/searchSlice";
 import FontAwesomeIcon from "../../FontAwesomeIcon";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faLanguage,
+} from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Button";
 const TopRight = () => {
-  const { showSearch } = useSelector((state) => state.searchSlice);
+  const { showSearch, showlang } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
   const toggleSearchBar = () => {
     showSearch ? dispatch(showSearchSec(false)) : dispatch(showSearchSec(true));
+  };
+  const showLanguages = () => {
+    showlang ? dispatch(showLangSec(false)) : dispatch(showLangSec(true));
   };
   return (
     <div className={styles.topRight}>
@@ -17,8 +23,23 @@ const TopRight = () => {
         type="button"
         title="Search"
         ariaLabel="Search"
+        id="search"
       >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
+      </Button>
+      <Button
+        onClick={showLanguages}
+        type="button"
+        title="language"
+        ariaLabel="language"
+        id="language"
+      >
+        <FontAwesomeIcon
+          icon={faLanguage}
+          beat
+          size="2xl"
+          style={{ width: "30px" }}
+        />
       </Button>
     </div>
   );

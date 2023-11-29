@@ -6,9 +6,10 @@ import TopRight from "./TopRight/TopRight";
 import { useSelector } from "react-redux";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
+const LanguageBar = dynamic(() => import("../languages/Languages"));
 
 const Header = () => {
-  const { showSearch } = useSelector((state) => state.searchSlice);
+  const { showSearch, showlang } = useSelector((state) => state.searchSlice);
   return (
     <header id="header" className={styles.header}>
       <div className="container">
@@ -34,6 +35,7 @@ const Header = () => {
           </div>
           <TopRight />
           {showSearch && <SearchBar />}
+          {showlang && <LanguageBar/>}
         </div>
       </div>
     </header>

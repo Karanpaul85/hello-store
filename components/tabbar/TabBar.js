@@ -2,7 +2,6 @@ import Link from "next/link";
 import { tagList } from "../../src/constant/common_constants";
 import styles from "./TobBar.module.css";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 const Tabbar = ({ lang }) => {
   const router = useRouter();
   const { type } = router.query;
@@ -34,7 +33,7 @@ const Tabbar = ({ lang }) => {
         tagList[lang].map((listItem) => {
           return (
             <li key={listItem}>
-              <Link href={`/en/${listItem.category}`}>{listItem}</Link>
+              <Link href={`/en/${listItem}`}>{listItem}</Link>
             </li>
           );
         })}

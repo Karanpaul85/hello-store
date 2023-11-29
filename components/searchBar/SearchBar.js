@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { showSearchSec } from "@/redux/slices/searchSlice";
 import { allConst } from "@/constant/common_constants";
+import Button from "../Button";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -54,9 +55,15 @@ const SearchBar = () => {
         onChange={handleChnage}
         className={searchError && styles.error}
       />
-      <button onClick={searchNews}>
+      <Button
+        onClick={searchNews}
+        type="button"
+        title="continue search"
+        ariaLabel="searchBtn"
+        id="searchBtn"
+      >
         <FontAwesomeIcon icon={faArrowRight} />
-      </button>
+      </Button>
     </div>
   );
 };
