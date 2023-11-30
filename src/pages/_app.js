@@ -3,8 +3,7 @@ import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
 import { Provider } from "react-redux";
 import { wrapper } from "../utils/withRedux";
-import { useEffect } from "react";
-import { initGA, logPageView } from "@/utils/ga";
+import Script from "next/script";
 
 const poppins = Poppins({
   weight: ["400", "500", "600"],
@@ -15,15 +14,22 @@ const poppins = Poppins({
 
 function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
-  useEffect(() => {
-    if (!window.GA_INITIALIZED) {
-      initGA();
-      window.GA_INITIALIZED = true;
-    }
-    logPageView();
-  }, []);
   return (
     <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=G-HDTNMT20N4`}
+      />
+      <Script  id="GA4" strategy="lazyOnload">
+        {`
+               window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+               gtag('config', 'G-HDTNMT20N4', {
+               page_path: window.location.pathname,
+               });
+         `}
+      </Script>
       <style jsx global>{`
         *,
         html {
