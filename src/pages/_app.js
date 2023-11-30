@@ -16,11 +16,12 @@ function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   return (
     <>
+      <Script src="https://accounts.google.com/gsi/client" async defer />
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=G-HDTNMT20N4`}
       />
-      <Script  id="GA4" strategy="lazyOnload">
+      <Script id="GA4" strategy="lazyOnload">
         {`
                window.dataLayer = window.dataLayer || [];
                function gtag(){dataLayer.push(arguments);}

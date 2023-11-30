@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 const Tabbar = ({ lang }) => {
   const router = useRouter();
   const { type } = router.query;
-
   if (lang === "hi") {
     return (
       <ul className={styles.tabBar}>
@@ -32,7 +31,10 @@ const Tabbar = ({ lang }) => {
         tagList[lang].length > 0 &&
         tagList[lang].map((listItem) => {
           return (
-            <li key={listItem}>
+            <li
+              key={listItem}
+              className={`${type === listItem && styles.active}`}
+            >
               <Link href={`/en/${listItem}`}>{listItem}</Link>
             </li>
           );

@@ -1,12 +1,57 @@
+/* google google */
 import Head from "next/head";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
 const Layout = (props) => {
   const [currentUrl, setCurrentUrl] = useState("");
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+
+  const onTapLogin = (response) => {
+    console.log(response);
+    const decodedData = parseJwt(response.credential);
+    console.log(decodedData, "decodedData");
+  };
+
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, [setCurrentUrl]);
+
+  useEffect(() => {
+    checkWindow();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function checkWindow() {
+    const checkGoogle = setInterval(() => {
+      if (window && window.google) {
+        // // eslint-disable-next-line no-undef
+        google.accounts.id.initialize({
+          client_id:
+            "454659208397-33luu09om2cg5e62tna7uvfipqufh9lj.apps.googleusercontent.com",
+          callback: onTapLogin,
+        });
+        // eslint-disable-next-line no-undef
+        google.accounts.id.prompt((notification) => {
+          console.log("Notification", notification);
+        });
+        clearInterval(checkGoogle);
+      }
+    }, 100);
+  }
   return (
     <>
       <Head>

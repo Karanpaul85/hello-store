@@ -11,7 +11,6 @@ import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
-  console.log(data, "data");
   const { textConst } = allConst;
   useEffect(() => {}, []);
   if (errorData) {
