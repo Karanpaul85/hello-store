@@ -7,9 +7,15 @@ import {
   faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Button";
+import UserTopIcon from "../../userDetails/UserTopIcon";
 const TopRight = () => {
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
+  const { email, email_verified, name, picture } = useSelector(
+    (state) => state.oneTapLogin
+  );
+
   const dispatch = useDispatch();
+
   const toggleSearchBar = () => {
     showSearch ? dispatch(showSearchSec(false)) : dispatch(showSearchSec(true));
     dispatch(showLangSec(false));
@@ -18,6 +24,7 @@ const TopRight = () => {
     showlang ? dispatch(showLangSec(false)) : dispatch(showLangSec(true));
     dispatch(showSearchSec(false));
   };
+
   return (
     <div className={styles.topRight}>
       <Button
@@ -43,6 +50,9 @@ const TopRight = () => {
           style={{ width: "30px" }}
         />
       </Button>
+      {email_verified && (
+        <UserTopIcon email={email} name={name} picture={picture} />
+      )}
     </div>
   );
 };

@@ -1,0 +1,9 @@
+.userDetailSec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userDetailSec img {
+  border-radius: 50%;
+}

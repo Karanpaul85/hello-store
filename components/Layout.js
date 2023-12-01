@@ -3,8 +3,15 @@ import Head from "next/head";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
+import { useCookies } from "react-cookie";
 const Layout = (props) => {
+  const [cookies] = useCookies(["auth"]);
+  const { auth } = cookies;
+  const dispatch = useDispatch();
   const [currentUrl, setCurrentUrl] = useState("");
+  //decode the one tap login token
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -21,9 +28,8 @@ const Layout = (props) => {
   }
 
   const onTapLogin = (response) => {
-    console.log(response);
     const decodedData = parseJwt(response.credential);
-    console.log(decodedData, "decodedData");
+    dispatch(setUserDetails(decodedData));
   };
 
   useEffect(() => {
@@ -31,8 +37,13 @@ const Layout = (props) => {
   }, [setCurrentUrl]);
 
   useEffect(() => {
-    checkWindow();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!auth) {
+      checkWindow();
+    }else{
+      dispatch(setUserDetails(auth));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function checkWindow() {
@@ -46,7 +57,7 @@ const Layout = (props) => {
         });
         // eslint-disable-next-line no-undef
         google.accounts.id.prompt((notification) => {
-          console.log("Notification", notification);
+          // console.log("Notification", notification);
         });
         clearInterval(checkGoogle);
       }
