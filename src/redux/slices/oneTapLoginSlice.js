@@ -1,5 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useCookies } from "react-cookie";
+
+function createCookie(MembershipIdName, MembershipID, minutes) {
+  let expires;
+  if (minutes) {
+    const date = new Date();
+    date.setMonth(date.getMonth() + 1);
+    expires = `; expires=${date.toGMTString()}`;
+  } else {
+    expires = "";
+  }
+  document.cookie = `${MembershipIdName}=${MembershipID}${expires}; path=/`;
+}
 const oneTapLogin = createSlice({
   name: "onetapLoginSlice",
   initialState: {
@@ -16,7 +27,8 @@ const oneTapLogin = createSlice({
         state.email_verified = email_verified;
         state.name = name;
         state.picture = picture;
-        document.cookie = `auth=${JSON.stringify(state)};path="/"`;
+        createCookie("auth", JSON.stringify(state), 2);
+        //document.cookie = `auth=${JSON.stringify(state)};path="/"`;
       }
     },
   },

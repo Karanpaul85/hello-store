@@ -83,6 +83,7 @@ const Layout = (props) => {
         />
         <meta name="twitter:url" content={currentUrl} />
         <meta property="og:url" content={currentUrl} />
+        <meta name="google-site-verification" content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g" />
       </Head>
       <Header />
       <main>
