@@ -18,6 +18,7 @@ const oneTapLogin = createSlice({
     email_verified: false,
     name: null,
     picture: null,
+    openDrawer: false,
   },
   reducers: {
     setUserDetails: (state, action) => {
@@ -28,10 +29,12 @@ const oneTapLogin = createSlice({
         state.name = name;
         state.picture = picture;
         createCookie("auth", JSON.stringify(state), 2);
-        //document.cookie = `auth=${JSON.stringify(state)};path="/"`;
       }
+    },
+    setOpenDrawer: (state, action) => {
+      state.openDrawer = action.payload;
     },
   },
 });
-export const { setUserDetails } = oneTapLogin.actions;
+export const { setUserDetails, setOpenDrawer } = oneTapLogin.actions;
 export default oneTapLogin.reducer;

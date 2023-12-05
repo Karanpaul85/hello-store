@@ -65,7 +65,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: "hi", category: "world" };
-      const serverData = await store.dispatch(fetchData(options));
+      // const serverData = await store.dispatch(fetchData(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
