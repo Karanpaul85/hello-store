@@ -8,3 +8,7 @@
 .userDetailSec img {
   border-radius: 50%;
 }
+.userIcon {
+  width: 44px !important;
+  height: 44px !important;
+}

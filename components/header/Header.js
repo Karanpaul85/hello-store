@@ -3,20 +3,16 @@ import Image from "next/image";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
-import { useDispatch, useSelector } from "react-redux";
-import { SwipeableDrawer } from "@mui/material";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { setOpenDrawer } from "@/redux/slices/oneTapLoginSlice";
+import MainNavigation from "./Navigation/MainNavigation";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
 
 const Header = () => {
-  const dispatch = useDispatch();
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
-  const { openDrawer } = useSelector((state) => state.oneTapLogin);
-  // const [drawerOpen, setDrawerOpen] = useState(false);
   return (
     <header id="header" className={styles.header}>
       <div className="container">
@@ -43,20 +39,9 @@ const Header = () => {
           <TopRight />
           {showSearch && <SearchBar />}
           {showlang && <LanguageBar />}
-          <SwipeableDrawer
-            anchor="left"
-            open={openDrawer}
-            onClose={() => {
-              dispatch(setOpenDrawer(false));
-            }}
-            onOpen={() => {
-              dispatch(setOpenDrawer(false));
-            }}
-          >
-            Test
-          </SwipeableDrawer>
         </div>
       </div>
+      <MainNavigation />
     </header>
   );
 };

@@ -50,9 +50,13 @@ const TopRight = () => {
           style={{ width: "30px" }}
         />
       </Button>
-      {email_verified && (
-        <UserTopIcon email={email} name={name} picture={picture} />
-      )}
+
+      <UserTopIcon
+        email={email}
+        name={name}
+        picture={picture}
+        emailVerifie={email_verified}
+      />
     </div>
   );
 };

@@ -3,11 +3,12 @@ import styles from "./UserDetails.module.css";
 import Button from "../Button";
 import { useDispatch } from "react-redux";
 import { setOpenDrawer } from "@/redux/slices/oneTapLoginSlice";
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
-const UserTopIcon = ({ name, picture }) => {
+const UserTopIcon = ({ email, name, picture, emailVerifie }) => {
   const dispatch = useDispatch();
   const showMenu = () => {
-    console.log("clicked");
     dispatch(setOpenDrawer(true));
   };
   return (
@@ -19,7 +20,14 @@ const UserTopIcon = ({ name, picture }) => {
         id="myAccount"
         ariaLabel="myAccount"
       >
-        <Image src={picture} alt={name} height={44} width={44} />
+        {emailVerifie ? (
+          <Image src={picture} alt={name} height={44} width={44} />
+        ) : (
+          <FontAwesomeIcon
+                icon={faCircleUser}
+                className={styles.userIcon}
+              />
+        )}
       </Button>
     </div>
   );
