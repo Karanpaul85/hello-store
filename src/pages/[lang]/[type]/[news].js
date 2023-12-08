@@ -1,3 +1,4 @@
+import ReactHtmlParser from "react-html-parser";
 import Layout from "../../../../components/Layout";
 import { wrapper } from "@/utils/withRedux";
 import { fetchData } from "@/redux/slices/newsSlice";
@@ -37,20 +38,24 @@ const News = ({ data, errorData }) => {
     <Layout>
       <Head>{ogMetaTags(data ? data : "Welcome to world breaking News")}</Head>
       <div>
-        {data.image_url && <div className={styles.tumbNail}>
-          <Image
-            src={data.image_url}
-            width={640}
-            height={480}
-            alt=""
-            blurDataURL={data.image_url}
-            priority={true}
-          />
-        </div>}
+        {data.image_url && (
+          <div className={styles.tumbNail}>
+            <Image
+              src={data.image_url}
+              width={640}
+              height={480}
+              alt=""
+              blurDataURL={data.image_url}
+              priority={true}
+            />
+          </div>
+        )}
         <div className={styles.newsContent}>
           <h1>{data.title}</h1>
-          <p className={styles.publish}>Published at : {data.pubDate}</p>
-          <p>{data.description}</p>
+          <div className={styles.publish}>Published at : {data.pubDate}</div>
+          <div className={styles.description}>
+            {ReactHtmlParser(data.description)}
+          </div>
         </div>
       </div>
     </Layout>

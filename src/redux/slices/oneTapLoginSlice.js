@@ -1,16 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createCookie } from "../../utils/common";
+import axios from "axios";
 
-function createCookie(MembershipIdName, MembershipID, minutes) {
-  let expires;
-  if (minutes) {
-    const date = new Date();
-    date.setMonth(date.getMonth() + 1);
-    expires = `; expires=${date.toGMTString()}`;
-  } else {
-    expires = "";
+// Async thunk for fetching data
+export const sendUserDetails = createAsyncThunk(
+  "onetapLoginSlice/sendUserDetails",
+  async (options) => {
+    const savedData = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      options
+    );
+    return savedData.data;
   }
-  document.cookie = `${MembershipIdName}=${MembershipID}${expires}; path=/`;
-}
+);
+
 const initialState = {
   email: null,
   email_verified: false,
@@ -18,6 +21,7 @@ const initialState = {
   picture: null,
   openDrawer: false,
 };
+
 const oneTapLogin = createSlice({
   name: "onetapLoginSlice",
   initialState,
@@ -37,7 +41,20 @@ const oneTapLogin = createSlice({
       state.openDrawer = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(sendUserDetails.fulfilled, (state, action) => {
+      const { email, email_verified, name, picture } = action.payload;
+      if (email_verified) {
+        state.email = email;
+        state.email_verified = email_verified;
+        state.name = name;
+        state.picture = picture;
+        createCookie("auth", JSON.stringify(state), 2);
+      }
+    });
+  },
 });
+
 export const { setUserDetails, setOpenDrawer, userLogout } =
   oneTapLogin.actions;
 export default oneTapLogin.reducer;

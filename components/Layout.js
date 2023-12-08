@@ -4,7 +4,7 @@ import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
 import { useDispatch } from "react-redux";
-import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
+import { sendUserDetails, setUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 const Layout = (props) => {
   const [cookies] = useCookies(["auth"]);
@@ -29,7 +29,7 @@ const Layout = (props) => {
 
   const onTapLogin = (response) => {
     const decodedData = parseJwt(response.credential);
-    dispatch(setUserDetails(decodedData));
+    dispatch(sendUserDetails(decodedData));
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Layout = (props) => {
     if (!auth) {
       checkWindow();
     }else{
-      dispatch(setUserDetails(auth));
+      dispatch(sendUserDetails(auth));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
