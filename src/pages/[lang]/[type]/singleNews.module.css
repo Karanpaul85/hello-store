@@ -37,3 +37,6 @@
 .description a {
   color: #2076cb;
 }
+.description iframe{
+  width: 100% !important;
+}
