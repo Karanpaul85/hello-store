@@ -4,7 +4,10 @@ import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
 import { useDispatch } from "react-redux";
-import { sendUserDetails, setUserDetails } from "@/redux/slices/oneTapLoginSlice";
+import {
+  sendUserDetails,
+  setUserDetails,
+} from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 const Layout = (props) => {
   const [cookies] = useCookies(["auth"]);
@@ -37,9 +40,10 @@ const Layout = (props) => {
   }, [setCurrentUrl]);
 
   useEffect(() => {
+    console.log(process.env.GOOGLE_CLIENTID, "clientid");
     if (!auth) {
       checkWindow();
-    }else{
+    } else {
       dispatch(sendUserDetails(auth));
     }
 
@@ -51,8 +55,7 @@ const Layout = (props) => {
       if (window && window.google) {
         // // eslint-disable-next-line no-undef
         google.accounts.id.initialize({
-          client_id:
-            "454659208397-33luu09om2cg5e62tna7uvfipqufh9lj.apps.googleusercontent.com",
+          client_id: process.env.GOOGLE_CLIENTID,
           callback: onTapLogin,
         });
         // eslint-disable-next-line no-undef
@@ -83,7 +86,10 @@ const Layout = (props) => {
         />
         <meta name="twitter:url" content={currentUrl} />
         <meta property="og:url" content={currentUrl} />
-        <meta name="google-site-verification" content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g" />
+        <meta
+          name="google-site-verification"
+          content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g"
+        />
       </Head>
       <Header />
       <main>
