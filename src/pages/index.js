@@ -37,7 +37,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
     <Layout>
       <Head>
         {ogMetaTags(
-          data && data.length ? data?.[0] : "Welcome to world breaking News"
+          data && data.length ? data?.[0] : "Welcome to world breaking News", "Home"
         )}
       </Head>
       <Tabbar lang="hi" />
