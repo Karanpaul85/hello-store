@@ -1,11 +1,10 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { GoogleLogin } from "@react-oauth/google";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
 import { useSelector } from "react-redux";
-
-import { setOpenDrawer } from "@/redux/slices/oneTapLoginSlice";
 import MainNavigation from "./Navigation/MainNavigation";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
@@ -42,6 +41,15 @@ const Header = () => {
         </div>
       </div>
       <MainNavigation />
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+        useOneTap
+      />
     </header>
   );
 };
