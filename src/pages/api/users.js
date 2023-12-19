@@ -29,7 +29,6 @@ export default async function handler(req, res) {
         return;
       }
 
-      // Create a new user instance
       const newUser = new User({
         email,
         name,
