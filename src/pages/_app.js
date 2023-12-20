@@ -16,21 +16,26 @@ function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   return (
     <>
-      <Script src="https://accounts.google.com/gsi/client" async defer />
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-HDTNMT20N4`}
-      />
-      <Script id="GA4" strategy="lazyOnload">
-        {`
-               window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
-               gtag('config', 'G-HDTNMT20N4', {
-               page_path: window.location.pathname,
-               });
-         `}
-      </Script>
+      {process.env.NODE_ENV !== "development" && (
+        <>
+          <Script src="https://accounts.google.com/gsi/client" async defer />
+          <Script
+            strategy="lazyOnload"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-HDTNMT20N4`}
+          />
+          <Script id="GA4" strategy="lazyOnload">
+            {`
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'G-HDTNMT20N4', {
+         page_path: window.location.pathname,
+         });
+   `}
+          </Script>
+        </>
+      )}
+
       <style jsx global>{`
         *,
         html {
