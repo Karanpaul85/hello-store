@@ -1,70 +1,22 @@
-/* google google */
 import Head from "next/head";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
 import { useDispatch } from "react-redux";
-import { sendUserDetails, setUserDetails } from "@/redux/slices/oneTapLoginSlice";
+import { sendUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 const Layout = (props) => {
   const [cookies] = useCookies(["auth"]);
   const { auth } = cookies;
   const dispatch = useDispatch();
   const [currentUrl, setCurrentUrl] = useState("");
-  //decode the one tap login token
-  function parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-
-    return JSON.parse(jsonPayload);
-  }
-
-  const onTapLogin = (response) => {
-    const decodedData = parseJwt(response.credential);
-    dispatch(sendUserDetails(decodedData));
-  };
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, [setCurrentUrl]);
-
-  useEffect(() => {
-    if (!auth) {
-      checkWindow();
-    }else{
-      dispatch(sendUserDetails(auth));
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function checkWindow() {
-    const checkGoogle = setInterval(() => {
-      if (window && window.google) {
-        // // eslint-disable-next-line no-undef
-        google.accounts.id.initialize({
-          client_id:
-            "454659208397-33luu09om2cg5e62tna7uvfipqufh9lj.apps.googleusercontent.com",
-          callback: onTapLogin,
-        });
-        // eslint-disable-next-line no-undef
-        google.accounts.id.prompt((notification) => {
-          // console.log("Notification", notification);
-        });
-        clearInterval(checkGoogle);
-      }
-    }, 100);
-  }
   return (
-    <>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Head>
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
@@ -83,14 +35,17 @@ const Layout = (props) => {
         />
         <meta name="twitter:url" content={currentUrl} />
         <meta property="og:url" content={currentUrl} />
-        <meta name="google-site-verification" content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g" />
+        <meta
+          name="google-site-verification"
+          content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g"
+        />
       </Head>
       <Header />
       <main>
         <div className="container">{props.children}</div>
       </main>
       <ShareBTN />
-    </>
+    </GoogleOAuthProvider>
   );
 };
 
