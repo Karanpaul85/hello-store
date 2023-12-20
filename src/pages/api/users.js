@@ -1,4 +1,5 @@
 import { connectionStr } from "@/utils/db";
+import parseJwt from "@/utils/jwt";
 import { User } from "@/utils/model/user";
 import mongoose from "mongoose";
 
@@ -11,9 +12,11 @@ export default async function handler(req, res) {
     const data = await User.find();
     res.status(200).json(data);
   } else if (req.method === "POST") {
+    const authHeader = req?.headers?.authorization;
+    const token = authHeader && authHeader.split(" ")[1];
+    const payLoad = parseJwt(token);
     // Handle POST request to add new data
-    const { email, name, picture, given_name, family_name, password } =
-      req.body;
+    const { email, name, picture, given_name, family_name } = payLoad;
 
     // Validate request body
     if (!email) {
@@ -25,7 +28,12 @@ export default async function handler(req, res) {
       const existingUser = await User.findOne({ email });
 
       if (existingUser) {
-        res.status(409).json(existingUser);
+        res.status(200).json({
+          name: existingUser.name,
+          email: existingUser.email,
+          picture: existingUser.picture,
+          email_verified: true,
+        });
         return;
       }
 
@@ -35,13 +43,18 @@ export default async function handler(req, res) {
         picture,
         given_name,
         family_name,
-        password,
+        password: "",
       });
 
       // Save the new user to the database
       const savedUser = await newUser.save();
 
-      res.status(201).json(savedUser);
+      res.status(201).json({
+        name: savedUser.name,
+        email: savedUser.email,
+        picture: savedUser.picture,
+        email_verified: true,
+      });
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
     }
