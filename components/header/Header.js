@@ -14,7 +14,7 @@ import { useCookies } from "react-cookie";
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
 
-const Header = () => {
+const Header = ({ topright }) => {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["auth"]);
   const { auth } = cookies;
@@ -72,7 +72,7 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <TopRight />
+          {topright && <TopRight />}
           {showSearch && <SearchBar />}
           {showlang && <LanguageBar />}
         </div>
@@ -80,5 +80,8 @@ const Header = () => {
       <MainNavigation />
     </header>
   );
+};
+Header.defaultProps = {
+  topright: true,
 };
 export default Header;

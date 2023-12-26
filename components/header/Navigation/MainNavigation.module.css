@@ -1,14 +1,15 @@
 .mainMenu {
   width: 80vw;
   height: 100vh;
+  max-width: 360px;
 }
 .navUserSection {
   padding: 18px;
   height: 87px;
-  background: #af0303;
+  background: var(--red);
   display: flex;
   align-items: center;
-  color: #fff;
+  color: var(--white);
   justify-content: space-between;
 }
 
@@ -25,7 +26,7 @@
   padding: 0 10px;
 }
 .button {
-  background: #fff;
+  background: var(--white);
   text-transform: uppercase;
   border: 0;
   padding: 5px 8px;
@@ -34,4 +35,19 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.loginBtn {
+  background: var(--white);
+  text-transform: uppercase;
+  border: 0;
+  padding: 5px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--black);
+  line-height: 1;
+  height: 30px;
+  min-width: 70px;
 }

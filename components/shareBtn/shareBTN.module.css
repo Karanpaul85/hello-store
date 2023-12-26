@@ -10,8 +10,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--borderColor);
+  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,8 +39,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--borderColor);
+  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@
 }
 .facebook {
   background-position: 1px -11px;
-  background-color: #2d4af6;
+  background-color: var(--blueColor);
 }
 .twitter {
   background-position: 1px -49px;
