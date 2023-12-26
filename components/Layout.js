@@ -31,7 +31,7 @@ const Layout = ({ topright, children, shareBtn }) => {
         <meta property="og:url" content={currentUrl} />
         <meta
           name="google-site-verification"
-          content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g"
+          content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
         />
       </Head>
       <Header topright={topright} />
