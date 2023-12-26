@@ -3,13 +3,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
 import ShareBTN from "./shareBtn/ShareBTN";
-import { useDispatch } from "react-redux";
-import { sendUserDetails } from "@/redux/slices/oneTapLoginSlice";
-import { useCookies } from "react-cookie";
-const Layout = (props) => {
-  const [cookies] = useCookies(["auth"]);
-  const { auth } = cookies;
-  const dispatch = useDispatch();
+const Layout = ({ topright, children, shareBtn }) => {
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
@@ -37,16 +31,18 @@ const Layout = (props) => {
         <meta property="og:url" content={currentUrl} />
         <meta
           name="google-site-verification"
-          content="FoMfRhUffA7vlR8b57xo5kmsRQd5fU50E0Grpkiwk8g"
+          content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
         />
       </Head>
-      <Header />
+      <Header topright={topright} />
       <main>
-        <div className="container">{props.children}</div>
+        <div className="container">{children}</div>
       </main>
-      <ShareBTN />
+      {shareBtn && <ShareBTN />}
     </GoogleOAuthProvider>
   );
 };
-
+Layout.defaultProps = {
+  shareBtn: true,
+};
 export default Layout;

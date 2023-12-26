@@ -2,9 +2,9 @@
   position: absolute;
   top: 100%;
   width: 100%;
-  background: #fff;
-  border-top: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: var(--white);
+  border-top: 1px solid var(--borderColor);
+  box-shadow: var(--shadow);
   height: 44px;
   display: flex;
   align-items: center;
@@ -22,5 +22,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid var(--borderColor);
 }
