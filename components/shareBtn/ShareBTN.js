@@ -68,7 +68,7 @@ const ShareBTN = () => {
         ariaLabel="Social Share"
       >
         <FontAwesomeIcon icon={faShareAlt} />
-        {isScrollingStop && <span>Share</span>}
+        {isScrollingStop && <span style={{ marginLeft: 10 }}>Share</span>}
       </Button>
       {showSocialLinks && <SocialLinks />}
     </div>
