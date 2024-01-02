@@ -3,19 +3,25 @@
   background-size: 100%;
   background-position: -3px -167px;
 }
+.scrollingStop {
+  width: auto !important;
+  transition: all ease-in-out 0.5s;
+}
 .shareBtn {
   position: fixed;
+  padding: 8px !important;
   bottom: 30px;
   right: 20px;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: 8px;
   border: 1px solid var(--borderColor);
   box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all ease-in-out 0.5s;
 }
 .shareBtn svg {
   width: 18px;

@@ -35,8 +35,6 @@ a {
 }
 main {
   margin-top: 88px;
-  height: calc(100vh - 81px);
-  overflow: auto;
   padding-bottom: 54px;
 }
 .container {

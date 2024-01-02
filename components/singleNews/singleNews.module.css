@@ -5,6 +5,7 @@
   box-shadow: var(--shadow);
   display: flex;
   flex-wrap: wrap;
+  width: 48%;
 }
 .tumbNail {
   position: relative;
@@ -34,4 +35,9 @@
 .published {
   margin-top: 10px;
   font-size: 12px;
+}
+@media (max-width: 640px) {
+  .newsCard {
+    width: 100%;
+  }
 }
