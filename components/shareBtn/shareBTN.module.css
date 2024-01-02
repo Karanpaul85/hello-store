@@ -25,6 +25,7 @@
 }
 .shareBtn svg {
   width: 18px;
+  margin-right: 10px;
 }
 .socialShare {
   position: fixed;
