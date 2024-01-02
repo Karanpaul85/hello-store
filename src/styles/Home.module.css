@@ -10,4 +10,7 @@
 .newsSection {
   padding: 0 16px;
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
