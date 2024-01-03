@@ -68,6 +68,7 @@ const Header = ({ topright }) => {
                   priority
                   blurDataURL="/assets/images/logo.jpg"
                   placeholder="blur"
+                  sizes="100vw"
                 />
               </div>
             </Link>

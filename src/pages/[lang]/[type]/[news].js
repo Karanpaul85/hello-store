@@ -36,7 +36,9 @@ const News = ({ data, errorData }) => {
   }
   return (
     <Layout>
-      <Head>{ogMetaTags(data ? data : "Welcome to world breaking News", "Single")}</Head>
+      <Head>
+        {ogMetaTags(data ? data : "Welcome to world breaking News", "Single")}
+      </Head>
       <div>
         {data.image_url && (
           <div className={styles.tumbNail}>
@@ -44,9 +46,11 @@ const News = ({ data, errorData }) => {
               src={data.image_url}
               width={640}
               height={480}
-              alt=""
+              alt={data.title}
               blurDataURL={data.image_url}
               priority={true}
+              placeholder="blur"
+              sizes="100vw"
             />
           </div>
         )}
