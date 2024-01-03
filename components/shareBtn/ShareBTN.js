@@ -17,7 +17,6 @@ const ShareBTN = () => {
       window?.addEventListener(
         "scroll",
         function () {
-          console.log("KP");
           // Clear our timeout throughout the scroll
           setIsScrollingStop(false);
           window.clearTimeout(isUserScrolling);
@@ -32,7 +31,6 @@ const ShareBTN = () => {
       );
     }
 
-    console.log(isScrollingStop, "isScrollingStop");
   }, [isScrollingStop]);
 
   useEffect(() => {
