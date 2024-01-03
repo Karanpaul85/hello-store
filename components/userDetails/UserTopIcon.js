@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./UserDetails.module.css";
 import Button from "../Button";
@@ -23,10 +24,7 @@ const UserTopIcon = ({ email, name, picture, emailVerifie }) => {
         {emailVerifie ? (
           <Image src={picture} alt={name} height={44} width={44} />
         ) : (
-          <FontAwesomeIcon
-                icon={faCircleUser}
-                className={styles.userIcon}
-              />
+          <FontAwesomeIcon icon={faCircleUser} className={styles.userIcon} />
         )}
       </Button>
     </div>

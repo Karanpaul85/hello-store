@@ -7,7 +7,7 @@ export const fetchData = createAsyncThunk(
   "newSlice/fetchData",
   async (options) => {
     const response = await api.get(
-      `/1/news?apikey=pub_30553943e4fa640b3256ae5087619b2dede08&language=${options.lang}&image=1&category=${options.category}`
+      `/1/news?apikey=${process.env.NEWS_API_KEY}&language=${options.lang}&image=1&category=${options.category}`
     );
     return response.data.results;
   }

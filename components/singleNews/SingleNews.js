@@ -23,19 +23,22 @@ const SingleNews = ({
               src={newsdata.image_url}
               width={300}
               height={300}
-              alt=""
+              alt={newsdata.title}
               loading="lazy"
               blurDataURL={newsdata.image_url}
               placeholder="blur"
+              sizes="100vw"
             />
           ) : (
             <Image
               src={newsdata.image_url}
               width={300}
               height={300}
-              alt=""
+              alt={newsdata.title}
               blurDataURL={newsdata.image_url}
               priority={true}
+              placeholder="blur"
+              sizes="100vw"
             />
           )}
         </div>

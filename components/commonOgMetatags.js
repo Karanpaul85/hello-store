@@ -1,5 +1,4 @@
 export const ogMetaTags = (otherdata, pageType) => {
-  console.log(pageType, "pageType");
   return (
     <>
       <title>{`${pageType ? `${pageType} -` : ""} ${otherdata.title}`}</title>

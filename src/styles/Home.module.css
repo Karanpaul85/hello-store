@@ -4,10 +4,13 @@
 }
 .mainHeading h1 {
   font-size: 20px;
-  color: #222;
+  color: var(--black);
   font-weight: 500;
 }
 .newsSection {
   padding: 0 16px;
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

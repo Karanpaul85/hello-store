@@ -7,8 +7,10 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Button from "../../Button";
 import { removeCookie } from "@/utils/common";
+import { useRouter } from "next/router";
 
 const MainNavigation = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { openDrawer, name, picture, email_verified } = useSelector(
     (state) => state.oneTapLogin
@@ -19,6 +21,10 @@ const MainNavigation = () => {
     dispatch(setOpenDrawer(false));
   };
 
+  const loginFun = () => {
+    dispatch(setOpenDrawer(false));
+    router.push("/login");
+  };
   return (
     <SwipeableDrawer
       anchor="left"
@@ -49,7 +55,7 @@ const MainNavigation = () => {
             )}
           </div>
           <div className={styles.userName}>{name ? name : "Hi Guest!"}</div>
-          {email_verified && (
+          {email_verified ? (
             <Button
               type="button"
               title="logout"
@@ -59,6 +65,17 @@ const MainNavigation = () => {
               onClick={logout}
             >
               Logout
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              title="logout"
+              ariaLabel="logout"
+              classes={styles.button}
+              id="logout"
+              onClick={loginFun}
+            >
+              Login
             </Button>
           )}
         </div>

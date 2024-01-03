@@ -1,16 +1,17 @@
-.newsCard{
-    background: #fff;
-    border-radius: 8px;
-    margin: 0 0 24px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    display: flex;
-    flex-wrap: wrap;
+.newsCard {
+  background: var(--white);
+  border-radius: 8px;
+  margin: 0 0 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  width: 48%;
 }
 .tumbNail {
   position: relative;
   width: 100%;
   padding-top: 75%;
-  background-color: #ccc;
+  background-color: var(--borderColor);
 }
 .tumbNail img {
   color: transparent;
@@ -34,4 +35,9 @@
 .published {
   margin-top: 10px;
   font-size: 12px;
+}
+@media (max-width: 640px) {
+  .newsCard {
+    width: 100%;
+  }
 }
