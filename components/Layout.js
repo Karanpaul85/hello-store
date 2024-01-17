@@ -26,8 +26,6 @@ const Layout = ({ topright, children, shareBtn }) => {
       });
       const resp = await axios.post("/api/notificationToken", { token });
       console.log(resp.data, "resp");
-    } else if (permission === "denied") {
-      alert("Permission Denied");
     }
   }
   useEffect(() => {
