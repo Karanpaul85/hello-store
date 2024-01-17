@@ -25,7 +25,7 @@ const Layout = ({ topright, children, shareBtn }) => {
           "BEWVewYC3Vja2sC3qQ12-JYZubW9p0797eHaiHLZUQixgCQQ_N-oKLnAbHmcuHIpdgwUc_FAY-d5EtwP7QvmVHg",
       });
       const resp = await axios.post("/api/notificationToken", { token });
-      console.log(resp.data, "resp");
+      console.log(resp.data, "resp", token);
     }
   }
   useEffect(() => {

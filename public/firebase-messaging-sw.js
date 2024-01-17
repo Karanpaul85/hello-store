@@ -1,6 +1,8 @@
-importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts(
-  "https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"
+  "https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"
+);
+importScripts(
+  "https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging-compat.js"
 );
 
 const firebaseConfig = {
@@ -23,4 +25,9 @@ messaging.onBackgroundMessage((payload) => {
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+  self.addEventListener("notificationclick", (event) => {
+    const clickedNotification = event.notification;
+    clickedNotification.close();
+    event.waitUntil(clients.openWindow(payload?.fcmOptions?.link));
+  });
 });
