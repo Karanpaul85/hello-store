@@ -21,6 +21,8 @@ export default async function handler(req, res) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   } else if (req.method === "GET") {
-    res.status(200).json("GET METHOD CALL");
+    const data = await notificationToken.find();
+    const tokens = data.map(item => item.token);
+    res.status(200).json(tokens);
   }
 }
