@@ -15,6 +15,9 @@
   cursor: pointer;
   transition: all ease-in-out 0.5s;
 }
+.notificationBtn svg {
+  width: 18px;
+}
 .notificationBtn span {
   margin-left: 10px;
 }
