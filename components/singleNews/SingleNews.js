@@ -19,27 +19,35 @@ const SingleNews = ({
       {newsdata.image_url && (
         <div className={styles.tumbNail}>
           {index > 1 ? (
-            <Image
-              src={newsdata.image_url}
-              width={300}
-              height={300}
-              alt={newsdata.title}
-              loading="lazy"
-              blurDataURL={newsdata.image_url}
-              placeholder="blur"
-              sizes="100vw"
-            />
+            <>
+              <div
+                className={styles.tumbNailBlur}
+                style={{ backgroundImage: `url(${newsdata.image_url})` }}
+              ></div>
+              <Image
+                src={newsdata.image_url}
+                width={300}
+                height={300}
+                alt={newsdata.title}
+                loading="lazy"
+                sizes="100vw"
+              />
+            </>
           ) : (
-            <Image
-              src={newsdata.image_url}
-              width={300}
-              height={300}
-              alt={newsdata.title}
-              blurDataURL={newsdata.image_url}
-              priority={true}
-              placeholder="blur"
-              sizes="100vw"
-            />
+            <>
+              <div
+                className={styles.tumbNailBlur}
+                style={{ backgroundImage: `url(${newsdata.image_url})` }}
+              ></div>
+              <Image
+                src={newsdata.image_url}
+                width={300}
+                height={300}
+                alt={newsdata.title}
+                priority={true}
+                sizes="100vw"
+              />
+            </>
           )}
         </div>
       )}

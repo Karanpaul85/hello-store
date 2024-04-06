@@ -5,9 +5,11 @@ import styles from "./MainNavigation.module.css";
 import FontAwesomeIcon from "../../FontAwesomeIcon";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import Button from "../../Button";
 import { removeCookie } from "@/utils/common";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const Button = dynamic(() => import("../../Button"));
 
 const MainNavigation = () => {
   const router = useRouter();
