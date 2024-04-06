@@ -27,6 +27,9 @@ const searchSlice = createSlice({
     showLangSec: (state, action) => {
       state.showlang = action.payload;
     },
+    setNewsData: (state, action) => {
+      state.newsData = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // Add extra reducers for handling the async action
@@ -46,5 +49,5 @@ const searchSlice = createSlice({
       });
   },
 });
-export const { showSearchSec, showLangSec } = searchSlice.actions;
+export const { showSearchSec, showLangSec, setNewsData } = searchSlice.actions;
 export default searchSlice.reducer;

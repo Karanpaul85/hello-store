@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 
 const News = ({ data, errorData }) => {
   const { isAdmin } = useSelector((state) => state.oneTapLogin);
+  const { newsData } = useSelector((state) => state.newSlice);
   const { textConst } = allConst;
   if (errorData) {
     return (
@@ -45,6 +46,10 @@ const News = ({ data, errorData }) => {
       <div>
         {data.image_url && (
           <div className={styles.tumbNail}>
+            <div
+              className={styles.tumbNailBlur}
+              style={{ backgroundImage: `url(${data.image_url})` }}
+            ></div>
             <Image
               src={data.image_url}
               width={640}
