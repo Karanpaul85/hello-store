@@ -1,6 +1,6 @@
 // pages/index.js
 import Layout from "../../components/Layout";
-import { fetchData } from "../redux/slices/newsSlice";
+import { fetchData, setNewsData } from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
 import styles from "../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
@@ -9,10 +9,12 @@ import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import Tabbar from "../../components/tabbar/TabBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PushNotification from "../../components/pushNotification/PushNotification";
 
 const HomePage = ({ data, errorData, category, lang }) => {
+  const dispatch = useDispatch();
+  dispatch(setNewsData(data));
   const { isAdmin } = useSelector((state) => state.oneTapLogin);
   const { textConst } = allConst;
   if (errorData) {

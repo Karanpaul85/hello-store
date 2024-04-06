@@ -2,6 +2,19 @@
   position: relative;
   width: 100%;
   padding-top: 75%;
+  overflow: hidden;
+}
+.tumbNailBlur {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .tumbNail img {
   color: transparent;
@@ -11,7 +24,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: #ccc;
 }
 .newsContent {
   padding: 8px;
@@ -28,7 +40,8 @@
   display: block;
   width: 100%;
 }
-.description, .description p {
+.description,
+.description p {
   display: block;
   width: 100%;
   line-height: 1.5;
@@ -37,6 +50,6 @@
 .description a {
   color: #2076cb;
 }
-.description iframe{
+.description iframe {
   width: 100% !important;
 }

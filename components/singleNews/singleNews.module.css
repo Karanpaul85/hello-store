@@ -12,6 +12,19 @@
   width: 100%;
   padding-top: 75%;
   background-color: var(--borderColor);
+  overflow: hidden;
+}
+.tumbNailBlur {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .tumbNail img {
   color: transparent;
