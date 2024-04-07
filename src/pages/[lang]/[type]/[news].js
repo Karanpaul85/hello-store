@@ -1,4 +1,3 @@
-import ReactHtmlParser from "react-html-parser";
 import { useDispatch } from "react-redux";
 import Layout from "../../../../components/Layout";
 import { wrapper } from "@/utils/withRedux";
@@ -64,7 +63,7 @@ const News = ({ data, errorData }) => {
           <h1>{data.title}</h1>
           <div className={styles.publish}>Published at : {data.pubDate}</div>
           <div className={styles.description}>
-            {ReactHtmlParser(data.description)}
+            ReactHtmlParser add here data.description
           </div>
         </div>
       </div>
