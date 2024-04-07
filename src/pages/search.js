@@ -1,5 +1,5 @@
 // pages/index.js
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 import { fetchSearchData, setNewsData } from "../redux/slices/searchSlice";
 import { wrapper } from "../utils/withRedux";
@@ -10,12 +10,12 @@ import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
-import PushNotification from "../../components/pushNotification/PushNotification";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   const dispatch = useDispatch();
   dispatch(setNewsData(data));
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
+  data && data.length > 0 && dispatch(setNotificationData(data[0]));
   const { textConst } = allConst;
   useEffect(() => {}, []);
   if (errorData) {
@@ -68,7 +68,6 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
             })
           : "We can not find any results for this query"}
       </div>
-      {isAdmin && data && <PushNotification notificationDetail={data[0]} />}
     </Layout>
   );
 };

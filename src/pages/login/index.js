@@ -3,7 +3,7 @@ import { Box, TextField } from "@mui/material";
 import Layout from "../../../components/Layout";
 import Button from "../../../components/Button";
 import styles from "./Login.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import SocialLogin from "../../../components/socialLogin";
 
@@ -13,7 +13,6 @@ const Login = () => {
     email: "",
     emailValid: false,
   });
-  const [isUserExist, setIsUserExist] = useState(false);
   const [loading, setLoading] = useState(false);
   const onChange = (e) => {
     setUser({
@@ -36,12 +35,9 @@ const Login = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    console.log(isUserExist, "isUserExist");
-  }, [isUserExist]);
 
   return (
-    <Layout topright={false} shareBtn={false}>
+    <Layout topright={false} showBottomBar={false}>
       <div className={styles.login}>
         <Box component="form" noValidate autoComplete="off">
           <TextField
@@ -71,7 +67,7 @@ const Login = () => {
             Continue
           </Button>
         </Box>
-        <SocialLogin/>
+        <SocialLogin />
       </div>
     </Layout>
   );

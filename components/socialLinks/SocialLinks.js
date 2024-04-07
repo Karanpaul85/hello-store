@@ -13,7 +13,6 @@ const SocialLinks = () => {
         {socialSharing &&
           socialSharing.length &&
           socialSharing.map((socialLink) => {
-            console.log(socialLink, "socialLink");
             return (
               <li key={socialLink.name}>
                 <Link

@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import Tabbar from "../../../components/tabbar/TabBar";
@@ -9,11 +10,13 @@ import { ogMetaTags } from "../../../components/commonOgMetatags";
 import headingStyle from "../../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
 import SingleNews from "../../../components/singleNews/SingleNews";
-import PushNotification from "../../../components/pushNotification/PushNotification";
-import { useSelector } from "react-redux";
+import { setNewsData } from "@/redux/slices/searchSlice";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const Types = ({ data, errorData, category }) => {
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
+  const dispatch = useDispatch();
+  dispatch(setNewsData(data));
+  data && data.length > 0 && dispatch(setNotificationData(data[0]));
   const router = useRouter();
   const { textConst } = allConst;
   const { lang, type } = router.query;
@@ -65,9 +68,6 @@ const Types = ({ data, errorData, category }) => {
             })
           : "We can not find any results for this query"}
       </div>
-      {isAdmin && data && data.length && (
-        <PushNotification notificationDetail={data?.[0]} />
-      )}
     </Layout>
   );
 };
