@@ -1,4 +1,5 @@
 import ReactHtmlParser from "react-html-parser";
+import { useDispatch } from "react-redux";
 import Layout from "../../../../components/Layout";
 import { wrapper } from "@/utils/withRedux";
 import { fetchData } from "@/redux/slices/newsSlice";
@@ -10,12 +11,11 @@ import styles from "./singleNews.module.css";
 import headingStyle from "../../../styles/Home.module.css";
 import { fetchSearchData } from "@/redux/slices/searchSlice";
 import { allConst } from "@/constant/common_constants";
-import PushNotification from "../../../../components/pushNotification/PushNotification";
-import { useSelector } from "react-redux";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const News = ({ data, errorData }) => {
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
-  const { newsData } = useSelector((state) => state.newSlice);
+  const dispatch = useDispatch();
+  data && dispatch(setNotificationData(data));
   const { textConst } = allConst;
   if (errorData) {
     return (
@@ -55,9 +55,7 @@ const News = ({ data, errorData }) => {
               width={640}
               height={480}
               alt={data.title}
-              blurDataURL={data.image_url}
               priority={true}
-              placeholder="blur"
               sizes="100vw"
             />
           </div>
@@ -70,7 +68,6 @@ const News = ({ data, errorData }) => {
           </div>
         </div>
       </div>
-      {isAdmin && data && <PushNotification notificationDetail={data} />}
     </Layout>
   );
 };

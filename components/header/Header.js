@@ -61,13 +61,11 @@ const Header = ({ topright }) => {
                 aria-label="Navigate to the destination page"
               >
                 <Image
-                  src="/assets/images/logo.jpg"
+                  src="/assets/images/logo.svg"
                   width={80}
                   height={80}
                   alt="Breaking News"
                   priority
-                  blurDataURL="/assets/images/logo.jpg"
-                  placeholder="blur"
                   sizes="100vw"
                 />
               </div>
