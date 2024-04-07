@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { firBaseApp, messaging } from "../src/firebase";
@@ -5,9 +6,10 @@ import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 import Header from "./header/Header";
 import { useEffect, useState } from "react";
-import ShareBTN from "./shareBtn/ShareBTN";
 
-const Layout = ({ topright, children, shareBtn }) => {
+const BottomBar = dynamic(() => import("./bottomBar/BottomBar"));
+
+const Layout = ({ topright = true, children, showBottomBar = true }) => {
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Layout = ({ topright, children, shareBtn }) => {
             "BEWVewYC3Vja2sC3qQ12-JYZubW9p0797eHaiHLZUQixgCQQ_N-oKLnAbHmcuHIpdgwUc_FAY-d5EtwP7QvmVHg",
         });
         const resp = await axios.post("/api/notificationToken", { token });
-        console.log(resp.data, "resp", token);
+        console.log(resp.data, "Notification.permission", token);
       }
     }
   }
@@ -65,11 +67,9 @@ const Layout = ({ topright, children, shareBtn }) => {
       <main>
         <div className="container">{children}</div>
       </main>
-      {shareBtn && <ShareBTN />}
+      {showBottomBar && <BottomBar />}
     </GoogleOAuthProvider>
   );
 };
-Layout.defaultProps = {
-  shareBtn: true,
-};
+
 export default Layout;

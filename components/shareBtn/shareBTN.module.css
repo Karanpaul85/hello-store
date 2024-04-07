@@ -8,28 +8,23 @@
   transition: all ease-in-out 0.5s;
 }
 .shareBtn {
-  position: fixed;
-  padding: 8px !important;
-  bottom: 30px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  border: 1px solid var(--borderColor);
-  box-shadow: var(--shadow);
+  border: 0;
+  cursor: pointer;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all ease-in-out 0.5s;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
 }
 .shareBtn svg {
-  width: 18px;
+  height: 18px;
 }
 .socialShare {
   position: fixed;
-  bottom: 90px;
-  right: 20px;
+  bottom: 60px;
+  right: 10px;
 }
 .socialLinkList {
   list-style: none;
@@ -40,6 +35,9 @@
 }
 .socialLinkList li {
   margin-bottom: 10px;
+  min-width: 44px !important;
+  height: 44px !important;
+  border: 0 !important;
 }
 .socialLinkList li a {
   width: 44px;

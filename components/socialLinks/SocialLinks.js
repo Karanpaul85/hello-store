@@ -13,14 +13,13 @@ const SocialLinks = () => {
         {socialSharing &&
           socialSharing.length &&
           socialSharing.map((socialLink) => {
-            console.log(socialLink, "socialLink");
             return (
               <li key={socialLink.name}>
                 <Link
                   href={`${socialLink.url}${url}`}
-                  className={`${styles.icons} ${styles[socialLink.name]}`}
+                  // className={`${styles.icons} ${styles[socialLink.name]}`}
                 >
-                  {/* <FontAwesomeIcon icon={socialLink.icon} /> */}
+                  <FontAwesomeIcon icon={socialLink.icon} />
                 </Link>
               </li>
             );

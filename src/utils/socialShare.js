@@ -1,4 +1,9 @@
-import { faFacebookF,faTwitter,faLinkedinIn,faWhatsapp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 export const socialSharing = [
   {
     name: "facebook",

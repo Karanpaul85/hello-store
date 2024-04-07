@@ -55,9 +55,7 @@ const News = ({ data, errorData }) => {
               width={640}
               height={480}
               alt={data.title}
-              blurDataURL={data.image_url}
               priority={true}
-              placeholder="blur"
               sizes="100vw"
             />
           </div>

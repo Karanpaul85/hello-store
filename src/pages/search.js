@@ -10,7 +10,6 @@ import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
-import PushNotification from "../../components/pushNotification/PushNotification";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   const dispatch = useDispatch();
@@ -68,7 +67,6 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
             })
           : "We can not find any results for this query"}
       </div>
-      {isAdmin && data && <PushNotification notificationDetail={data[0]} />}
     </Layout>
   );
 };

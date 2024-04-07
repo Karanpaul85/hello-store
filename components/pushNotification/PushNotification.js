@@ -4,23 +4,25 @@ import Button from "../Button";
 import styles from "./pushNotification.module.css";
 import { SwipeableDrawer } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Image from "next/image";
 import axios from "axios";
 
-const PushNotification = ({ notificationDetail }) => {
+const PushNotification = () => {
   const [showNotifationDrawer, setShowNotifationDrawer] = useState(false);
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
+  const { notificationData } = useSelector((state) => state.notification);
   const openNotificationSec = () => {
     setShowNotifationDrawer(!showNotifationDrawer);
   };
   const sendNotification = async () => {
     setDisabledBtn(true);
-    const notification = {
-      title: notificationDetail.title,
-      body: notificationDetail.title,
-      icon: notificationDetail.image_url,
-      image: notificationDetail.image_url,
+    const notificationData = {
+      title: notificationData.title,
+      body: notificationData.title,
+      icon: notificationData.image_url,
+      image: notificationData.image_url,
       click_action: currentUrl,
       data: {
         customData1: "",
@@ -28,7 +30,7 @@ const PushNotification = ({ notificationDetail }) => {
     };
     const resp = await axios.post(
       "/api/notificationToken/sendNotification",
-      notification
+      notificationData
     );
     if (resp) {
       setShowNotifationDrawer(false);
@@ -49,7 +51,8 @@ const PushNotification = ({ notificationDetail }) => {
         id="pushNotification"
         onClick={openNotificationSec}
       >
-        <FontAwesomeIcon icon={faBell} /> <span>Push Now</span>
+        <FontAwesomeIcon icon={faBell} />
+        <span>Send Notification</span>
       </Button>
       <SwipeableDrawer
         anchor="bottom"
@@ -59,17 +62,15 @@ const PushNotification = ({ notificationDetail }) => {
       >
         <div className={styles.notificationDrawer}>
           <div className={styles.notificationTitle}>
-            {notificationDetail.title}
+            {notificationData.title}
           </div>
           <div className={styles.notificationImage}>
             <Image
-              src={notificationDetail.image_url}
+              src={notificationData.image_url}
               width={80}
               height={80}
-              alt={notificationDetail.title}
+              alt={notificationData.title}
               loading="lazy"
-              blurDataURL={notificationDetail.image_url}
-              placeholder="blur"
               sizes="100vw"
             />
           </div>

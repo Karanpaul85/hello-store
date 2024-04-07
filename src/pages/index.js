@@ -10,12 +10,13 @@ import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch, useSelector } from "react-redux";
-import PushNotification from "../../components/pushNotification/PushNotification";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const HomePage = ({ data, errorData, category, lang }) => {
   const dispatch = useDispatch();
   dispatch(setNewsData(data));
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
+  data && data.length > 0 && dispatch(setNotificationData(data[0]));
+
   const { textConst } = allConst;
   if (errorData) {
     return (
@@ -64,9 +65,6 @@ const HomePage = ({ data, errorData, category, lang }) => {
             );
           })}
       </div>
-      {isAdmin && data && data.length && (
-        <PushNotification notificationDetail={data[0]} />
-      )}
     </Layout>
   );
 };
