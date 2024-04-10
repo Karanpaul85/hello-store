@@ -1,4 +1,5 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import {
@@ -8,9 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import FontAwesomeIcon from "../FontAwesomeIcon";
-import ShareBTN from "../shareBtn/ShareBTN";
-import PushNotification from "../pushNotification/PushNotification";
 import styles from "./BottomBar.module.css";
+
+const ShareBTN = dynamic(() => import("../shareBtn/ShareBTN"));
+const PushNotification = dynamic(() =>
+  import("../pushNotification/PushNotification")
+);
 
 const BottomBar = () => {
   const { isAdmin } = useSelector((state) => state.oneTapLogin);

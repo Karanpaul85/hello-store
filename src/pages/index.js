@@ -20,7 +20,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
   const { textConst } = allConst;
   if (errorData) {
     return (
-      <Layout>
+      <Layout showBottomBar={false}>
         <Head>
           {errorData
             ? ogErrorMetaTags(errorData)
@@ -40,7 +40,7 @@ const HomePage = ({ data, errorData, category, lang }) => {
     );
   }
   return (
-    <Layout>
+    <Layout showBottomBar={true}>
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",

@@ -19,7 +19,7 @@ const PushNotification = () => {
   };
   const sendNotification = async () => {
     setDisabledBtn(true);
-    const notificationData = {
+    const notificationDataToSend = {
       title: notificationData.title,
       body: notificationData.title,
       icon: notificationData.image_url,
@@ -31,7 +31,7 @@ const PushNotification = () => {
     };
     const resp = await axios.post(
       "/api/notificationToken/sendNotification",
-      notificationData
+      notificationDataToSend
     );
     if (resp) {
       setShowNotifationDrawer(false);
