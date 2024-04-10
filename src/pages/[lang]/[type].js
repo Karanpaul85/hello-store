@@ -76,6 +76,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     try {
       const options = { lang: ctx.query.lang, category: ctx.query.type };
       const serverData = await store.dispatch(fetchData(options));
+      console.log(serverData, "serverData");
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {

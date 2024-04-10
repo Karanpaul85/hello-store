@@ -1,6 +1,10 @@
 // pages/index.js
 import Layout from "../../components/Layout";
-import { fetchData, setNewsData } from "../redux/slices/newsSlice";
+import {
+  fetchData,
+  fetchDataFromMDB,
+  setNewsData,
+} from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
 import styles from "../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
@@ -72,7 +76,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: "hi", category: "world" };
-      const serverData = await store.dispatch(fetchData(options));
+      const serverData = await store.dispatch(fetchDataFromMDB(options));
+      // const serverData = await store.dispatch(fetchData(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {

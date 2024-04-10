@@ -1,6 +1,7 @@
 // slices/mySlice.js
 import api from "@/utils/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // Async thunk for fetching data
 export const fetchData = createAsyncThunk(
@@ -10,6 +11,16 @@ export const fetchData = createAsyncThunk(
       `/1/news?apikey=${process.env.NEWS_API_KEY}&language=${options.lang}&image=1&category=${options.category}`
     );
     return response.data.results;
+  }
+);
+
+export const fetchDataFromMDB = createAsyncThunk(
+  "newSlice/fetchDataFromMDB",
+  async (options) => {
+    const response = await axios.get(
+      `http://localhost:3000/api/newsData?language=${options.lang}&category=${options.category}`
+    );
+    return response.data;
   }
 );
 
@@ -28,6 +39,19 @@ const newSlice = createSlice({
   extraReducers: (builder) => {
     // Add extra reducers for handling the async action
     builder
+      .addCase(fetchDataFromMDB.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDataFromMDB.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newsData = action.payload;
+      })
+      .addCase(fetchDataFromMDB.rejected, (state, action) => {
+        state.loading = false;
+        state.newsData = null;
+        state.error = action.error.message;
+      })
       .addCase(fetchData.pending, (state) => {
         state.loading = true;
         state.error = null;
