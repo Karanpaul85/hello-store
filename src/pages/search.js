@@ -20,7 +20,7 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   useEffect(() => {}, []);
   if (errorData) {
     return (
-      <Layout>
+      <Layout showBottomBar={false}>
         <Head>
           {errorData
             ? ogErrorMetaTags(errorData)
@@ -40,7 +40,7 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
     );
   }
   return (
-    <Layout>
+    <Layout showBottomBar={true}>
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",

@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import parse from "html-react-parser";
 import Layout from "../../../../components/Layout";
 import { wrapper } from "@/utils/withRedux";
 import { fetchData } from "@/redux/slices/newsSlice";
@@ -18,7 +19,7 @@ const News = ({ data, errorData }) => {
   const { textConst } = allConst;
   if (errorData) {
     return (
-      <Layout>
+      <Layout showBottomBar={false}>
         <Head>
           {errorData
             ? ogErrorMetaTags(errorData)
@@ -38,7 +39,7 @@ const News = ({ data, errorData }) => {
     );
   }
   return (
-    <Layout>
+    <Layout showBottomBar={true}>
       <Head>
         {ogMetaTags(data ? data : "Welcome to world breaking News", "Single")}
       </Head>
@@ -63,7 +64,8 @@ const News = ({ data, errorData }) => {
           <h1>{data.title}</h1>
           <div className={styles.publish}>Published at : {data.pubDate}</div>
           <div className={styles.description}>
-            ReactHtmlParser add here data.description
+            {/* ReactHtmlParser add here data.description */}
+            {parse(`${data.description}`)}
           </div>
         </div>
       </div>
