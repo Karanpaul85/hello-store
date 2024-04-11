@@ -17,19 +17,24 @@ export default async function handler(req, res) {
     try {
       const reqBody = req?.body;
       if (reqBody.length > 0) {
-        reqBody.forEach(async (item) => {
+        reqBody.forEach(async (item, index) => {
           const { article_id } = item;
           const isNewsExist = await allNews.findOne({ article_id });
           if (!isNewsExist) {
             const newNews = new allNews(item);
             const savedNews = await newNews.save();
-            res.status(201).json(savedNews);
+            //res.status(201).json(savedNews);
           } else {
-            res.status(201).json({ messaging: "Already Exist" });
+            //res.status(201).json({ messaging: "Already Exist" });
+          }
+          if (index === reqBody.length - 1) {
+            res.status(201).json({ messaging: "All news are saved" });
           }
         });
       } else {
-        res.status(200).json({ Message: "There is no Data" });
+        res
+          .status(200)
+          .json({ Message: "There is no Data in request to save" });
       }
     } catch (error) {
       res.status(200).json(error);

@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import {
   fetchData,
   fetchDataFromMDB,
+  sendDataFromMDB,
   setNewsData,
 } from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
@@ -78,6 +79,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const options = { lang: "hi", category: "world" };
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       // const serverData = await store.dispatch(fetchData(options));
+      const sendData = await store.dispatch(
+        sendDataFromMDB(serverData.payload)
+      );
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
