@@ -1,7 +1,7 @@
 .bottomBaar {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) -2px -2px 2px;
@@ -9,6 +9,8 @@
   list-style: none;
   grid-auto-flow: column;
   height: 54px;
+  transform: translateX(-50%);
+  max-width: 1120px;
 }
 
 .bottomBaar li {

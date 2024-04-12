@@ -4,7 +4,8 @@ import styles from "./TobBar.module.css";
 import { useRouter } from "next/router";
 const Tabbar = ({ lang }) => {
   const router = useRouter();
-  const { type } = router.query;
+  const { type } =
+    Object.keys(router?.query).length > 0 ? router?.query : { type: "world" };
   if (lang === "hi") {
     return (
       <ul className={styles.tabBar}>
