@@ -11,24 +11,31 @@ export default async function handler(req, res) {
     };
     finalQuery.category = [req?.query?.category];
     finalQuery.language = req?.query?.language === "hi" ? "hindi" : "english";
-    const isNewsExist = await allNews.find(finalQuery).limit(10);
+    const isNewsExist = await allNews
+      .find(finalQuery)
+      .sort({ _id: -1 })
+      .limit(10);
     res.status(200).json(isNewsExist);
   } else if (req.method === "POST") {
     try {
       const reqBody = req?.body;
       if (reqBody.length > 0) {
+        let allSaved = true;
         reqBody.forEach(async (item, index) => {
           const { article_id } = item;
           const isNewsExist = await allNews.findOne({ article_id });
           if (!isNewsExist) {
             const newNews = new allNews(item);
-            const savedNews = await newNews.save();
-            //res.status(201).json(savedNews);
-          } else {
-            //res.status(201).json({ messaging: "Already Exist" });
+            await newNews.save();
           }
           if (index === reqBody.length - 1) {
-            res.status(201).json({ messaging: "All news are saved" });
+            if (allSaved) {
+              res.status(201).json({ messaging: "All news are saved" });
+            } else {
+              res
+                .status(200)
+                .json({ messaging: "Some news were already saved" });
+            }
           }
         });
       } else {

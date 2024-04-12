@@ -8,3 +8,12 @@ export const createCookie = (MembershipIdName, MembershipID) => {
 export const removeCookie = (cookieName) => {
   document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
+
+export const checkTimeisOver = async (serverTime) => {
+  const currentTime = Date.now();
+  const timeDiffrence = currentTime - serverTime;
+  if (timeDiffrence > 7200000) {
+    return true;
+  }
+  return false;
+};

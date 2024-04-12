@@ -1,12 +1,14 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const apiCallTime = mongoose.Schema(
   {
-    queryType: Array,
+    language: String,
+    category: String,
+    timestamp: Number,
   },
   {
     timestamps: true,
   }
 );
 export const apiCallTimes =
-  mongoose.models.apiCallTimes || mongoose.model("apiCallTimes", newsModal);
+  mongoose.models.apiCallTimes || mongoose.model("apiCallTimes", apiCallTime);

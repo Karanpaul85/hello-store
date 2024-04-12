@@ -3,6 +3,11 @@ import api from "@/utils/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+    : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
+
 // Async thunk for fetching data
 export const fetchData = createAsyncThunk(
   "newSlice/fetchData",
@@ -18,7 +23,7 @@ export const fetchDataFromMDB = createAsyncThunk(
   "newSlice/fetchDataFromMDB",
   async (options) => {
     const response = await axios.get(
-      `http://localhost:3000/api/newsData?language=${options.lang}&category=${options.category}`
+      `${baseUrl}/api/newsData?language=${options.lang}&category=${options.category}`
     );
     return response.data;
   }
@@ -26,10 +31,25 @@ export const fetchDataFromMDB = createAsyncThunk(
 export const sendDataFromMDB = createAsyncThunk(
   "newSlice/sendDataFromMDB",
   async (data) => {
-    const response = await axios.post(
-      `http://localhost:3000/api/newsData`,
-      data
+    const response = await axios.post(`${baseUrl}/api/newsData`, data);
+    return response.data;
+  }
+);
+
+export const getApiCallTime = createAsyncThunk(
+  "newSlice/getApiCallTime",
+  async (options) => {
+    const response = await axios.get(
+      `${baseUrl}/api/apiCallTime?category=${options.category}&language=${options.lang}`
     );
+    return response.data;
+  }
+);
+
+export const setApiCallTime = createAsyncThunk(
+  "newSlice/setApiCallTime",
+  async (data) => {
+    const response = await axios.post(`${baseUrl}/api/apiCallTime`, data);
     return response.data;
   }
 );
@@ -49,6 +69,32 @@ const newSlice = createSlice({
   extraReducers: (builder) => {
     // Add extra reducers for handling the async action
     builder
+      .addCase(setApiCallTime.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(setApiCallTime.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newsData = action.payload;
+      })
+      .addCase(setApiCallTime.rejected, (state, action) => {
+        state.loading = false;
+        state.newsData = null;
+        state.error = action.error.message;
+      })
+      .addCase(getApiCallTime.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getApiCallTime.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newsData = action.payload;
+      })
+      .addCase(getApiCallTime.rejected, (state, action) => {
+        state.loading = false;
+        state.newsData = null;
+        state.error = action.error.message;
+      })
       .addCase(sendDataFromMDB.pending, (state) => {
         state.loading = true;
         state.error = null;
