@@ -25,8 +25,8 @@ export default async function handler(req, res) {
       language: "",
       category: "",
     };
-    finalQuery.category = reqBody?.category;
-    finalQuery.language = reqBody?.language === "hi" ? "hindi" : "english";
+    finalQuery.category = reqBody?.category ? reqBody?.category : "top";
+    finalQuery.language = reqBody?.lang === "hi" ? "hindi" : "english";
     const newTimestamp = Date.now();
 
     const updateTime = await apiCallTimes.findOneAndUpdate(

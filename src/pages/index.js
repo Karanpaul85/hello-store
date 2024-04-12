@@ -86,9 +86,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
         apiTimeTocall?.payload?.timestamp
       );
       if (isTimeOver) {
+        await store.dispatch(setApiCallTime(options));
         serverData = await store.dispatch(fetchData(options));
         await store.dispatch(sendDataFromMDB(serverData.payload));
-        await store.dispatch(setApiCallTime(options));
       } else {
         serverData = await store.dispatch(fetchDataFromMDB(options));
       }

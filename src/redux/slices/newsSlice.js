@@ -54,6 +54,16 @@ export const setApiCallTime = createAsyncThunk(
   }
 );
 
+export const getSingleNews = createAsyncThunk(
+  "newSlice/getSingleNews",
+  async (id) => {
+    const response = await axios.get(
+      `${baseUrl}/api/newsData/getSingleNews?article_id=${id}`
+    );
+    return response.data;
+  }
+);
+
 const newSlice = createSlice({
   name: "newSlice",
   initialState: {
@@ -69,6 +79,19 @@ const newSlice = createSlice({
   extraReducers: (builder) => {
     // Add extra reducers for handling the async action
     builder
+      .addCase(getSingleNews.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getSingleNews.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newsData = action.payload;
+      })
+      .addCase(getSingleNews.rejected, (state, action) => {
+        state.loading = false;
+        state.newsData = null;
+        state.error = action.error.message;
+      })
       .addCase(setApiCallTime.pending, (state) => {
         state.loading = true;
         state.error = null;

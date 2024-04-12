@@ -13,7 +13,9 @@ export const checkTimeisOver = async (serverTime) => {
   const currentTime = Date.now();
   const timeDiffrence = currentTime - serverTime;
   if (timeDiffrence > 7200000) {
+    console.log("Time is over");
     return true;
   }
+  console.log("In Time");
   return false;
 };
