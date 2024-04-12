@@ -1,6 +1,13 @@
 // pages/index.js
 import Layout from "../../components/Layout";
-import { fetchData, setNewsData } from "../redux/slices/newsSlice";
+import {
+  fetchData,
+  fetchDataFromMDB,
+  getApiCallTime,
+  sendDataFromMDB,
+  setApiCallTime,
+  setNewsData,
+} from "../redux/slices/newsSlice";
 import { wrapper } from "../utils/withRedux";
 import styles from "../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
@@ -11,6 +18,7 @@ import SingleNews from "../../components/singleNews/SingleNews";
 import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { checkTimeisOver } from "@/utils/common";
 
 const HomePage = ({ data, errorData, category, lang }) => {
   const dispatch = useDispatch();
@@ -71,8 +79,20 @@ const HomePage = ({ data, errorData, category, lang }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
+      let serverData;
       const options = { lang: "hi", category: "world" };
-      const serverData = await store.dispatch(fetchData(options));
+      const apiTimeTocall = await store.dispatch(getApiCallTime(options));
+      const isTimeOver = await checkTimeisOver(
+        apiTimeTocall?.payload?.timestamp
+      );
+      if (isTimeOver) {
+        await store.dispatch(setApiCallTime(options));
+        serverData = await store.dispatch(fetchData(options));
+        await store.dispatch(sendDataFromMDB(serverData.payload));
+      } else {
+        serverData = await store.dispatch(fetchDataFromMDB(options));
+      }
+
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {

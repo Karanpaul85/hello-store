@@ -3,7 +3,13 @@ import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import Tabbar from "../../../components/tabbar/TabBar";
 import { wrapper } from "@/utils/withRedux";
-import { fetchData } from "@/redux/slices/newsSlice";
+import {
+  fetchData,
+  fetchDataFromMDB,
+  getApiCallTime,
+  sendDataFromMDB,
+  setApiCallTime,
+} from "@/redux/slices/newsSlice";
 import Head from "next/head";
 import { ogErrorMetaTags } from "../../../components/commonErrorMetatags";
 import { ogMetaTags } from "../../../components/commonOgMetatags";
@@ -12,6 +18,7 @@ import { allConst } from "@/constant/common_constants";
 import SingleNews from "../../../components/singleNews/SingleNews";
 import { setNewsData } from "@/redux/slices/searchSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { checkTimeisOver } from "@/utils/common";
 
 const Types = ({ data, errorData, category }) => {
   const dispatch = useDispatch();
@@ -74,8 +81,26 @@ const Types = ({ data, errorData, category }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
+      let serverData;
       const options = { lang: ctx.query.lang, category: ctx.query.type };
-      const serverData = await store.dispatch(fetchData(options));
+      const apiTimeTocall = await store.dispatch(getApiCallTime(options));
+      const isTimeOver = await checkTimeisOver(
+        apiTimeTocall?.payload?.timestamp
+      );
+
+      if (isTimeOver) {
+        await store.dispatch(setApiCallTime(options));
+        serverData = await store.dispatch(fetchData(options));
+        await store.dispatch(sendDataFromMDB(serverData.payload));
+      } else {
+        serverData = await store.dispatch(fetchDataFromMDB(options));
+        if (serverData.payload.length === 0) {
+          await store.dispatch(setApiCallTime(options));
+          serverData = await store.dispatch(fetchData(options));
+          await store.dispatch(sendDataFromMDB(serverData.payload));
+        }
+      }
+
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
