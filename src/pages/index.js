@@ -19,13 +19,15 @@ import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { checkTimeisOver } from "@/utils/common";
+import { useEffect } from "react";
 
-const HomePage = ({ data, errorData, category, lang }) => {
+const HomePage = ({ data, errorData, options }) => {
   const dispatch = useDispatch();
   dispatch(setNewsData(data));
   data && data.length > 0 && dispatch(setNotificationData(data[0]));
 
   const { textConst } = allConst;
+
   if (errorData) {
     return (
       <Layout showBottomBar={false}>
@@ -67,8 +69,8 @@ const HomePage = ({ data, errorData, category, lang }) => {
                 key={item.article_id}
                 newsdata={item}
                 index={index}
-                lang={lang}
-                category={category}
+                lang={options?.lang}
+                category={options?.category}
               />
             );
           })}
@@ -79,7 +81,6 @@ const HomePage = ({ data, errorData, category, lang }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
-      let serverData;
       const options = { lang: "hi", category: "world" };
       const apiTimeTocall = await store.dispatch(getApiCallTime(options));
       const isTimeOver = await checkTimeisOver(
@@ -87,20 +88,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
       );
       if (isTimeOver) {
         await store.dispatch(setApiCallTime(options));
-        serverData = await store.dispatch(fetchData(options));
-        await store.dispatch(sendDataFromMDB(serverData.payload));
-      } else {
-        serverData = await store.dispatch(fetchDataFromMDB(options));
+        const latestNewsData = await store.dispatch(fetchData(options));
+        await store.dispatch(sendDataFromMDB(latestNewsData.payload));
       }
-
+      const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
         props: {
           data,
           errorData,
-          category: options.category,
-          lang: options.lang,
+          options,
         },
       };
     } catch (error) {

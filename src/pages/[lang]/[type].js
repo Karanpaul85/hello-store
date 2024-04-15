@@ -81,26 +81,17 @@ const Types = ({ data, errorData, category }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
-      let serverData;
       const options = { lang: ctx.query.lang, category: ctx.query.type };
       const apiTimeTocall = await store.dispatch(getApiCallTime(options));
       const isTimeOver = await checkTimeisOver(
         apiTimeTocall?.payload?.timestamp
       );
-
       if (isTimeOver) {
         await store.dispatch(setApiCallTime(options));
-        serverData = await store.dispatch(fetchData(options));
-        await store.dispatch(sendDataFromMDB(serverData.payload));
-      } else {
-        serverData = await store.dispatch(fetchDataFromMDB(options));
-        if (serverData.payload.length === 0) {
-          await store.dispatch(setApiCallTime(options));
-          serverData = await store.dispatch(fetchData(options));
-          await store.dispatch(sendDataFromMDB(serverData.payload));
-        }
+        const latestNewsData = await store.dispatch(fetchData(options));
+        await store.dispatch(sendDataFromMDB(latestNewsData.payload));
       }
-
+      const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {
