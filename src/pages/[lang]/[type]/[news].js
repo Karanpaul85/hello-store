@@ -7,7 +7,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import styles from "./singleNews.module.css";
-import { allConst } from "@/constant/common_constants";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const News = ({ data }) => {
