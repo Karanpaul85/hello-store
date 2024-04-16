@@ -1,0 +1,55 @@
+.profileSection {
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.profileIconEmail {
+  display: flex;
+  width: 100%;
+  background: #fff;
+  padding: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+.profileImage {
+  width: 44px;
+  height: 44px;
+  margin-right: 16px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.userEmail {
+  color: var(--black);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 22px;
+}
+.items {
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+  flex-direction: column;
+  background: var(--white);
+}
+.items li {
+  padding: 16px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--lightGrey);
+}
+.items li:last-child {
+  border: 0;
+}
+.items li svg {
+  margin-right: 16px;
+  width: 20px;
+  height: 20px;
+  color: var(--darkGrey);
+}
+.button {
+  border: 0;
+  font-size: 16px;
+  background: none;
+}
