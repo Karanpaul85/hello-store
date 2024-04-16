@@ -20,7 +20,7 @@ const Profile = ({ userDetails }) => {
   const { email, email_verified, isAdmin, name, picture } = userDetails;
   const dispatch = useDispatch();
 
-  dispatch(setNotificationData(null));
+  dispatch(setNotificationData({}));
 
   const logout = () => {
     removeCookie("auth");
@@ -53,7 +53,7 @@ const Profile = ({ userDetails }) => {
             <FontAwesomeIcon icon={faKey} />
             Change Password
           </li>
-          <li>
+          {/* <li>
             <FontAwesomeIcon icon={faPowerOff} />{" "}
             <Button
               type="button"
@@ -65,7 +65,7 @@ const Profile = ({ userDetails }) => {
             >
               Logout
             </Button>
-          </li>
+          </li> */}
         </ul>
       </div>
     </Layout>
@@ -73,9 +73,7 @@ const Profile = ({ userDetails }) => {
 };
 export const getServerSideProps = wrapper.getServerSideProps(
   () => async (ctx) => {
-    const userDetails = ctx?.req?.cookies?.auth
-      ? JSON.parse(ctx?.req?.cookies?.auth)
-      : {};
+    const userDetails = JSON.parse(ctx?.req?.cookies?.auth);
     return {
       props: {
         userDetails,
