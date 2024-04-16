@@ -11,7 +11,7 @@ import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
-import { sendDataFromMDB, setApiCallTime } from "@/redux/slices/newsSlice";
+import { sendDataToMDB, setApiCallTime } from "@/redux/slices/newsSlice";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
       await store.dispatch(setApiCallTime(options));
       const serverData = await store.dispatch(fetchSearchData(options));
-      await store.dispatch(sendDataFromMDB(serverData.payload));
+      await store.dispatch(sendDataToMDB(serverData.payload));
 
       // serverData = await store.dispatch(fetchSearchData(options));
       const data = serverData.payload ? serverData.payload : null;

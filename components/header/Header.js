@@ -21,6 +21,7 @@ const Header = ({ topright }) => {
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
   useEffect(() => {
     if (auth) {
+      auth.from = "local";
       dispatch(setUserDetails(auth));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,6 +41,7 @@ const Header = ({ topright }) => {
                   Authorization: `Bearer ${credentialResponse.credential}`,
                 },
               });
+              auth.from = "api";
               dispatch(setUserDetails(resp.data));
             }
           },
