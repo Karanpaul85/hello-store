@@ -28,8 +28,8 @@ export const fetchDataFromMDB = createAsyncThunk(
     return response.data;
   }
 );
-export const sendDataFromMDB = createAsyncThunk(
-  "newSlice/sendDataFromMDB",
+export const sendDataToMDB = createAsyncThunk(
+  "newSlice/sendDataToMDB",
   async (data) => {
     const response = await axios.post(`${baseUrl}/api/newsData`, data);
     return response.data;
@@ -118,15 +118,15 @@ const newSlice = createSlice({
         state.newsData = null;
         state.error = action.error.message;
       })
-      .addCase(sendDataFromMDB.pending, (state) => {
+      .addCase(sendDataToMDB.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(sendDataFromMDB.fulfilled, (state, action) => {
+      .addCase(sendDataToMDB.fulfilled, (state, action) => {
         state.loading = false;
         state.newsData = action.payload;
       })
-      .addCase(sendDataFromMDB.rejected, (state, action) => {
+      .addCase(sendDataToMDB.rejected, (state, action) => {
         state.loading = false;
         state.newsData = null;
         state.error = action.error.message;

@@ -4,7 +4,7 @@ import {
   fetchData,
   fetchDataFromMDB,
   getApiCallTime,
-  sendDataFromMDB,
+  sendDataToMDB,
   setApiCallTime,
   setNewsData,
 } from "../redux/slices/newsSlice";
@@ -89,7 +89,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (isTimeOver) {
         await store.dispatch(setApiCallTime(options));
         const latestNewsData = await store.dispatch(fetchData(options));
-        store.dispatch(sendDataFromMDB(latestNewsData.payload));
+        store.dispatch(sendDataToMDB(latestNewsData.payload));
       }
 
       const data = serverData.payload ? serverData.payload : null;
