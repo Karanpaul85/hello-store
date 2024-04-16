@@ -19,7 +19,6 @@ import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { checkTimeisOver } from "@/utils/common";
-import { useEffect } from "react";
 
 const HomePage = ({ data, errorData, options }) => {
   const dispatch = useDispatch();

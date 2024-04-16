@@ -14,10 +14,13 @@ import Button from "../../../components/Button";
 import { removeCookie } from "@/utils/common";
 import { useDispatch } from "react-redux";
 import { userLogout } from "@/redux/slices/oneTapLoginSlice";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
 
 const Profile = ({ userDetails }) => {
   const { email, email_verified, isAdmin, name, picture } = userDetails;
   const dispatch = useDispatch();
+
+  dispatch(setNotificationData(null));
 
   const logout = () => {
     removeCookie("auth");

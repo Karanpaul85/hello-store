@@ -1,4 +1,5 @@
 import React from "react";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,7 @@ const PushNotification = dynamic(() =>
 );
 
 const BottomBar = () => {
+  const pathname = usePathname();
   const { isAdmin } = useSelector((state) => state.oneTapLogin);
   const { showSearch } = useSelector((state) => state.searchSlice);
   const { notificationData } = useSelector((state) => state.notification) || {};
@@ -41,19 +43,6 @@ const BottomBar = () => {
         </Link>
       </li>
       <li>
-        <Button
-          onClick={toggleSearchBar}
-          type="button"
-          title="Search"
-          ariaLabel="Search"
-          id="bottomSearch"
-          classes={styles.bottomBaarSearch}
-        >
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-          <span>Search</span>
-        </Button>
-      </li>
-      <li>
         <Link
           href="/profile"
           className={router.asPath == "/profile" ? "active" : ""}
@@ -62,9 +51,27 @@ const BottomBar = () => {
           <span>Profile</span>
         </Link>
       </li>
-      <li>
-        <ShareBTN />
-      </li>
+      {pathname !== "/profile" && (
+        <li>
+          <Button
+            onClick={toggleSearchBar}
+            type="button"
+            title="Search"
+            ariaLabel="Search"
+            id="bottomSearch"
+            classes={styles.bottomBaarSearch}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <span>Search</span>
+          </Button>
+        </li>
+      )}
+      {pathname !== "/profile" && (
+        <li>
+          <ShareBTN />
+        </li>
+      )}
+
       {isAdmin &&
         notificationData &&
         Object.keys(notificationData).length > 0 && (

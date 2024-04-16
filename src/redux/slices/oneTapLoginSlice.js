@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createCookie } from "../../utils/common";
+import Router from "next/router";
 
 const initialState = {
   email: null,
@@ -22,6 +23,7 @@ const oneTapLogin = createSlice({
         state.picture = picture;
         state.isAdmin = isAdmin;
         createCookie("auth", JSON.stringify(state), 2);
+        Router.push("/");
       }
     },
     userLogout: (state) => initialState,
