@@ -12,13 +12,11 @@ export const ogMetaTags = (otherdata, pageType) => {
         property="og:image"
         content={otherdata.image_url}
       />
-      <meta property="og:title" content={otherdata.title} />
       <meta property="og:description" content={otherdata.title} />
       <meta name="twitter:title" content={otherdata.title} />
       <meta name="twitter:description" content={otherdata.title} />
       <meta property="og:title" content={otherdata.title} />
       <meta name="twitter:title" content={otherdata.title} />
-      <meta property="og:description" content={otherdata.title} />
       <meta name="twitter:description" content={otherdata.title} />
     </>
   );
