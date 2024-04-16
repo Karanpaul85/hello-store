@@ -41,7 +41,7 @@ const Header = ({ topright }) => {
                   Authorization: `Bearer ${credentialResponse.credential}`,
                 },
               });
-              auth.from = "api";
+              resp.data.from = "api";
               dispatch(setUserDetails(resp.data));
             }
           },
