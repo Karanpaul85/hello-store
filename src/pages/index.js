@@ -89,7 +89,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (isTimeOver) {
         await store.dispatch(setApiCallTime(options));
         const latestNewsData = await store.dispatch(fetchData(options));
-        store.dispatch(sendDataToMDB(latestNewsData.payload));
+        await store.dispatch(sendDataToMDB(latestNewsData.payload));
       }
 
       const data = serverData.payload ? serverData.payload : null;
