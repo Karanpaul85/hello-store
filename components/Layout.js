@@ -5,16 +5,11 @@ import { firBaseApp, messaging } from "../src/firebase";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 import Header from "./header/Header";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const BottomBar = dynamic(() => import("./bottomBar/BottomBar"));
 
 const Layout = ({ topright = true, children, showBottomBar = true }) => {
-  const [currentUrl, setCurrentUrl] = useState("");
-
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, [setCurrentUrl]);
   //user notification
   async function requestPermission() {
     if (Notification.permission !== "granted") {
@@ -55,14 +50,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-        <meta
-          name="twitter:url"
-          content={currentUrl ? currentUrl : "https://websitefreelancing.co.in"}
-        />
-        <meta
-          property="og:url"
-          content={currentUrl ? currentUrl : "https://websitefreelancing.co.in"}
-        />
+
         <meta
           name="google-site-verification"
           content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"

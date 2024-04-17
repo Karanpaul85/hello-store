@@ -45,7 +45,8 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",
-          "Search"
+          "Search",
+          { lang: lang, category: queryString }
         )}
       </Head>
       {/* <div style={{ height: 200 }}>Slider</div> */}

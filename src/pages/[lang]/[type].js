@@ -53,7 +53,8 @@ const Types = ({ data, errorData, category }) => {
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",
-          type
+          type,
+          { lang: lang, category: type }
         )}
       </Head>
       <Tabbar lang={lang} />
