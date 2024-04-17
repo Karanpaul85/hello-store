@@ -1,5 +1,4 @@
 export const ogMetaTags = (otherdata, pageType, query) => {
-  console.log(query, "query");
   const baseUrl =
     process.env.NODE_ENV === "production"
       ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD

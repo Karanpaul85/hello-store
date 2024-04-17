@@ -31,6 +31,7 @@ const SingleNews = ({
                 alt={newsdata.title}
                 loading="lazy"
                 sizes="100vw"
+                unoptimized={true}
               />
             </>
           ) : (
@@ -46,6 +47,7 @@ const SingleNews = ({
                 alt={newsdata.title}
                 priority={true}
                 sizes="100vw"
+                unoptimized={true}
               />
             </>
           )}
