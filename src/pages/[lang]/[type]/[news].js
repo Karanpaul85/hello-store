@@ -9,14 +9,18 @@ import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import styles from "./singleNews.module.css";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 
-const News = ({ data }) => {
+const News = ({ data, options }) => {
   const dispatch = useDispatch();
   data && dispatch(setNotificationData(data));
 
   return (
     <Layout showBottomBar={true}>
       <Head>
-        {ogMetaTags(data ? data : "Welcome to world breaking News", "Single")}
+        {ogMetaTags(data ? data : "Welcome to world breaking News", "Single", {
+          lang: options.lang,
+          category: options.type,
+          news: options.news,
+        })}
       </Head>
       <div>
         {data.image_url && (
@@ -58,6 +62,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       return {
         props: {
           data: singleNews,
+          options: ctx.query,
         },
       };
     } catch (error) {

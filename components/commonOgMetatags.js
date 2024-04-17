@@ -1,8 +1,21 @@
 export const ogMetaTags = (otherdata, pageType, query) => {
+  console.log(query, "query");
   const baseUrl =
     process.env.NODE_ENV === "production"
       ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
       : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
+
+  const contentUrl = () => {
+    if (pageType === "Home") {
+      return baseUrl;
+    } else if (pageType === "Search") {
+      return `${baseUrl}/search?q=${query.category}&lang=${query?.lang}`;
+    } else if (pageType === "Single") {
+      return `${baseUrl}/${query?.lang}/${query.category}/${query.news}`;
+    } else {
+      return `${baseUrl}/${query?.lang}/${query.category}`;
+    }
+  };
   return (
     <>
       <title>{`${pageType ? `${pageType} -` : ""} ${otherdata.title}`}</title>
@@ -17,26 +30,8 @@ export const ogMetaTags = (otherdata, pageType, query) => {
       <meta property="og:title" content={otherdata.title} />
       <meta name="twitter:title" content={otherdata.title} />
       <meta name="twitter:description" content={otherdata.title} />
-      <meta
-        name="twitter:url"
-        content={
-          pageType === "Home"
-            ? baseUrl
-            : pageType === "Search"
-            ? `${baseUrl}/search?q=${query.category}&lang=${query?.lang}`
-            : `${baseUrl}/${query?.lang}/${query.category}`
-        }
-      />
-      <meta
-        property="og:url"
-        content={
-          pageType === "Home"
-            ? baseUrl
-            : pageType === "Search"
-            ? `${baseUrl}/search?q=${query.category}&lang=${query?.lang}`
-            : `${baseUrl}/${query?.lang}/${query.category}`
-        }
-      />
+      <meta name="twitter:url" content={contentUrl()} />
+      <meta property="og:url" content={contentUrl()} />
     </>
   );
 };
