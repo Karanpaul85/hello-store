@@ -12,7 +12,7 @@ const SingleNews = ({
 }) => {
   const searchParm = isSearch ? `?from=${queryString}` : "";
   return (
-    <Link
+    <a
       href={`/${lang}/${category}/${newsdata.article_id}${searchParm}`}
       className={styles.newsCard}
     >
@@ -55,7 +55,7 @@ const SingleNews = ({
         <h2 className={styles.h2Hdeading}>{newsdata.title}</h2>
         <p className={styles.published}>Published at : {newsdata.pubDate}</p>
       </div>
-    </Link>
+    </a>
   );
 };
 export default SingleNews;
