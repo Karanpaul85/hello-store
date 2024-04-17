@@ -73,6 +73,7 @@ const PushNotification = () => {
               alt={notificationData.title}
               loading="lazy"
               sizes="100vw"
+              unoptimized={true}
             />
           </div>
           <div className={styles.notificationDrawerBtnSec}>
