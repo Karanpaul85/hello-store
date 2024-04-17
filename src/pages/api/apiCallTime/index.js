@@ -13,11 +13,10 @@ export default async function handler(req, res) {
     finalQuery.category = req?.query?.category;
     finalQuery.language = req?.query?.language === "hi" ? "hindi" : "english";
     const isNewsExist = await apiCallTimes.findOne(finalQuery);
-
     res.status(200).json({
       success: true,
       message: "GET Method Call",
-      timestamp: isNewsExist?.timestamp,
+      timestamp: isNewsExist ? isNewsExist?.timestamp : null,
     });
   } else if (req.method === "POST") {
     const reqBody = req.body;
