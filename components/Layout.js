@@ -15,7 +15,6 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, [setCurrentUrl]);
-
   //user notification
   async function requestPermission() {
     if (Notification.permission !== "granted") {
@@ -56,8 +55,14 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-        <meta name="twitter:url" content={currentUrl} />
-        <meta property="og:url" content={currentUrl} />
+        <meta
+          name="twitter:url"
+          content={currentUrl ? currentUrl : "https://websitefreelancing.co.in"}
+        />
+        <meta
+          property="og:url"
+          content={currentUrl ? currentUrl : "https://websitefreelancing.co.in"}
+        />
         <meta
           name="google-site-verification"
           content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
