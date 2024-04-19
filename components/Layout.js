@@ -64,8 +64,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
       <Header topright={topright} />
       <main>
         <div className="container">{children}</div>
-      </main>
-      {parse(`<script
+        {parse(`<script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175301977598959"
         crossorigin="anonymous"
@@ -79,6 +78,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         data-full-width-responsive="true"
       ></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`)}
+      </main>
 
       {showBottomBar && <BottomBar />}
     </GoogleOAuthProvider>
