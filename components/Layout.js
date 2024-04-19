@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import parse from "html-react-parser";
 import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { firBaseApp, messaging } from "../src/firebase";
@@ -64,6 +65,21 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
       <main>
         <div className="container">{children}</div>
       </main>
+      {parse(`<script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175301977598959"
+        crossorigin="anonymous"
+      ></script>
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-4175301977598959"
+        data-ad-slot="6526679972"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`)}
+
       {showBottomBar && <BottomBar />}
     </GoogleOAuthProvider>
   );
