@@ -43,3 +43,21 @@ main {
   margin: 0 auto;
   width: 100%;
 }
+.infoPage {
+  padding: 16px;
+}
+.infoPage h1,
+.infoPage h2,
+.infoPage h3 {
+  font-size: 20px;
+  color: var(--black);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.infoPage p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.infoPage ul {
+  margin-left: 20px;
+}
