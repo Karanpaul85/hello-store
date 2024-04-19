@@ -38,6 +38,10 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-4175301977598959"
+        ></meta>
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Breaking News" />
         <meta name="twitter:card" content="summary" />

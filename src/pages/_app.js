@@ -18,11 +18,6 @@ function MyApp({ Component, ...rest }) {
     <>
       {process.env.NODE_ENV !== "development" && (
         <>
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175301977598959"
-            crossorigin="anonymous"
-          ></Script>
           <Script src="https://accounts.google.com/gsi/client" async defer />
           <Script
             strategy="lazyOnload"
