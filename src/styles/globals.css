@@ -61,3 +61,8 @@ main {
 .infoPage ul {
   margin-left: 20px;
 }
+.adsParent {
+  width: 100%;
+  display: block;
+  min-height: 20px;
+}

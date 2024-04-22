@@ -69,6 +69,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175301977598959"
         crossorigin="anonymous"
       ></script>
+      <div class="adsParent" align="center" min-width="320px">
       <ins
         class="adsbygoogle"
         style="display:block"
@@ -77,6 +78,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
+      </div>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`)}
       </main>
 
