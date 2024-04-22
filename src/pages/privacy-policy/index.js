@@ -9,6 +9,58 @@ const PrivacyPolicy = () => {
   <p>Last updated: April 19, 2024</p>
   <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
   <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
+  <h2>GDPR (General Data Protection Regulation)</h2>
+  <h3>Data Controller and Data Processor</h3>
+<ul><li>Live News, as the data controller, and any third-party service providers acting as data processors, comply with the GDPR's requirements for processing personal data of individuals in the European Economic Area (EEA).</li></ul>
+
+<h3>Lawful Basis for Processing
+</h3>
+<ul><li>Live News processes personal data under one or more lawful bases as outlined in Article 6 of the GDPR, such as the necessity for the performance of a contract, compliance with legal obligations, protection of vital interests, consent, performance of tasks carried out in the public interest, or legitimate interests pursued by Live News or a third party.</li></ul>
+
+<h3>Data Subject Rights
+</h3>
+<ul><li>Users located in the EEA have certain rights under the GDPR, including the right to access, rectify, erase, restrict processing, object to processing, data portability, and the right not to be subject to automated decision-making, including profiling.
+</li></ul>
+
+<h3>Cross-Border Data Transfers
+</h3>
+<ul><li>Live News may transfer personal data outside the EEA to countries that have been deemed to provide an adequate level of protection by the European Commission or through appropriate safeguards as outlined in the GDPR.
+</li></ul>
+<h2>CPRA (California Privacy Rights Act)</h2>
+<h3>California Residents' Rights</h3>
+<ul><li>Live News recognizes the rights granted to California residents under the CPRA, including the right to know what personal information is being collected, the right to opt out of the sale of personal information, the right to request deletion of personal information, and the right to non-discrimination for exercising privacy rights.
+</li></ul>
+
+<h3>Sale of Personal Information
+</h3>
+<ul><li>Live News does/does not sell personal information as defined by the CPRA. If Live News engages in the sale of personal information, California residents have the right to opt out of such sales.
+</li></ul>
+
+<h3>Authorized Agents
+</h3>
+<ul><li>California residents can designate an authorized agent to exercise their rights under the CPRA on their behalf, subject to certain requirements.
+</li></ul>
+<h2>LGPD (Lei Geral de Proteção de Dados)
+</h2>
+
+<h3>Data Processing Principles</h3>
+<ul><li>Live News adheres to the principles of the LGPD, including the necessity, purpose limitation, free access, data quality, security, prevention of damage, transparency, accountability, and non-discrimination.
+</li></ul>
+
+<h3>Rights of Brazilian Users
+</h3>
+<ul><li>Brazilian users have certain rights under the LGPD, including the right to confirmation of the existence of processing, access to data, correction of incomplete, inaccurate, or outdated data, anonymization, blocking, deletion, portability of data to another service or product provider, deletion of personal data processed with the consent of the data subject, and information about public and private entities with which Live News has shared data.
+</li></ul>
+
+<h3>Legal Basis for Processing
+</h3>
+<ul><li>Live News processes personal data under one of the legal bases provided by the LGPD, such as the data subject's consent, compliance with a legal or regulatory obligation, execution of a contract, protection of life or physical safety, protection of health, legitimate interests, protection of credit, or protection of the data subject's or third parties' rights.
+</li></ul>
+
+<h3>Data Protection Officer (DPO)</h3>
+<ul><li>Live News may appoint a data protection officer (DPO) responsible for monitoring compliance with the LGPD and serving as a point of contact for data subjects and authorities.
+</li></ul>
+<p>By integrating these elements into your privacy policy, you can demonstrate compliance with GDPR, CPRA, and LGPD requirements, providing transparency and protection for users' personal data.</p>
   <h2>Interpretation and Definitions</h2>
   <h3>Interpretation</h3>
   <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
