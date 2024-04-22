@@ -2,7 +2,7 @@ import FontAwesomeIcon from "../FontAwesomeIcon";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button";
 import styles from "./pushNotification.module.css";
-import { SwipeableDrawer } from "@mui/material";
+import { Drawer, SwipeableDrawer } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
@@ -55,11 +55,11 @@ const PushNotification = () => {
         <FontAwesomeIcon icon={faBell} />
         <span>Send Notification</span>
       </Button>
-      <SwipeableDrawer
+
+      <Drawer
         anchor="bottom"
         open={showNotifationDrawer}
         onClose={openNotificationSec}
-        onOpen={openNotificationSec}
       >
         <div className={styles.notificationDrawer}>
           <div className={styles.notificationTitle}>
@@ -92,7 +92,7 @@ const PushNotification = () => {
             </Button>
           </div>
         </div>
-      </SwipeableDrawer>
+      </Drawer>
     </>
   );
 };

@@ -65,7 +65,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
       <main>
         <div className="container">{children}</div>
         {parse(`<script
-        async
+        defer
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175301977598959"
         crossorigin="anonymous"
       ></script>
@@ -75,11 +75,12 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         style="display:block"
         data-ad-client="ca-pub-4175301977598959"
         data-ad-slot="6526679972"
-        data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
       </div>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`)}
+      <script>window.addEventListener('load', function (){
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        })`)}
       </main>
 
       {showBottomBar && <BottomBar />}
