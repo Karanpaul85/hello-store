@@ -55,11 +55,16 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-
         <meta
           name="google-site-verification"
           content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
         />
+        {parse(`<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NSZM77B3');</script>`)}
+        ;
       </Head>
       <Header topright={topright} />
       <main>
@@ -80,7 +85,14 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
       </div>
       <script>window.addEventListener('load', function (){
         (adsbygoogle = window.adsbygoogle || []).push({});
-        })`)}
+        })
+        
+        
+        
+        <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSZM77B3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`)}
       </main>
 
       {showBottomBar && <BottomBar />}
