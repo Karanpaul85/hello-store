@@ -31,7 +31,9 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      requestPermission(messaging);
+      setTimeout(() => {
+        requestPermission(messaging);
+      }, 3000);
     }
   }, []);
   return (
