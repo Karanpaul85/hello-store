@@ -8,10 +8,13 @@ import Image from "next/image";
 import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import styles from "./singleNews.module.css";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { useEffect } from "react";
 
 const News = ({ data, options }) => {
   const dispatch = useDispatch();
-  data && dispatch(setNotificationData(data));
+  useEffect(() => {
+    data && dispatch(setNotificationData(data));
+  }, [data, dispatch]);
 
   return (
     <Layout showBottomBar={true}>

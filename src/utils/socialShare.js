@@ -16,7 +16,8 @@ export const socialSharing = [
   },
   {
     name: "whatsapp",
-    url: "web.whatsapp://send?text=",
+    url: "whatsapp://send?text=",
     icon: "whatsapp",
+    dataAction: "share/whatsapp/share",
   },
 ];

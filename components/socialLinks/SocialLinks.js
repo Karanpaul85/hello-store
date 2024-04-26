@@ -17,6 +17,7 @@ const SocialLinks = () => {
               <li key={socialLink.name}>
                 <Link
                   href={`${socialLink.url}${url}`}
+                  data-action={socialLink?.dataAction}
                   className={`${styles.icons}`}
                 >
                   <Image

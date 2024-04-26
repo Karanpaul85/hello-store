@@ -19,11 +19,15 @@ import SingleNews from "../../../components/singleNews/SingleNews";
 import { setNewsData } from "@/redux/slices/searchSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { checkTimeisOver } from "@/utils/common";
+import { useEffect } from "react";
 
 const Types = ({ data, errorData, category }) => {
   const dispatch = useDispatch();
-  dispatch(setNewsData(data));
-  data && data.length > 0 && dispatch(setNotificationData(data[0]));
+  useEffect(() => {
+    dispatch(setNewsData(data));
+    data && data.length > 0 && dispatch(setNotificationData(data[0]));
+  }, [data, dispatch]);
+
   const router = useRouter();
   const { textConst } = allConst;
   const { lang, type } = router.query;

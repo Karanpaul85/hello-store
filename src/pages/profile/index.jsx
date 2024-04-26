@@ -15,12 +15,15 @@ import { removeCookie } from "@/utils/common";
 import { useDispatch } from "react-redux";
 import { userLogout } from "@/redux/slices/oneTapLoginSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { useEffect } from "react";
 
 const Profile = ({ userDetails }) => {
   const { email, email_verified, isAdmin, name, picture } = userDetails;
   const dispatch = useDispatch();
 
-  dispatch(setNotificationData({}));
+  useEffect(() => {
+    dispatch(setNotificationData({}));
+  }, [dispatch]);
 
   const logout = () => {
     removeCookie("auth");
@@ -28,7 +31,7 @@ const Profile = ({ userDetails }) => {
     Router.push("/");
   };
   return (
-    <Layout topright={false} showBottomBar={true}>
+    <Layout topright={false} showBottomBar={false}>
       <div className={style.profileSection}>
         <div className={style.profileIconEmail}>
           {email_verified && (
@@ -53,7 +56,7 @@ const Profile = ({ userDetails }) => {
             <FontAwesomeIcon icon={faKey} />
             Change Password
           </li>
-          {/* <li>
+          <li>
             <FontAwesomeIcon icon={faPowerOff} />{" "}
             <Button
               type="button"
@@ -65,7 +68,7 @@ const Profile = ({ userDetails }) => {
             >
               Logout
             </Button>
-          </li> */}
+          </li>
         </ul>
       </div>
     </Layout>

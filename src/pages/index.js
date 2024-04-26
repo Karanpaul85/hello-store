@@ -19,11 +19,14 @@ import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { checkTimeisOver } from "@/utils/common";
+import { useEffect } from "react";
 
 const HomePage = ({ data, errorData, options }) => {
   const dispatch = useDispatch();
-  dispatch(setNewsData(data));
-  data && data.length > 0 && dispatch(setNotificationData(data[0]));
+  useEffect(() => {
+    dispatch(setNewsData(data));
+    data && data.length > 0 && dispatch(setNotificationData(data[0]));
+  }, [data, dispatch]);
 
   const { textConst } = allConst;
 
