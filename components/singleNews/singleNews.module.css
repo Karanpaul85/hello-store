@@ -26,6 +26,16 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.placeHolder {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .tumbNail img {
   color: transparent;
   border-radius: 8px 8px 0 0;

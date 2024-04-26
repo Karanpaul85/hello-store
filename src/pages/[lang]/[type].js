@@ -21,16 +21,34 @@ import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { checkTimeisOver } from "@/utils/common";
 import { useEffect } from "react";
 
-const Types = ({ data, errorData, category }) => {
+const Types = ({ data, errorData, category, lang }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setNewsData(data));
     data && data.length > 0 && dispatch(setNotificationData(data[0]));
   }, [data, dispatch]);
 
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const apiTimeTocall = await dispatch(
+        getApiCallTime({ lang: lang, category: category })
+      );
+      const isTimeOver = await checkTimeisOver(
+        apiTimeTocall?.payload?.timestamp
+      );
+      if (isTimeOver) {
+        await dispatch(setApiCallTime({ lang: lang, category: category }));
+        const latestNewsData = await dispatch(
+          fetchData({ lang: lang, category: category })
+        );
+        await dispatch(sendDataToMDB(latestNewsData.payload));
+      }
+    }
+    fetchMyAPI();
+  }, [category, dispatch, lang]);
+
   const router = useRouter();
   const { textConst } = allConst;
-  const { lang, type } = router.query;
   if (errorData) {
     return (
       <Layout>
@@ -57,8 +75,8 @@ const Types = ({ data, errorData, category }) => {
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",
-          type,
-          { lang: lang, category: type }
+          category,
+          { lang: lang, category: category }
         )}
       </Head>
       <Tabbar lang={lang} />
@@ -87,15 +105,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: ctx.query.lang, category: ctx.query.type };
-      const apiTimeTocall = await store.dispatch(getApiCallTime(options));
-      const isTimeOver = await checkTimeisOver(
-        apiTimeTocall?.payload?.timestamp
-      );
-      if (isTimeOver) {
-        await store.dispatch(setApiCallTime(options));
-        const latestNewsData = await store.dispatch(fetchData(options));
-        await store.dispatch(sendDataToMDB(latestNewsData.payload));
-      }
+
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;

@@ -39,7 +39,6 @@ const News = ({ data, options }) => {
               alt={data.title}
               priority={true}
               sizes="100vw"
-              unoptimized={true}
             />
           </div>
         )}

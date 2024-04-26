@@ -30,6 +30,23 @@ const HomePage = ({ data, errorData, options }) => {
 
   const { textConst } = allConst;
 
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const apiTimeTocall = await dispatch(getApiCallTime(options));
+      const isTimeOver = await checkTimeisOver(
+        apiTimeTocall?.payload?.timestamp
+      );
+      if (isTimeOver) {
+        await dispatch(setApiCallTime(options));
+        const latestNewsData = await dispatch(fetchData(options));
+        console.log(latestNewsData, "latest");
+        await dispatch(sendDataToMDB(latestNewsData.payload));
+      }
+    }
+
+    fetchMyAPI();
+  }, [dispatch, options]);
+
   if (errorData) {
     return (
       <Layout showBottomBar={false}>
@@ -88,15 +105,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
-      // const apiTimeTocall = await store.dispatch(getApiCallTime(options));
-      // const isTimeOver = await checkTimeisOver(
-      //   apiTimeTocall?.payload?.timestamp
-      // );
-      // if (isTimeOver) {
-      //   await store.dispatch(setApiCallTime(options));
-      //   const latestNewsData = await store.dispatch(fetchData(options));
-      //   await store.dispatch(sendDataToMDB(latestNewsData.payload));
-      // }
+
       return {
         props: {
           data,

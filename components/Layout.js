@@ -7,6 +7,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 import Header from "./header/Header";
 import { useEffect } from "react";
+import imgDataURLs from "@/utils/imageUtil";
 
 const BottomBar = dynamic(() => import("./bottomBar/BottomBar"));
 
@@ -36,6 +37,12 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Head>
+        <link
+          rel="preload"
+          as="image"
+          href={imgDataURLs.placeholderImg}
+          fetchpriority="high"
+        />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />

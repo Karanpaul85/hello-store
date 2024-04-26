@@ -13,7 +13,7 @@ export const fetchData = createAsyncThunk(
   "newSlice/fetchData",
   async (options) => {
     const response = await api.get(
-      `/1/news?apikey=${process.env.NEWS_API_KEY}&language=${options.lang}&image=1&category=${options.category}`
+      `/1/news?apikey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}&language=${options.lang}&image=1&category=${options.category}`
     );
     return response.data.results;
   }
@@ -31,6 +31,7 @@ export const fetchDataFromMDB = createAsyncThunk(
 export const sendDataToMDB = createAsyncThunk(
   "newSlice/sendDataToMDB",
   async (data) => {
+    console.log(data, "data");
     const response = await axios.post(`${baseUrl}/api/newsData`, data);
     return response.data;
   }

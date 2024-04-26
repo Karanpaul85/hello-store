@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./singleNews.module.css";
+import { useState } from "react";
+import imgDataURLs from "../../src/utils/imageUtil";
 
 const SingleNews = ({
   newsdata,
@@ -10,7 +11,12 @@ const SingleNews = ({
   isSearch,
   queryString,
 }) => {
+  const [showPlaceHolder, setPlaceHolder] = useState(false);
   const searchParm = isSearch ? `?from=${queryString}` : "";
+
+  const onImageLoad = (e) => {
+    setPlaceHolder(true);
+  };
   return (
     <a
       href={`/${lang}/${category}/${newsdata.article_id}${searchParm}`}
@@ -21,8 +27,14 @@ const SingleNews = ({
           {index > 1 ? (
             <>
               <div
-                className={styles.tumbNailBlur}
-                style={{ backgroundImage: `url(${newsdata.image_url})` }}
+                className={
+                  showPlaceHolder ? styles.tumbNailBlur : styles.placeHolder
+                }
+                style={{
+                  backgroundImage: showPlaceHolder
+                    ? `url(${newsdata.image_url})`
+                    : `url(${imgDataURLs.placeholderImg})`,
+                }}
               ></div>
               <Image
                 src={newsdata.image_url}
@@ -30,15 +42,21 @@ const SingleNews = ({
                 height={300}
                 alt={newsdata.title}
                 loading="lazy"
-                sizes="100vw"
-                unoptimized={true}
+                sizes="50vw"
+                onLoad={onImageLoad}
               />
             </>
           ) : (
             <>
               <div
-                className={styles.tumbNailBlur}
-                style={{ backgroundImage: `url(${newsdata.image_url})` }}
+                className={
+                  showPlaceHolder ? styles.tumbNailBlur : styles.placeHolder
+                }
+                style={{
+                  backgroundImage: showPlaceHolder
+                    ? `url(${newsdata.image_url})`
+                    : `url(${imgDataURLs.placeholderImg})`,
+                }}
               ></div>
               <Image
                 src={newsdata.image_url}
@@ -46,8 +64,8 @@ const SingleNews = ({
                 height={300}
                 alt={newsdata.title}
                 priority={true}
-                sizes="100vw"
-                unoptimized={true}
+                sizes="50vw"
+                onLoad={onImageLoad}
               />
             </>
           )}
