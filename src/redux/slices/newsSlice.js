@@ -31,7 +31,6 @@ export const fetchDataFromMDB = createAsyncThunk(
 export const sendDataToMDB = createAsyncThunk(
   "newSlice/sendDataToMDB",
   async (data) => {
-    console.log(data, "data");
     const response = await axios.post(`${baseUrl}/api/newsData`, data);
     return response.data;
   }

@@ -39,7 +39,6 @@ const HomePage = ({ data, errorData, options }) => {
       if (isTimeOver) {
         await dispatch(setApiCallTime(options));
         const latestNewsData = await dispatch(fetchData(options));
-        console.log(latestNewsData, "latest");
         await dispatch(sendDataToMDB(latestNewsData.payload));
       }
     }
