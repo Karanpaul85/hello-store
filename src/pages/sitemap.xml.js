@@ -1,5 +1,7 @@
 import { tagList } from "@/constant/common_constants";
 
+export const revalidate = 30; // revalidate at most every hour
+
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
