@@ -1,7 +1,8 @@
 User-agent: Googlebot
-Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 Disallow: 
 Disallow: /cgi-bin/
+Disallow: /login
+Disallow: /profile
 Sitemap: https://websitefreelancing.co.in/sitemap.xml
