@@ -1,23 +1,23 @@
-import { faFacebookF,faTwitter,faLinkedinIn,faWhatsapp } from "@fortawesome/free-solid-svg-icons";
 export const socialSharing = [
   {
     name: "facebook",
     url: "https://www.facebook.com/sharer/sharer.php?u=",
-    icon: faFacebookF,
+    icon: "facebook",
   },
   {
     name: "twitter",
     url: "https://twitter.com/intent/tweet?text=",
-    icon: faTwitter,
+    icon: "twitter",
   },
   {
     name: "linkedin",
     url: "https://www.linkedin.com/share?url=",
-    icon: faLinkedinIn,
+    icon: "linkedin",
   },
   {
     name: "whatsapp",
-    url: "web.whatsapp://send?text=",
-    icon: faWhatsapp,
+    url: "whatsapp://send?text=",
+    icon: "whatsapp",
+    dataAction: "share/whatsapp/share",
   },
 ];

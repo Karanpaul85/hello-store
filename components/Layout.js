@@ -1,19 +1,17 @@
+import dynamic from "next/dynamic";
+import parse from "html-react-parser";
 import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { firBaseApp, messaging } from "../src/firebase";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 import Header from "./header/Header";
-import { useEffect, useState } from "react";
-import ShareBTN from "./shareBtn/ShareBTN";
+import { useEffect } from "react";
+import imgDataURLs from "@/utils/imageUtil";
 
-const Layout = ({ topright, children, shareBtn }) => {
-  const [currentUrl, setCurrentUrl] = useState("");
+const BottomBar = dynamic(() => import("./bottomBar/BottomBar"));
 
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, [setCurrentUrl]);
-
+const Layout = ({ topright = true, children, showBottomBar = true }) => {
   //user notification
   async function requestPermission() {
     if (Notification.permission !== "granted") {
@@ -33,15 +31,27 @@ const Layout = ({ topright, children, shareBtn }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      requestPermission(messaging);
+      setTimeout(() => {
+        requestPermission(messaging);
+      }, 3000);
     }
   }, []);
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Head>
+        <link
+          rel="preload"
+          as="image"
+          href={imgDataURLs.placeholderImg}
+          fetchpriority="high"
+        />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
+        {/* <meta
+          name="google-adsense-account"
+          content="ca-pub-4175301977598959"
+        ></meta> */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Breaking News" />
         <meta name="twitter:card" content="summary" />
@@ -54,22 +64,29 @@ const Layout = ({ topright, children, shareBtn }) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-        <meta name="twitter:url" content={currentUrl} />
-        <meta property="og:url" content={currentUrl} />
-        <meta
+        {/* <meta
           name="google-site-verification"
           content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
-        />
+        /> */}
+        {parse(`<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NSZM77B3');</script>`)}
+        ;
       </Head>
       <Header topright={topright} />
       <main>
         <div className="container">{children}</div>
+        {parse(`<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSZM77B3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`)}
       </main>
-      {shareBtn && <ShareBTN />}
+
+      {showBottomBar && <BottomBar />}
     </GoogleOAuthProvider>
   );
 };
-Layout.defaultProps = {
-  shareBtn: true,
-};
+
 export default Layout;

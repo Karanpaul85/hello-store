@@ -1,22 +1,54 @@
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import Tabbar from "../../../components/tabbar/TabBar";
 import { wrapper } from "@/utils/withRedux";
-import { fetchData } from "@/redux/slices/newsSlice";
+import {
+  fetchData,
+  fetchDataFromMDB,
+  getApiCallTime,
+  sendDataToMDB,
+  setApiCallTime,
+} from "@/redux/slices/newsSlice";
 import Head from "next/head";
 import { ogErrorMetaTags } from "../../../components/commonErrorMetatags";
 import { ogMetaTags } from "../../../components/commonOgMetatags";
 import headingStyle from "../../styles/Home.module.css";
 import { allConst } from "@/constant/common_constants";
 import SingleNews from "../../../components/singleNews/SingleNews";
-import PushNotification from "../../../components/pushNotification/PushNotification";
-import { useSelector } from "react-redux";
+import { setNewsData } from "@/redux/slices/searchSlice";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { checkTimeisOver } from "@/utils/common";
+import { useEffect } from "react";
 
-const Types = ({ data, errorData, category }) => {
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
+const Types = ({ data, errorData, category, lang }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setNewsData(data));
+    data && data.length > 0 && dispatch(setNotificationData(data[0]));
+  }, [data, dispatch]);
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const apiTimeTocall = await dispatch(
+        getApiCallTime({ lang: lang, category: category })
+      );
+      const isTimeOver = await checkTimeisOver(
+        apiTimeTocall?.payload?.timestamp
+      );
+      if (isTimeOver) {
+        await dispatch(setApiCallTime({ lang: lang, category: category }));
+        const latestNewsData = await dispatch(
+          fetchData({ lang: lang, category: category })
+        );
+        await dispatch(sendDataToMDB(latestNewsData.payload));
+      }
+    }
+    fetchMyAPI();
+  }, [category, dispatch, lang]);
+
   const router = useRouter();
   const { textConst } = allConst;
-  const { lang, type } = router.query;
   if (errorData) {
     return (
       <Layout>
@@ -43,7 +75,8 @@ const Types = ({ data, errorData, category }) => {
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",
-          type
+          category,
+          { lang: lang, category: category }
         )}
       </Head>
       <Tabbar lang={lang} />
@@ -65,9 +98,6 @@ const Types = ({ data, errorData, category }) => {
             })
           : "We can not find any results for this query"}
       </div>
-      {isAdmin && data && data.length && (
-        <PushNotification notificationDetail={data?.[0]} />
-      )}
     </Layout>
   );
 };
@@ -75,7 +105,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: ctx.query.lang, category: ctx.query.type };
-      const serverData = await store.dispatch(fetchData(options));
+
+      const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {

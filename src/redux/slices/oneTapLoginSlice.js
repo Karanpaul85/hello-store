@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { createCookie } from "../../utils/common";
-import axios from "axios";
+import Router from "next/router";
 
 const initialState = {
   email: null,
@@ -14,8 +14,9 @@ const oneTapLogin = createSlice({
   name: "onetapLoginSlice",
   initialState,
   reducers: {
-    setUserDetails: (state, action) => {
-      const { email, email_verified, name, picture, isAdmin } = action.payload;
+    setUserDetails: (state, action, dataFrom) => {
+      const { email, email_verified, name, picture, isAdmin, from } =
+        action.payload;
       if (email_verified) {
         state.email = email;
         state.email_verified = email_verified;
@@ -23,6 +24,9 @@ const oneTapLogin = createSlice({
         state.picture = picture;
         state.isAdmin = isAdmin;
         createCookie("auth", JSON.stringify(state), 2);
+        if (from && from === "api") {
+          Router.push("/");
+        }
       }
     },
     userLogout: (state) => initialState,

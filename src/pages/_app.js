@@ -21,14 +21,14 @@ function MyApp({ Component, ...rest }) {
           <Script src="https://accounts.google.com/gsi/client" async defer />
           <Script
             strategy="lazyOnload"
-            src={`https://www.googletagmanager.com/gtag/js?id=G-HDTNMT20N4`}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-XDNPRLXP95`}
           />
           <Script id="GA4" strategy="lazyOnload">
             {`
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
-         gtag('config', 'G-HDTNMT20N4', {
+         gtag('config', 'G-XDNPRLXP95', {
          page_path: window.location.pathname,
          });
    `}

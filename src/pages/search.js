@@ -1,5 +1,5 @@
 // pages/index.js
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 import { fetchSearchData, setNewsData } from "../redux/slices/searchSlice";
 import { wrapper } from "../utils/withRedux";
@@ -10,17 +10,18 @@ import { ogMetaTags } from "../../components/commonOgMetatags";
 import { ogErrorMetaTags } from "../../components/commonErrorMetatags";
 import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
-import PushNotification from "../../components/pushNotification/PushNotification";
+import { setNotificationData } from "@/redux/slices/notificationSlice";
+import { sendDataToMDB, setApiCallTime } from "@/redux/slices/newsSlice";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   const dispatch = useDispatch();
   dispatch(setNewsData(data));
-  const { isAdmin } = useSelector((state) => state.oneTapLogin);
+  data && data.length > 0 && dispatch(setNotificationData(data[0]));
   const { textConst } = allConst;
   useEffect(() => {}, []);
   if (errorData) {
     return (
-      <Layout>
+      <Layout showBottomBar={false}>
         <Head>
           {errorData
             ? ogErrorMetaTags(errorData)
@@ -40,11 +41,12 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
     );
   }
   return (
-    <Layout>
+    <Layout showBottomBar={true}>
       <Head>
         {ogMetaTags(
           data && data.length ? data?.[0] : "Welcome to world breaking News",
-          "Search"
+          "Search",
+          { lang: lang, category: queryString }
         )}
       </Head>
       {/* <div style={{ height: 200 }}>Slider</div> */}
@@ -68,7 +70,6 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
             })
           : "We can not find any results for this query"}
       </div>
-      {isAdmin && data && <PushNotification notificationDetail={data[0]} />}
     </Layout>
   );
 };
@@ -76,7 +77,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
       const options = { lang: ctx.query.lang, q: ctx.query.q };
+
+      await store.dispatch(setApiCallTime(options));
       const serverData = await store.dispatch(fetchSearchData(options));
+      await store.dispatch(sendDataToMDB(serverData.payload));
+
+      // serverData = await store.dispatch(fetchSearchData(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
       return {

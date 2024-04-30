@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { socialSharing } from "../../src/utils/socialShare";
 import styles from "../shareBtn/shareBTN.module.css";
-import FontAwesomeIcon from "../FontAwesomeIcon";
 const SocialLinks = () => {
   const url =
     window !== undefined
@@ -13,14 +13,19 @@ const SocialLinks = () => {
         {socialSharing &&
           socialSharing.length &&
           socialSharing.map((socialLink) => {
-            console.log(socialLink, "socialLink");
             return (
               <li key={socialLink.name}>
                 <Link
                   href={`${socialLink.url}${url}`}
-                  className={`${styles.icons} ${styles[socialLink.name]}`}
+                  data-action={socialLink?.dataAction}
+                  className={`${styles.icons}`}
                 >
-                  {/* <FontAwesomeIcon icon={socialLink.icon} /> */}
+                  <Image
+                    src={`/assets/icons/${socialLink.icon}.svg`}
+                    width={24}
+                    height={24}
+                    alt={socialLink.name}
+                  />
                 </Link>
               </li>
             );

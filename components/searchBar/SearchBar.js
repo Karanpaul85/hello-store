@@ -12,7 +12,6 @@ import Button from "../Button";
 const SearchBar = () => {
   const router = useRouter();
   const { lang } = router.query;
-  console.log(lang, "lang");
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [searchError, setSearchError] = useState(false);
@@ -35,7 +34,6 @@ const SearchBar = () => {
       router.push(`/search?q=${search}&lang=${lang ? lang : "hi"}`);
       dispatch(showSearchSec(false));
     } else {
-      console.log("please enter proper query");
       setSearchError(true);
     }
   };
