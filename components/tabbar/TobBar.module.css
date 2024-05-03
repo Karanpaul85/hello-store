@@ -11,6 +11,9 @@
 .tabBar::-webkit-scrollbar {
   display: none;
 }
+.tabBar ul {
+  display: flex;
+}
 .tabBar li {
   margin: 0;
   vertical-align: top;

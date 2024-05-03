@@ -9,6 +9,7 @@ import { ogMetaTags } from "../../../../components/commonOgMetatags";
 import styles from "./singleNews.module.css";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
+import Tabbar from "../../../../components/tabbar/TabBar";
 
 const News = ({ data, options }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ const News = ({ data, options }) => {
           news: options.news,
         })}
       </Head>
-      <div>
+      <Tabbar lang="hi" />
+      <div className={styles.single}>
         {data.image_url && (
           <div className={styles.tumbNail}>
             <div
