@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import styles from "./Header.module.css";
+import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
 import { useDispatch, useSelector } from "react-redux";
 import MainNavigation from "./Navigation/MainNavigation";
@@ -56,7 +57,7 @@ const Header = ({ topright }) => {
       <div className="container">
         <div className={styles.topHeader}>
           <div className={styles.logo}>
-            <a href="/">
+            <Link href="/" passHref>
               <div
                 role="link"
                 tabIndex={0}
@@ -71,7 +72,7 @@ const Header = ({ topright }) => {
                   sizes="100vw"
                 />
               </div>
-            </a>
+            </Link>
           </div>
           {topright && <TopRight />}
           {showSearch && <SearchBar />}
