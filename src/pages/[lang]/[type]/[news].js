@@ -26,7 +26,7 @@ const News = ({ data, options }) => {
           news: options.news,
         })}
       </Head>
-      <Tabbar lang="hi" />
+      <Tabbar lang={options.lang} />
       <div className={styles.single}>
         {data.image_url && (
           <div className={styles.tumbNail}>

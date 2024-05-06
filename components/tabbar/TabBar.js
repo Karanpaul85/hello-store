@@ -6,7 +6,6 @@ const Tabbar = ({ lang }) => {
   const router = useRouter();
   const { type } =
     Object.keys(router?.query).length > 0 ? router?.query : { type: "world" };
-
   useEffect(() => {
     setTimeout(() => {
       const parentContainer = document.querySelector("#tabBar");
@@ -86,7 +85,7 @@ const Tabbar = ({ lang }) => {
               <li
                 key={listItem}
                 className={`${type === listItem && styles.active}`}
-                data-active={`${type === listItem.category ? true : false}`}
+                data-active={`${type === listItem ? true : false}`}
               >
                 <a href={`/en/${listItem}`}>{listItem}</a>
               </li>
