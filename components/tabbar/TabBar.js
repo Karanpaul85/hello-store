@@ -83,11 +83,11 @@ const Tabbar = ({ lang }) => {
           tagList[lang].map((listItem) => {
             return (
               <li
-                key={listItem}
-                className={`${type === listItem && styles.active}`}
-                data-active={`${type === listItem ? true : false}`}
+                key={listItem.category}
+                className={`${type === listItem.category && styles.active}`}
+                data-active={`${type === listItem.category ? true : false}`}
               >
-                <a href={`/en/${listItem}`}>{listItem}</a>
+                <a href={`/en/${listItem.category}`}>{listItem.category}</a>
               </li>
             );
           })}

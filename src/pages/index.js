@@ -18,10 +18,11 @@ import SingleNews from "../../components/singleNews/SingleNews";
 import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
-import { checkTimeisOver } from "@/utils/common";
+import { checkTimeisOver, getingHeadingText } from "@/utils/common";
 import { useEffect } from "react";
+import Heading from "../../components/heading/Heading";
 
-const HomePage = ({ data, errorData, options }) => {
+const HomePage = ({ data, errorData, options, headingText }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setNewsData(data));
@@ -58,9 +59,7 @@ const HomePage = ({ data, errorData, options }) => {
                   : "Welcome to world breaking News"
               )}
         </Head>
-        <div className={styles.mainHeading}>
-          <h1>{textConst.API_ERROR}</h1>
-        </div>
+        <Heading Tag="h1" content={textConst.API_ERROR} />
         <div className={styles.newsSection}>
           <p>{errorData}</p>
         </div>
@@ -77,9 +76,9 @@ const HomePage = ({ data, errorData, options }) => {
         )}
       </Head>
       <Tabbar lang="hi" />
-      <div className={styles.mainHeading}>
-        <h1>{textConst.LATEST_NEWS}</h1>
-      </div>
+
+      <Heading Tag="h1" content={headingText} />
+
       <div className={styles.newsSection}>
         {data &&
           data.map((item, index) => {
@@ -104,12 +103,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
-
+      const headingText = await getingHeadingText(options);
       return {
         props: {
           data,
           errorData,
           options,
+          headingText,
         },
       };
     } catch (error) {

@@ -1,3 +1,5 @@
+import { tagList } from "@/constant/common_constants";
+
 export const createCookie = (MembershipIdName, MembershipID) => {
   let expires;
   const date = new Date();
@@ -18,4 +20,15 @@ export const checkTimeisOver = async (serverTime) => {
   }
   console.log("In Time");
   return false;
+};
+export const getingHeadingText = async (options) => {
+  const tagLists = tagList[options.lang];
+  const itemObject = await tagLists?.find(
+    (object) => object.category === options.category
+  );
+  if (itemObject) {
+    return itemObject.heading;
+  } else {
+    return null;
+  }
 };

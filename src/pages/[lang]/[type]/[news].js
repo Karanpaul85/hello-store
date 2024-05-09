@@ -10,6 +10,7 @@ import styles from "./singleNews.module.css";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
 import Tabbar from "../../../../components/tabbar/TabBar";
+import Heading from "../../../../components/heading/Heading";
 
 const News = ({ data, options }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const News = ({ data, options }) => {
           </div>
         )}
         <div className={styles.newsContent}>
-          <h1>{data.title}</h1>
+          <Heading Tag="h1" content={data.title} single={true} />
           <div className={styles.publish}>Published at : {data.pubDate}</div>
           <div className={styles.description}>
             {parse(`${data.description}`)}

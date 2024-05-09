@@ -1,0 +1,9 @@
+.mainHeading {
+  padding: 16px;
+  line-height: 1;
+}
+.heading {
+  font-size: 20px;
+  color: var(--black);
+  font-weight: 500;
+}
