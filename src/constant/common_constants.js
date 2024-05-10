@@ -131,7 +131,7 @@ export const tagList = {
   ],
 };
 export const languages = [
-  { url: "/hi/world", desc: "हिंदी" },
+  { url: "/", desc: "हिंदी" },
   { url: "/en/world", desc: "English" },
 ];
 export const adminEmails = ["karanpaul85@gmail.com"];

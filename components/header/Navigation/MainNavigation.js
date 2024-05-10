@@ -8,6 +8,7 @@ import Image from "next/image";
 import { removeCookie } from "@/utils/common";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const Button = dynamic(() => import("../../Button"));
 
@@ -17,6 +18,10 @@ const MainNavigation = () => {
   const { openDrawer, name, picture, email_verified } = useSelector(
     (state) => state.oneTapLogin
   );
+  const redirectToPage = (e) => {
+    const redirectionUrl = e.target.getAttribute("data-id");
+    window.location.href = redirectionUrl;
+  };
   const logout = () => {
     removeCookie("auth");
     dispatch(userLogout());
@@ -81,6 +86,34 @@ const MainNavigation = () => {
             </Button>
           )}
         </div>
+        <ul>
+          <li>
+            <Button
+              type="button"
+              title="News in English"
+              ariaLabel="News in English"
+              classes={styles.urls}
+              id="english_news"
+              data="/en/world"
+              onClick={redirectToPage}
+            >
+              News in English
+            </Button>
+          </li>
+          <li>
+            <Button
+              type="button"
+              title="हिंदी में समाचार"
+              ariaLabel="हिंदी में समाचार"
+              classes={styles.urls}
+              id="hindi_news"
+              data="/"
+              onClick={redirectToPage}
+            >
+              हिंदी में समाचार
+            </Button>
+          </li>
+        </ul>
       </div>
     </SwipeableDrawer>
   );

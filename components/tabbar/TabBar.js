@@ -65,7 +65,13 @@ const Tabbar = ({ lang }) => {
                   className={`${type === listItem.category && styles.active}`}
                   data-active={`${type === listItem.category ? true : false}`}
                 >
-                  <a href={`/hi/${listItem.category}`}>
+                  <a
+                    href={
+                      listItem.category === "world"
+                        ? "/"
+                        : `/hi/${listItem.category}`
+                    }
+                  >
                     {listItem.translation}
                   </a>
                 </li>

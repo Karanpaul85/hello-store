@@ -5,7 +5,7 @@ import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
 import { useDispatch, useSelector } from "react-redux";
-import MainNavigation from "./Navigation/MainNavigation";
+// import MainNavigation from "./Navigation/MainNavigation";
 import { useEffect } from "react";
 import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
@@ -14,6 +14,7 @@ import logo from "/public/assets/images/logo.svg";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
+const MainNavigation = dynamic(() => import("./Navigation/MainNavigation"));
 
 const Header = ({ topright }) => {
   const dispatch = useDispatch();

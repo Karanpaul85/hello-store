@@ -25,6 +25,22 @@
   width: 80%;
   padding: 0 10px;
 }
+.urls {
+  background: var(--white);
+  text-transform: uppercase;
+  border: 0;
+  padding: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid var(--lightGrey);
+  transition: var(--transitions);
+}
+.urls:hover {
+  background: var(--lightGrey);
+}
 .button {
   background: var(--white);
   text-transform: uppercase;
