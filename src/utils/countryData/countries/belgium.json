@@ -1,14 +1,14 @@
 [
-	{
-		"name": "Brussels Hoofdstedelijk Gewest",
-		"code": "BE-BRU"
-	},
-	{
-		"name": "Région Wallonne",
-		"code": "BE-WAL"
-	},
-	{
-		"name": "Vlaams Gewest",
-		"code": "BE-VLG"
-	}
+  {
+    "name": "Brussels Hoofdstedelijk Gewest",
+    "code": "BE-BRU"
+  },
+  {
+    "name": "Région Wallonne",
+    "code": "BE-WAL"
+  },
+  {
+    "name": "Vlaams Gewest",
+    "code": "BE-VLG"
+  }
 ]

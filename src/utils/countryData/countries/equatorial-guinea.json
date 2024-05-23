@@ -1,10 +1,10 @@
 [
-	{
-		"name": "Región Continental",
-		"code": "GQ-C"
-	},
-	{
-		"name": "Región Insular",
-		"code": "GQ-I"
-	}
+  {
+    "name": "Región Continental",
+    "code": "GQ-C"
+  },
+  {
+    "name": "Región Insular",
+    "code": "GQ-I"
+  }
 ]

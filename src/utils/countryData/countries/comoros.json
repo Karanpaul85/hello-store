@@ -1,14 +1,14 @@
 [
-	{
-		"name": "Anjouan",
-		"code": "KM-A"
-	},
-	{
-		"name": "Grande Comore",
-		"code": "KM-G"
-	},
-	{
-		"name": "Mohéli",
-		"code": "KM-M"
-	}
+  {
+    "name": "Anjouan",
+    "code": "KM-A"
+  },
+  {
+    "name": "Grande Comore",
+    "code": "KM-G"
+  },
+  {
+    "name": "Mohéli",
+    "code": "KM-M"
+  }
 ]
