@@ -12,6 +12,7 @@ import SingleNews from "../../components/singleNews/SingleNews";
 import { useEffect } from "react";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { sendDataToMDB, setApiCallTime } from "@/redux/slices/newsSlice";
+import Heading from "../../components/heading/Heading";
 
 const SearchNews = ({ data, errorData, category, lang, queryString }) => {
   const dispatch = useDispatch();
@@ -31,9 +32,7 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
                   : "Welcome to world breaking News"
               )}
         </Head>
-        <div className={styles.mainHeading}>
-          <h1>{textConst.API_ERROR}</h1>
-        </div>
+        <Heading Tag="h1" content={textConst.API_ERROR} />
         <div className={styles.newsSection}>
           <p>{errorData}</p>
         </div>
@@ -49,10 +48,15 @@ const SearchNews = ({ data, errorData, category, lang, queryString }) => {
           { lang: lang, category: queryString }
         )}
       </Head>
-      {/* <div style={{ height: 200 }}>Slider</div> */}
-      <div className={styles.mainHeading}>
-        <h1>{textConst.LATEST_NEWS}</h1>
-      </div>
+
+      <Heading
+        Tag="h1"
+        content={
+          lang === "hi"
+            ? `${queryString} ${textConst[lang]}`
+            : `${textConst[lang]} ${queryString}`
+        }
+      />
       <div className={styles.newsSection}>
         {data && data.length > 0
           ? data.map((item, index) => {

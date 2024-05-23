@@ -3,6 +3,8 @@ export const allConst = {
     LATEST_NEWS: "Latest News",
     API_ERROR: "GETTING API ERORR",
     SEARCH_ERROR_PLACEHOLDER: "Please enter proper query",
+    hi: "के लिए आपका खोज परिणाम यहां है",
+    en: "Here is your search result for ",
   },
 };
 export const tagList = {

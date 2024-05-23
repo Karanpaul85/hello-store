@@ -38,7 +38,11 @@ const SearchBar = () => {
     }
   };
   return (
-    <div className={styles.searcBarSection}>
+    <form
+      className={styles.searcBarSection}
+      id="searchBar"
+      onSubmit={searchNews}
+    >
       <input
         type="text"
         name="search"
@@ -62,7 +66,7 @@ const SearchBar = () => {
       >
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
-    </div>
+    </form>
   );
 };
 export default SearchBar;

@@ -5,12 +5,15 @@ import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
 import { useDispatch, useSelector } from "react-redux";
-// import MainNavigation from "./Navigation/MainNavigation";
+import { setOpenDrawer } from "@/redux/slices/oneTapLoginSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 import logo from "/public/assets/images/logo.svg";
+import Button from "../Button";
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
@@ -21,6 +24,11 @@ const Header = ({ topright }) => {
   const [cookies] = useCookies(["auth"]);
   const { auth } = cookies;
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
+
+  const showMenu = () => {
+    dispatch(setOpenDrawer(true));
+  };
+
   useEffect(() => {
     if (auth) {
       auth.from = "local";
@@ -58,6 +66,16 @@ const Header = ({ topright }) => {
       <div className="container">
         <div className={styles.topHeader}>
           <div className={styles.logo}>
+            <Button
+              onClick={showMenu}
+              title="My Account"
+              type="button"
+              id="myAccount"
+              ariaLabel="myAccount"
+              classes={styles.menuBtn}
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </Button>
             <Link href="/" passHref>
               <div
                 role="link"
