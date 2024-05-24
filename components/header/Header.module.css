@@ -17,12 +17,3 @@
 .logo {
   display: flex;
 }
-.menuBtn {
-  background: none;
-  border: none;
-  width: 44px;
-}
-.menuBtn svg {
-  width: 44px;
-  height: 24px;
-}
