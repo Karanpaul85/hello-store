@@ -21,11 +21,19 @@ const Header = ({ topright }) => {
   const { auth } = cookies;
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
 
+  const success = ({ coords }) => {
+    console.log(coords);
+  };
+  const error = (errors) => {
+    console.log(errors);
+  };
+
   useEffect(() => {
     if (auth) {
       auth.from = "local";
       dispatch(setUserDetails(auth));
     }
+    navigator.geolocation.getCurrentPosition(success, error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
