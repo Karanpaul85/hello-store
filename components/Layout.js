@@ -29,13 +29,13 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
     }
   }
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setTimeout(() => {
-        requestPermission(messaging);
-      }, 3000);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setTimeout(() => {
+  //       requestPermission(messaging);
+  //     }, 3000);
+  //   }
+  // }, []);
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Head>
