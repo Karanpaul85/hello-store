@@ -10,6 +10,8 @@ export default async function handler(req, res) {
       const existingUser = await User.findOne({ email });
       if (!existingUser) {
         res.status(200).json({ userExist: false });
+      } else {
+        res.status(200).json(existingUser);
       }
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
