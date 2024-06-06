@@ -101,7 +101,11 @@ const Types = ({ data, errorData, category, lang, headingText }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
-      const options = { lang: ctx.query.lang, category: ctx.query.type };
+      const options = {
+        lang: ctx.query.lang,
+        category: ctx.query.type,
+        page: 1,
+      };
 
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;

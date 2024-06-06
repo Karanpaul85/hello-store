@@ -137,3 +137,4 @@ export const languages = [
   { url: "/en/world", desc: "English" },
 ];
 export const adminEmails = ["karanpaul85@gmail.com"];
+export const perPageLimit = 20;

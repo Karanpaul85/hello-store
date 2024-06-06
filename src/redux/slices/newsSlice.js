@@ -1,4 +1,5 @@
 // slices/mySlice.js
+import { perPageLimit } from "@/constant/common_constants";
 import api from "@/utils/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -23,7 +24,7 @@ export const fetchDataFromMDB = createAsyncThunk(
   "newSlice/fetchDataFromMDB",
   async (options) => {
     const response = await axios.get(
-      `${baseUrl}/api/newsData?language=${options.lang}&category=${options.category}`
+      `${baseUrl}/api/newsData?language=${options.lang}&category=${options.category}&page=${options.page}&limit=${perPageLimit}`
     );
     return response.data;
   }
