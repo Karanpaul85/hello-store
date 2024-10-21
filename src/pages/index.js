@@ -18,11 +18,24 @@ import SingleNews from "../../components/singleNews/SingleNews";
 import Tabbar from "../../components/tabbar/TabBar";
 import { useDispatch } from "react-redux";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
-import { checkTimeisOver } from "@/utils/common";
-import { useEffect } from "react";
+import { checkTimeisOver, getingHeadingText } from "@/utils/common";
+import { useEffect, useState } from "react";
+import Heading from "../../components/heading/Heading";
 
-const HomePage = ({ data, errorData, options }) => {
+const HomePage = ({ data, errorData, options, headingText }) => {
+  const [allData, setAllData] = useState(data);
+  const [page, setpage] = useState(options.page);
+  // console.log(page, "page");
+
   const dispatch = useDispatch();
+
+  // const loadMoreUnew = async () => {
+  //   options.page = 2;
+  //   const res = await dispatch(fetchDataFromMDB(options));
+  //   setAllData(...allData, ...res.payload);
+  //   console.log(allData, "res");
+  // };
+
   useEffect(() => {
     dispatch(setNewsData(data));
     data && data.length > 0 && dispatch(setNotificationData(data[0]));
@@ -58,9 +71,7 @@ const HomePage = ({ data, errorData, options }) => {
                   : "Welcome to world breaking News"
               )}
         </Head>
-        <div className={styles.mainHeading}>
-          <h1>{textConst.API_ERROR}</h1>
-        </div>
+        <Heading Tag="h1" content={textConst.API_ERROR} />
         <div className={styles.newsSection}>
           <p>{errorData}</p>
         </div>
@@ -77,12 +88,12 @@ const HomePage = ({ data, errorData, options }) => {
         )}
       </Head>
       <Tabbar lang="hi" />
-      <div className={styles.mainHeading}>
-        <h1>{textConst.LATEST_NEWS}</h1>
-      </div>
+
+      <Heading Tag="h1" content={headingText} />
+
       <div className={styles.newsSection}>
-        {data &&
-          data.map((item, index) => {
+        {allData &&
+          allData.map((item, index) => {
             return (
               <SingleNews
                 key={item.article_id}
@@ -94,22 +105,24 @@ const HomePage = ({ data, errorData, options }) => {
             );
           })}
       </div>
+      {/* <button onClick={loadMoreUnew}>Load More</button> */}
     </Layout>
   );
 };
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
-      const options = { lang: "hi", category: "world" };
+      const options = { lang: "hi", category: "world", page: 1 };
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
-
+      const headingText = await getingHeadingText(options);
       return {
         props: {
           data,
           errorData,
           options,
+          headingText,
         },
       };
     } catch (error) {

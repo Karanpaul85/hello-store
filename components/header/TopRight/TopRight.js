@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./TopRight.module.css";
 import { showSearchSec, showLangSec } from "@/redux/slices/searchSlice";
 import FontAwesomeIcon from "../../FontAwesomeIcon";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { setOpenDrawer } from "@/redux/slices/oneTapLoginSlice";
 import {
   faMagnifyingGlass,
   faLanguage,
@@ -15,6 +17,10 @@ const TopRight = () => {
   );
 
   const dispatch = useDispatch();
+
+  const showMenu = () => {
+    dispatch(setOpenDrawer(true));
+  };
 
   const toggleSearchBar = () => {
     showSearch ? dispatch(showSearchSec(false)) : dispatch(showSearchSec(true));
@@ -57,6 +63,16 @@ const TopRight = () => {
         picture={picture}
         emailVerifie={email_verified}
       />
+      <Button
+        onClick={showMenu}
+        title="My Account"
+        type="button"
+        id="myAccount"
+        ariaLabel="myAccount"
+        classes={styles.menuBtn}
+      >
+        <FontAwesomeIcon icon={faBars} />
+      </Button>
     </div>
   );
 };

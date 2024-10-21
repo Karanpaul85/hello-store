@@ -31,6 +31,7 @@ export const ogMetaTags = (otherdata, pageType, query) => {
       <meta name="twitter:description" content={otherdata.title} />
       <meta name="twitter:url" content={contentUrl()} />
       <meta property="og:url" content={contentUrl()} />
+      <link rel="canonical" href={contentUrl()} />
     </>
   );
 };

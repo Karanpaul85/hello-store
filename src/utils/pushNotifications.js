@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const pushNotification = async (notificationData) => {
   return fetch(process.env.FCM_ENDPOINT, {
     method: "POST",
@@ -11,6 +9,7 @@ export const pushNotification = async (notificationData) => {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data, "RRRRRRRRRRRRRRRR");
       return true;
     })
     .catch((error) => {

@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
+import { firBaseApp, messaging } from "../../src/firebase";
+import { getMessaging, getToken } from "firebase/messaging";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import TopRight from "./TopRight/TopRight";
 import { useDispatch, useSelector } from "react-redux";
-import MainNavigation from "./Navigation/MainNavigation";
 import { useEffect } from "react";
 import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
@@ -14,16 +15,44 @@ import logo from "/public/assets/images/logo.svg";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
+const MainNavigation = dynamic(() => import("./Navigation/MainNavigation"));
 
 const Header = ({ topright }) => {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["auth"]);
   const { auth } = cookies;
   const { showSearch, showlang } = useSelector((state) => state.searchSlice);
+
+  //user notification
+  async function requestPermission() {
+    if (Notification.permission !== "granted") {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        // gernrate token
+        const messaging = getMessaging(firBaseApp);
+        const token = await getToken(messaging, {
+          vapidKey:
+            "BEWVewYC3Vja2sC3qQ12-JYZubW9p0797eHaiHLZUQixgCQQ_N-oKLnAbHmcuHIpdgwUc_FAY-d5EtwP7QvmVHg",
+        });
+        await axios.post("/api/notificationToken", { token });
+        // console.log(resp.data, "resp", token);
+      }
+    }
+  }
+
+  const success = ({ coords }) => {
+    console.log(coords);
+  };
+  const error = (errors) => {
+    console.log(errors);
+  };
+
   useEffect(() => {
     if (auth) {
       auth.from = "local";
       dispatch(setUserDetails(auth));
+      navigator.geolocation.getCurrentPosition(success, error);
+      requestPermission(messaging);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,6 +73,10 @@ const Header = ({ topright }) => {
               });
               resp.data.from = "api";
               dispatch(setUserDetails(resp.data));
+              if (resp.data) {
+                navigator.geolocation.getCurrentPosition(success, error);
+                requestPermission(messaging);
+              }
             }
           },
           onError: () => {

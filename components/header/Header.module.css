@@ -15,5 +15,5 @@
   max-width: 1120px;
 }
 .logo {
-  display: block;
+  display: flex;
 }

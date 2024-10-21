@@ -13,6 +13,7 @@ const firebaseConfig = {
   storageBucket: "breaking-news-notification.appspot.com",
   messagingSenderId: "472854924420",
   appId: "1:472854924420:web:23a8c1812625004b2f46d1",
+  measurementId: "G-5K92QHJVWP",
 };
 
 // Initialize Firebase

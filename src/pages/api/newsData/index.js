@@ -9,12 +9,17 @@ export default async function handler(req, res) {
       language: "",
       category: [],
     };
+    const page = Number(req?.query?.page);
+    const limit = Number(req?.query?.limit);
+    const skip = (page - 1) * limit;
+
     finalQuery.category = [req?.query?.category];
     finalQuery.language = req?.query?.language === "hi" ? "hindi" : "english";
     const isNewsExist = await allNews
       .find(finalQuery)
+      .skip(skip)
       .sort({ _id: -1 })
-      .limit(10);
+      .limit(limit);
     res.status(200).json(isNewsExist);
   } else if (req.method === "POST") {
     try {

@@ -18,10 +18,11 @@ import { allConst } from "@/constant/common_constants";
 import SingleNews from "../../../components/singleNews/SingleNews";
 import { setNewsData } from "@/redux/slices/searchSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
-import { checkTimeisOver } from "@/utils/common";
+import { checkTimeisOver, getingHeadingText } from "@/utils/common";
 import { useEffect } from "react";
+import Heading from "../../../components/heading/Heading";
 
-const Types = ({ data, errorData, category, lang }) => {
+const Types = ({ data, errorData, category, lang, headingText }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setNewsData(data));
@@ -61,9 +62,7 @@ const Types = ({ data, errorData, category, lang }) => {
                   : "Welcome to world breaking News"
               )}
         </Head>
-        <div className={headingStyle.mainHeading}>
-          <h1>{textConst.API_ERROR}</h1>
-        </div>
+        <Heading Tag="h1" content={textConst.API_ERROR} />
         <div className={headingStyle.newsSection}>
           <p>{errorData}</p>
         </div>
@@ -80,9 +79,7 @@ const Types = ({ data, errorData, category, lang }) => {
         )}
       </Head>
       <Tabbar lang={lang} />
-      <div className={headingStyle.mainHeading}>
-        <h1>{textConst.LATEST_NEWS}</h1>
-      </div>
+      <Heading Tag="h1" content={headingText} />
       <div className={headingStyle.newsSection}>
         {data && data.length > 0
           ? data.map((item, index) => {
@@ -104,17 +101,23 @@ const Types = ({ data, errorData, category, lang }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     try {
-      const options = { lang: ctx.query.lang, category: ctx.query.type };
+      const options = {
+        lang: ctx.query.lang,
+        category: ctx.query.type,
+        page: 1,
+      };
 
       const serverData = await store.dispatch(fetchDataFromMDB(options));
       const data = serverData.payload ? serverData.payload : null;
       const errorData = serverData.error ? serverData?.error?.message : null;
+      const headingText = await getingHeadingText(options);
       return {
         props: {
           data,
           errorData,
           category: options.category,
           lang: options.lang,
+          headingText,
         },
       };
     } catch (error) {
