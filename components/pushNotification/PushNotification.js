@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import axios from "axios";
+import CustomImage from "../customImage";
 
 const PushNotification = () => {
   const [showNotifationDrawer, setShowNotifationDrawer] = useState(false);
@@ -66,7 +67,7 @@ const PushNotification = () => {
             {notificationData.title}
           </div>
           <div className={styles.notificationImage}>
-            <Image
+            <CustomImage
               src={notificationData.image_url}
               width={80}
               height={80}

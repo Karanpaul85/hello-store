@@ -9,6 +9,7 @@ import { removeCookie } from "@/utils/common";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import CustomImage from "../../customImage";
 
 const Button = dynamic(() => import("../../Button"));
 
@@ -47,7 +48,7 @@ const MainNavigation = () => {
         <div className={styles.navUserSection}>
           <div className={styles.userIconsSec}>
             {email_verified ? (
-              <Image
+              <CustomImage
                 src={picture}
                 alt={name}
                 height={44}

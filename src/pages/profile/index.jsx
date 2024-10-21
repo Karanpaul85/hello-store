@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { userLogout } from "@/redux/slices/oneTapLoginSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
+import CustomImage from "../../../components/customImage";
 
 const Profile = ({ userDetails }) => {
   const { email, email_verified, isAdmin, name, picture } = userDetails;
@@ -37,7 +38,7 @@ const Profile = ({ userDetails }) => {
           {email_verified && (
             <>
               <div className={style.profileImage}>
-                <Image src={picture} alt={name} height={44} width={44} />
+                <CustomImage src={picture} alt={name} height={44} width={44} />
               </div>
               <div className={style.userEmail}>{name}</div>
             </>

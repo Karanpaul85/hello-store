@@ -12,6 +12,7 @@ import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 import logo from "/public/assets/images/logo.svg";
+import CustomImage from "../customImage";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
@@ -96,7 +97,7 @@ const Header = ({ topright }) => {
                 tabIndex={0}
                 aria-label="Navigate to the destination page"
               >
-                <Image
+                <CustomImage
                   src={logo}
                   width={80}
                   height={80}

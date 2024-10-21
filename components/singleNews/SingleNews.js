@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./singleNews.module.css";
 import { useState } from "react";
 import imgDataURLs from "../../src/utils/imageUtil";
+import CustomImage from "../customImage";
 
 const SingleNews = ({
   newsdata,
@@ -36,7 +37,7 @@ const SingleNews = ({
                     : `url(${imgDataURLs.placeholderImg})`,
                 }}
               ></div>
-              <Image
+              <CustomImage
                 src={newsdata.image_url}
                 width={300}
                 height={300}
@@ -58,7 +59,8 @@ const SingleNews = ({
                     : `url(${imgDataURLs.placeholderImg})`,
                 }}
               ></div>
-              <Image
+
+              <CustomImage
                 src={newsdata.image_url}
                 width={300}
                 height={300}

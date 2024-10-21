@@ -11,6 +11,7 @@ import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
 import Tabbar from "../../../../components/tabbar/TabBar";
 import Heading from "../../../../components/heading/Heading";
+import CustomImage from "../../../../components/customImage";
 
 const News = ({ data, options }) => {
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const News = ({ data, options }) => {
               className={styles.tumbNailBlur}
               style={{ backgroundImage: `url(${data.image_url})` }}
             ></div>
-            <Image
+
+            <CustomImage
               src={data.image_url}
               width={640}
               height={480}
