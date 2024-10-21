@@ -9,14 +9,6 @@ const CustomImage = ({ src, alt, ...props }) => {
     setImgSrc(logo);
   };
 
-  return (
-    <Image
-      src={imgSrc}
-      alt={alt}
-      onError={handleError}
-      {...props}
-      unoptimized={true}
-    />
-  );
+  return <Image src={imgSrc} alt={alt} onError={handleError} {...props} />;
 };
 export default CustomImage;
