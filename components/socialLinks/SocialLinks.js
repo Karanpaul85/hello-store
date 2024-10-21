@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { socialSharing } from "../../src/utils/socialShare";
 import styles from "../shareBtn/shareBTN.module.css";
-import CustomImage from "../customImage";
+import dynamic from "next/dynamic";
+const CustomImage = dynamic(() => import("../customImage"));
 const SocialLinks = () => {
   const url =
     window !== undefined

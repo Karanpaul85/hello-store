@@ -2,12 +2,13 @@ import FontAwesomeIcon from "../FontAwesomeIcon";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button";
 import styles from "./pushNotification.module.css";
-import { Drawer, SwipeableDrawer } from "@mui/material";
+import { Drawer } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Image from "next/image";
 import axios from "axios";
-import CustomImage from "../customImage";
+import dynamic from "next/dynamic";
+
+const CustomImage = dynamic(() => import("../customImage"));
 
 const PushNotification = () => {
   const [showNotifationDrawer, setShowNotifationDrawer] = useState(false);

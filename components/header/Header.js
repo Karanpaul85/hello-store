@@ -12,11 +12,11 @@ import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 import logo from "/public/assets/images/logo.svg";
-import CustomImage from "../customImage";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
 const MainNavigation = dynamic(() => import("./Navigation/MainNavigation"));
+const CustomImage = dynamic(() => import("../customImage"));
 
 const Header = ({ topright }) => {
   const dispatch = useDispatch();

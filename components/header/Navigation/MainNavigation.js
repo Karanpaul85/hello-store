@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainNavigation.module.css";
 import FontAwesomeIcon from "../../FontAwesomeIcon";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
 import { removeCookie } from "@/utils/common";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import CustomImage from "../../customImage";
 
 const Button = dynamic(() => import("../../Button"));
-
+const CustomImage = dynamic(() => import("../../customImage"));
 const MainNavigation = () => {
   const router = useRouter();
   const dispatch = useDispatch();

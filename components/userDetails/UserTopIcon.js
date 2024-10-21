@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image";
 import styles from "./UserDetails.module.css";
 
 import FontAwesomeIcon from "../FontAwesomeIcon";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import CustomImage from "../customImage";
+import dynamic from "next/dynamic";
+const CustomImage = dynamic(() => import("../customImage"));
 
 const UserTopIcon = ({ email, name, picture, emailVerifie }) => {
   const isUserLoggedIn = useSelector((state) => state.oneTapLogin);

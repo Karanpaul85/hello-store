@@ -14,7 +14,8 @@ const CustomImage = ({ src, alt, ...props }) => {
       src={imgSrc}
       alt={alt}
       onError={handleError}
-      {...props} // pass other props like width, height
+      {...props}
+      unoptimized={true}
     />
   );
 };

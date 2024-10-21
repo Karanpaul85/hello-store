@@ -11,7 +11,9 @@ import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
 import Tabbar from "../../../../components/tabbar/TabBar";
 import Heading from "../../../../components/heading/Heading";
-import CustomImage from "../../../../components/customImage";
+import dynamic from "next/dynamic";
+
+const CustomImage = dynamic(() => import("../../../../components/customImage"));
 
 const News = ({ data, options }) => {
   const dispatch = useDispatch();

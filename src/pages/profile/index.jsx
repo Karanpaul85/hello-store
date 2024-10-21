@@ -1,6 +1,5 @@
 import { wrapper } from "@/utils/withRedux";
 import Router from "next/router";
-import Image from "next/image";
 import Layout from "../../../components/Layout";
 import style from "./Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +15,9 @@ import { useDispatch } from "react-redux";
 import { userLogout } from "@/redux/slices/oneTapLoginSlice";
 import { setNotificationData } from "@/redux/slices/notificationSlice";
 import { useEffect } from "react";
-import CustomImage from "../../../components/customImage";
+import dynamic from "next/dynamic";
+
+const CustomImage = dynamic(() => import("../../../components/customImage"));
 
 const Profile = ({ userDetails }) => {
   const { email, email_verified, isAdmin, name, picture } = userDetails;

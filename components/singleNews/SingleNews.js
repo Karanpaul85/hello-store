@@ -1,8 +1,8 @@
-import Image from "next/image";
 import styles from "./singleNews.module.css";
 import { useState } from "react";
 import imgDataURLs from "../../src/utils/imageUtil";
-import CustomImage from "../customImage";
+import dynamic from "next/dynamic";
+const CustomImage = dynamic(() => import("../customImage"));
 
 const SingleNews = ({
   newsdata,
