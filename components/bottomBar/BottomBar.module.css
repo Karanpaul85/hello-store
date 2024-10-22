@@ -4,9 +4,8 @@
   left: 50%;
   width: 100%;
   background: #fff;
-  display: grid;
+  display: flex;
   list-style: none;
-  grid-auto-flow: column;
   height: 54px;
   transform: translateX(-50%);
   z-index: 99;

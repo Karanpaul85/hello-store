@@ -12,6 +12,7 @@ import axios from "axios";
 import { setUserDetails } from "@/redux/slices/oneTapLoginSlice";
 import { useCookies } from "react-cookie";
 import logo from "/public/assets/images/logo.svg";
+import Announcement from "../announcemant";
 
 const SearchBar = dynamic(() => import("../searchBar/SearchBar"));
 const LanguageBar = dynamic(() => import("../languages/Languages"));
@@ -114,6 +115,7 @@ const Header = ({ topright }) => {
         </div>
       </div>
       <MainNavigation />
+      <Announcement />
     </header>
   );
 };

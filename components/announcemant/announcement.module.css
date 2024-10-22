@@ -1,3 +1,15 @@
 .announcement{
-
+    width: 100%;
+    overflow: hidden;
+    text-wrap: nowrap;
+    padding: 8px;
+    letter-spacing: 2px;
+    font-size: 14px;
+    background: var(--red);
+    color: var(--white);
+    font-weight: 400;
+}
+.announcement span, .announcement a{
+    font-weight: 500;
+    color: var(--yellow);
 }
