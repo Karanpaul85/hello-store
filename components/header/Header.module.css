@@ -2,18 +2,24 @@
   background: var(--white);
   display: flex;
   width: 100%;
-  border-bottom: 1px solid var(--lightGrey);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  flex-direction: column;
 }
 .topHeader {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  position: fixed;
-  background: var(--white);
-  box-shadow: var(--shadow);
-  z-index: 1;
+  background: var(--white); 
   max-width: 1120px;
 }
 .logo {
   display: flex;
+}
+@media(max-width:1024px){
+  .topHeader {
+    box-shadow: var(--shadow);
+  }
 }

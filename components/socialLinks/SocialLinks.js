@@ -1,7 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { socialSharing } from "../../src/utils/socialShare";
 import styles from "../shareBtn/shareBTN.module.css";
+import dynamic from "next/dynamic";
+const CustomImage = dynamic(() => import("../customImage"));
 const SocialLinks = () => {
   const url =
     window !== undefined
@@ -20,7 +21,7 @@ const SocialLinks = () => {
                   data-action={socialLink?.dataAction}
                   className={`${styles.icons}`}
                 >
-                  <Image
+                  <CustomImage
                     src={`/assets/icons/${socialLink.icon}.svg`}
                     width={24}
                     height={24}

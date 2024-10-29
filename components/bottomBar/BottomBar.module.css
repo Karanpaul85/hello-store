@@ -1,17 +1,30 @@
-.bottomBaar {
+.bottomBaarStrip{
   position: fixed;
   bottom: 0;
   left: 50%;
   width: 100%;
   background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.2) -2px -2px 2px;
+  display: flex;
+  list-style: none;
+  height: 54px;
+  transform: translateX(-50%);
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transitions)
+}
+.hideBottomBar{
+  bottom: -54px;
+}
+.bottomBaar {
+  background: #fff;
   display: grid;
   list-style: none;
   grid-auto-flow: column;
   height: 54px;
-  transform: translateX(-50%);
   max-width: 1120px;
-  z-index: 99;
+ width: 100%;
+
 }
 
 .bottomBaar li {
@@ -22,6 +35,9 @@
   flex-direction: column;
   border-right: 1px solid var(--lightGrey);
   min-width: 70px;
+}
+.bottomBaar li:last-child{
+  border-right: 0;
 }
 .bottomBaar li a {
   width: 100%;
@@ -54,4 +70,9 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
+}
+@media(max-width:1024px){
+  .bottomBaarStrip{
+    box-shadow: rgba(0, 0, 0, 0.2) -2px -2px 2px;
+  }
 }

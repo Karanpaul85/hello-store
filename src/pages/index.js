@@ -25,16 +25,8 @@ import Heading from "../../components/heading/Heading";
 const HomePage = ({ data, errorData, options, headingText }) => {
   const [allData, setAllData] = useState(data);
   const [page, setpage] = useState(options.page);
-  // console.log(page, "page");
 
   const dispatch = useDispatch();
-
-  // const loadMoreUnew = async () => {
-  //   options.page = 2;
-  //   const res = await dispatch(fetchDataFromMDB(options));
-  //   setAllData(...allData, ...res.payload);
-  //   console.log(allData, "res");
-  // };
 
   useEffect(() => {
     dispatch(setNewsData(data));
@@ -105,7 +97,6 @@ const HomePage = ({ data, errorData, options, headingText }) => {
             );
           })}
       </div>
-      {/* <button onClick={loadMoreUnew}>Load More</button> */}
     </Layout>
   );
 };

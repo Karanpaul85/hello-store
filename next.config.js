@@ -1,17 +1,23 @@
 /** @type {import ( 'next' ).NextConfig} */
 
-const withPWA = require('next-pwa')({
-  dest: 'public'
-})
+const withPWA = require("next-pwa")({
+  dest: "public",
+});
 
-module.exports = withPWA({
-  // next.js config
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
-  },
-})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: false,
+});
+
+module.exports = withBundleAnalyzer(
+  withPWA({
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "**",
+        },
+      ],
+    },
+  })
+);
