@@ -1,12 +1,9 @@
 import dynamic from "next/dynamic";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import parse from "html-react-parser";
 import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { firBaseApp, messaging } from "../src/firebase";
-import { getMessaging, getToken } from "firebase/messaging";
-import axios from "axios";
 import Header from "./header/Header";
-import { useEffect } from "react";
 import imgDataURLs from "@/utils/imageUtil";
 
 const BottomBar = dynamic(() => import("./bottomBar/BottomBar"));
@@ -24,10 +21,6 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        {/* <meta
-          name="google-adsense-account"
-          content="ca-pub-4175301977598959"
-        ></meta> */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Breaking News" />
         <meta name="twitter:card" content="summary" />
@@ -40,10 +33,6 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
           name="keywords"
           content="Hindi news, हिंदी न्यूज़ , Hindi Samachar, हिंदी समाचार, Latest News in Hindi, Breaking News in Hindi, ताजा ख़बरें, KP News"
         />
-        {/* <meta
-          name="google-site-verification"
-          content="XoxCEAtWRxogq-mb14a365YYn-1HEUUVRxclvZ_f7J0"
-        /> */}
         {parse(`<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -61,6 +50,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </main>
 
       {showBottomBar && <BottomBar />}
+      <SpeedInsights />
     </GoogleOAuthProvider>
   );
 };
