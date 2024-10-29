@@ -7,7 +7,7 @@ export default async function middleware(req) {
       ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
       : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
 
-  if (req.nextUrl.host === "breakingnewsapp.netlify.app") {
+  if (req.nextUrl.host === "https://websitefreelancing.co.in") {
     return NextResponse.redirect(baseUrl);
   }
 

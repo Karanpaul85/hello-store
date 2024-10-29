@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import { firBaseApp } from "../../src/firebase"; // Only import the Firebase app here
 import { getMessaging, getToken } from "firebase/messaging"; // Import messaging-related functions
