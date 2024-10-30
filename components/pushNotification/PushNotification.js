@@ -53,6 +53,7 @@ const PushNotification = () => {
         ariaLabel="Push Notification"
         id="pushNotification"
         onClick={openNotificationSec}
+        type="button"
       >
         <FontAwesomeIcon icon={faBell} />
         <span>Send Notification</span>
@@ -73,7 +74,6 @@ const PushNotification = () => {
               width={80}
               height={80}
               alt={notificationData.title}
-              loading="lazy"
               sizes="100vw"
               unoptimized={true}
             />
@@ -86,6 +86,7 @@ const PushNotification = () => {
               id="pushNotification"
               onClick={sendNotification}
               disabled={disabledBtn}
+              type="button"
             >
               <span
                 className={`${styles.loading} ${disabledBtn && styles.show}`}

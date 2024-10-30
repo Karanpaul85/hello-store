@@ -42,7 +42,6 @@ const SingleNews = ({
                 width={300}
                 height={300}
                 alt={newsdata.title}
-                loading="lazy"
                 sizes="50vw"
                 onLoad={onImageLoad}
               />
@@ -65,7 +64,7 @@ const SingleNews = ({
                 width={300}
                 height={300}
                 alt={newsdata.title}
-                priority={true}
+                isPriority={true}
                 sizes="50vw"
                 onLoad={onImageLoad}
               />

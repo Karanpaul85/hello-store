@@ -12,12 +12,7 @@ const Layout = ({ topright = true, children, showBottomBar = true }) => {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Head>
-        <link
-          rel="preload"
-          as="image"
-          href={imgDataURLs.placeholderImg}
-          fetchpriority="high"
-        />
+        <link rel="preload" as="image" href={imgDataURLs.placeholderImg} />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="shortcut  icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#ffffff" />

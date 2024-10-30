@@ -39,6 +39,7 @@ const ShareBTN = () => {
         classes={styles.shareBtn}
         title="Social Share"
         ariaLabel="Social Share"
+        type="button"
       >
         <FontAwesomeIcon icon={faShareNodes} />
         <span>Share</span>

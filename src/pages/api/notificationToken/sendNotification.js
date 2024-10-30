@@ -3,8 +3,8 @@ import axios from "axios";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://breakingnewsapp.netlify.app"
-    : "http://localhost:3000";
+    ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+    : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

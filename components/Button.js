@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 
 const Button = ({
-  type,
-  title,
-  ariaLabel,
-  onClick,
+  type = "button",
+  title = "button",
+  ariaLabel = "button",
+  onClick = () => {},
   children,
   classes,
   id,
-  disabled,
-  data,
+  disabled = false,
+  data = "",
 }) => {
   return (
     <button
@@ -33,15 +33,6 @@ Button.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
-};
-
-Button.defaultProps = {
-  type: "button",
-  title: "button",
-  ariaLabel: "button",
-  disabled: false,
-  data: "",
-  onClick: () => {},
 };
 
 export default Button;
