@@ -6,7 +6,7 @@ import { showLangSec } from "@/redux/slices/searchSlice";
 const Languages = () => {
   const dispatch = useDispatch();
   const hideLangBar = () => {
-    dispatch(showLangSec(false))
+    dispatch(showLangSec(false));
   };
   return (
     <div className={styles.langBarSection}>
