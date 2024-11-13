@@ -44,7 +44,7 @@ const News = ({ data, options }) => {
               width={640}
               height={480}
               alt={data.title}
-              priority={true}
+              isPriority={true}
               sizes="100vw"
             />
           </div>

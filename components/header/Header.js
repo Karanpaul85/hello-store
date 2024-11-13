@@ -18,7 +18,7 @@ const LanguageBar = dynamic(() => import("../languages/Languages"));
 const MainNavigation = dynamic(() => import("./Navigation/MainNavigation"));
 const CustomImage = dynamic(() => import("../customImage"));
 
-const Header = ({ topright }) => {
+const Header = ({ topright = true }) => {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["auth"]);
   const { auth } = cookies;
@@ -102,7 +102,7 @@ const Header = ({ topright }) => {
                   width={80}
                   height={80}
                   alt="Breaking News"
-                  priority
+                  isPriority={true}
                   sizes="100vw"
                 />
               </div>
@@ -117,10 +117,6 @@ const Header = ({ topright }) => {
       <Announcement />
     </header>
   );
-};
-
-Header.defaultProps = {
-  topright: true,
 };
 
 export default Header;
