@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { useState } from "react";
-import logo from "/public/assets/images/logo.svg";
 
 const CustomImage = ({ src, alt, isPriority = false, ...props }) => {
   const loadingAttribute = isPriority ? "eager" : "lazy";
@@ -10,6 +8,7 @@ const CustomImage = ({ src, alt, isPriority = false, ...props }) => {
       alt={alt}
       priority={isPriority}
       loading={loadingAttribute}
+      unoptimized
       {...props}
     />
   );
